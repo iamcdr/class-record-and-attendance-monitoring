@@ -7,7 +7,7 @@
         <div class="col-lg-12" id="showStatusHere">
             <?php
             if(isset($_POST['barcode_shoot'])):
-                $query = "SELECT * FROM students WHERE student_barcode = '{$_POST['barcode']}'";
+                $query = "SELECT * FROM students AS a LEFT JOIN (SELECT * FROM student_section ORDER BY student_level_id DESC) b ON a.student_id = b.student_id WHERE a.student_barcode = '{$_POST['barcode']}'";
                 $result = mysqli_query($connection, $query);
 
                 $row = mysqli_fetch_array($result);
@@ -30,13 +30,23 @@
                     }
 
                 ?>
-                    <div class="col-lg-4">
-                        <label>Full Name</label>
-                    </div>
-                    <div class="col-lg-8">
-                        <?= $row['last_name'] . " " . $row['first_name']  ?>
-                    </div>
 
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Full Name</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <?= $row['last_name'] . " " . $row['first_name']  ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4"><label>Birthdate</label></div>
+                        <div class="col-lg-8"><?= $row['birthdate'] ?></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4"><label>Section</label></div>
+                        <div class="col-lg-8"><?= displaySectionDesc($row['section_id']) ?></div>
+                    </div>
 
 
                 <?php
@@ -59,7 +69,8 @@
         }
         focusInput(20);
 
-        $('input[name="barcode"]').on('keyup', function(e){
+        $('input[name="barcode"]').on('keyup paste', function(e){
+            e.stopImmediatePropagation();
             $.ajax({
                 url: "attendance.php",
                 type: "POST",
