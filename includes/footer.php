@@ -38,6 +38,16 @@
         });
 
         $('#searchable').select2();
+        
+        //low budget active side nave LOL
+        <?php if(isset($activePage)&&strpos($activePage, "Manage")!==false): ?>
+        $('#manage').addClass("in");
+        <?php endif ?>
+        
+        <?php if(isset($activePage)&&strpos($activePage, "Settings")!==false): ?>
+        $('#settings').addClass("in");
+        <?php endif ?>
+        
     });
 
     $('input[type="checkbox"]').iCheck({
