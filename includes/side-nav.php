@@ -11,10 +11,10 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
         Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
     -->
 
-            <div class="sidebar-wrapper" style="background-color: #29215E">
-                <div class="logo" style="position: fixed; left: 5px; z-index: 1; padding-bottom: 30px; background-color: #29215E">
+            <div class="sidebar-wrapper">
+                <div class="logo" style="position: fixed; left: 5px; z-index: 1; padding-bottom: 30px; background-color: #fff">
                     <img src="images/logo copy.png" style="margin:auto; display: block">
-                    <a href="./" class="simple-text" style="color: #fff">
+                    <a href="./" class="simple-text" style="color: #000">
                     Holy Trinity School
                 </a>
                 </div>

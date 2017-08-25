@@ -1,4 +1,5 @@
-<div class="container-fluid"><div class="row">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-lg-12">
             <input type="text" name="barcode" class="form-control">
         </div>
@@ -31,22 +32,26 @@
 
                 ?>
 
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <label>Full Name</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <?= $row['last_name'] . " " . $row['first_name']  ?>
-                        </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Full Name</label>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4"><label>Birthdate</label></div>
-                        <div class="col-lg-8"><?= $row['birthdate'] ?></div>
+                    <div class="col-lg-8">
+                        <?= $row['last_name'] . " " . $row['first_name']  ?>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4"><label>Section</label></div>
-                        <div class="col-lg-8"><?= displaySectionDesc($row['section_id']) ?></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4"><label>Birthdate</label></div>
+                    <div class="col-lg-8">
+                        <?= $row['birthdate'] ?>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4"><label>Section</label></div>
+                    <div class="col-lg-8">
+                        <?= displaySectionDesc($row['section_id']) ?>
+                    </div>
+                </div>
 
 
                 <?php
@@ -56,12 +61,12 @@
             ?>
         </div>
     </div>
-    </div>
+</div>
 
 <script>
     $(document).ready(function() {
 
-        function focusInput(time){
+        function focusInput(time) {
             setTimeout(function() {
                 $('input[name="barcode"]').focus();
                 $('input[name="barcode"]').val('');
@@ -69,7 +74,7 @@
         }
         focusInput(20);
 
-        $('input[name="barcode"]').on('keyup paste', function(e){
+        $('input[name="barcode"]').on('keyup paste', function(e) {
             e.stopImmediatePropagation();
             $.ajax({
                 url: "attendance.php",
@@ -78,7 +83,7 @@
                     barcode: $('input[name="barcode"]').val(),
                     barcode_shoot: true
                 },
-                success: function(result){
+                success: function(result) {
                     var getStatus = $('#showStatusHere', $(result));
                     $('#showStatusHere').html(getStatus);
 
