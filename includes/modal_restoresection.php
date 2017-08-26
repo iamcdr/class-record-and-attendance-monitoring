@@ -1,28 +1,28 @@
 <script>
     $(document).ready(function() {
-        $('#archive_subject<?= $rowSubjects['subject_id'] ?>').click(function() {
+        $('#restoreSection<?= $rowSection[0] ?>').click(function() {
             swal({
-                title: "Move <?= displaySubjectDesc($rowSubjects['subject_id']) ?> to archive?",
+                title: "Restore <?= displaySectionDesc($rowSection[0]) ?>?",
                 confirmButtonText: 'Yes',
                 showCancelButton: true,
                 showLoaderOnConfirm: true,
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: "subjects.php?s=exec",
+                                url: "archives.php?s=exec",
                                 type: "POST",
                                 data: {
-                                    archive_subject: true,
-                                    subject_id: <?= $rowSubjects['subject_id'] ?>
+                                    restore_section: true,
+                                    section_id: <?= $rowSection[0] ?>
                                 },
                                     success: function(){
                                         swal({
-                                            title: 'Archived!',
-                                            text: "Moved <?= displaySubjectDesc($rowSubjects['subject_id']) ?> to archive successfully.",
+                                            title: 'Restored!',
+                                            text: "Restored <?= displaySectionDesc($rowSection[0]) ?> successfully.",
                                             type: 'success'
                                         })
                                             .then(function(){
-                                             window.location.href= "subjects.php"
+                                             window.location.href= "archives.php?s=sections"
                                         })
                                     }
                             })

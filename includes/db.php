@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 //LOCALHOST CONNECTION
 //Connection through CONSTANTS method
 $db['db_host'] = "localhost";

@@ -14,6 +14,8 @@ $activePage = "Manage Teacher";
                     <?php
             if(isset($_GET['s'])&&$_GET['s']=="assg_cls")
                 echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> Assign Classes to '. displayTeacherName($_GET['tid']) .'</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="view")
+                echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> View Details '. displayTeacherName($_GET['tid']) .'</h4>';
             else
                 echo '<h4 class="page-header">Teachers</h4>';
                         ?>
@@ -27,6 +29,10 @@ $activePage = "Manage Teacher";
 
                        case 'assg_cls':
                            include "includes/teacher_assignclasses.php";
+                           break;
+
+                       case 'view':
+                           include "includes/teacher_view_details.php";
                            break;
 
                        case 'exec':

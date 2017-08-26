@@ -1,28 +1,28 @@
 <script>
     $(document).ready(function() {
-        $('#archive_subject<?= $rowSubjects['subject_id'] ?>').click(function() {
+        $('#restoreGradelevel<?= $rowGradeLvl['gradelevel_id'] ?>').click(function() {
             swal({
-                title: "Move <?= displaySubjectDesc($rowSubjects['subject_id']) ?> to archive?",
+                title: "Restore <?= displayGradeLevelDesc($rowGradeLvl['gradelevel_id']) ?>?",
                 confirmButtonText: 'Yes',
                 showCancelButton: true,
                 showLoaderOnConfirm: true,
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: "subjects.php?s=exec",
+                                url: "archives.php?s=exec",
                                 type: "POST",
                                 data: {
-                                    archive_subject: true,
-                                    subject_id: <?= $rowSubjects['subject_id'] ?>
+                                    restore_gradelevel: true,
+                                    gradelevel_id: <?= $rowGradeLvl['gradelevel_id'] ?>
                                 },
                                     success: function(){
                                         swal({
-                                            title: 'Archived!',
-                                            text: "Moved <?= displaySubjectDesc($rowSubjects['subject_id']) ?> to archive successfully.",
+                                            title: 'Restored!',
+                                            text: "Restored <?= displayGradeLevelDesc($rowGradeLvl['gradelevel_id']) ?> successfully.",
                                             type: 'success'
                                         })
                                             .then(function(){
-                                             window.location.href= "subjects.php"
+                                             window.location.href= "archives.php?s=glvl"
                                         })
                                     }
                             })

@@ -2,14 +2,26 @@
     <table class="table table-bordered" id="content">
         <thead>
             <tr>
-                <td>Col1</td>
-                <td>Col2</td>
+                <th>Folder Name</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Row1</td>
-                <td>Row2</td>
+                <td>Accounts</td>
+                <td><a href="./archives.php?s=accounts" class="btn btn-success"><i class="fa fa-folder-open"></i> Open</a></td>
+            </tr>
+            <tr>
+                <td>Subjects</td>
+                <td><a href="./archives.php?s=subjects" class="btn btn-success"><i class="fa fa-folder-open"></i> Open</a></td>
+            </tr>
+            <tr>
+                <td>Grade Level</td>
+                <td><a href="./archives.php?s=glvl" class="btn btn-success"><i class="fa fa-folder-open"></i> Open</a></td>
+            </tr>
+            <tr>
+                <td>Section</td>
+                <td><a href="./archives.php?s=sections" class="btn btn-success"><i class="fa fa-folder-open"></i> Open</a></td>
             </tr>
         </tbody>
     </table>
