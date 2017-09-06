@@ -53,3 +53,23 @@ if(isset($_POST['add_student'])){
     header("Location: students.php");
     exit();
 }
+
+if(isset($_POST['assign_section'])){
+    $student_id = $_POST['student_id'];
+    $section_id = $_POST['section_id'];
+    $year_id = $_POST['year_id'];
+    
+    //query to student_section
+    $query = "INSERT INTO student_section(student_id, section_id, schoolyear_id) VALUES('{$student_id}','{$section_id}','{$year_id}')";
+    mysqli_query($connection, $query);
+    
+    //var init
+    $studentname = displayStudentName($student_id);
+    $section_desc = displaySectionDesc($section_id);
+    
+    //alert
+    $_SESSION['ALERT']['ADD_STUDSEC_SUCCESS'] = "$studentname successfully assigned to $section_desc";
+    
+    header("Location: ./students.php?s=assg_sc&sid=$student_id");
+    exit();
+}

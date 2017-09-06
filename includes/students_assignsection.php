@@ -1,3 +1,6 @@
+<?= isset($_SESSION['ALERT']['ADD_STUDSEC_SUCCESS']) ? "<div class='alert alert-success'>{$_SESSION['ALERT']['ADD_STUDSEC_SUCCESS']}</div>" : '' ?>
+   
+
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-body">
