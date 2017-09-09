@@ -16,6 +16,8 @@ $activePage = "Manage Students";
                 echo '<h4 class="page-header"><a href="students.php">Students</a> -> Add New</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="assg_sc")
                 echo '<h4 class="page-header"><a href="students.php">Students</a> -> Assign Section to '.displayStudentName($_GET['sid']).'</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="view")
+                echo '<h4 class="page-header"><a href="students.php">Students</a> -> View Information of '.displayStudentName($_GET['sid']).'</h4>';
             else
                 echo '<h4 class="page-header">Students</h4>';
                         ?>

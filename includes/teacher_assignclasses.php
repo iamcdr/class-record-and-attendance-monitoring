@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-body">
-<?php 
+<?php
 if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
     echo '<div class="alert alert-success">'.$_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']. '</div>';
             ?>
-            
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -24,7 +24,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                                    <?php
                                     $querySection = "SELECT * FROM sections WHERE archive_status = 0";
                                     $resultSection = mysqli_query($connection, $querySection);
-                                    
+
                                     while($rowSection = mysqli_fetch_array($resultSection)){
                                     ?>
                                     <option value="<?= $rowSection[0] ?>"><?= $rowSection['section_description'] ?></option>
@@ -36,15 +36,13 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                                     <?php
                                     $querySubj = "SELECT * FROM subjects WHERE archive_status = 0";
                                     $resultSubj = mysqli_query($connection, $querySubj);
-                                    
+
                                     while($rowSubj = mysqli_fetch_array($resultSubj)){
-                                        
-                                        $subjcount = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM teacher_classes WHERE subject_id = $rowSubj[0] AND teacher_id = {$_GET['tid']} AND archive_status=0 "));
-                                        if($subjcount==0){
+
                                         ?>
                                         <option value="<?= $rowSubj[0] ?>"><?= $rowSubj['subject_description'] ?></option>
-                                        <?php 
-                                        }
+                                        <?php
+
                                     } ?>
                                 </select>
                             </td>
@@ -54,7 +52,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                                     $currentY = date("Y");
                                     $queryYear = "SELECT * FROM schoolyear";
                                     $resultYear = mysqli_query($connection, $queryYear);
-                                    
+
                                     while($rowYear = mysqli_fetch_array($resultYear)){
                                         ?>
                                         <option value="<?= $rowYear[0] ?>"<?php if($currentY==$rowYear['year1']) echo "selected" ?> ><?= $rowYear['year1'] . " - " . $rowYear['year2'] ?></option>
@@ -66,10 +64,10 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                             </td>
                         </tr>
                     </form>
-                    <?php 
+                    <?php
                     $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']}";
                     $resultClass = mysqli_query($connection, $queryClass);
-                    
+
                     while($rowClass = mysqli_fetch_array($resultClass)){
                     ?>
                     <tr>
