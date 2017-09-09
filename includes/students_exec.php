@@ -37,8 +37,8 @@ if(isset($_POST['add_student'])){
         //init students id
         $student_id = mysqli_insert_id($connection);
 
-    //query to lvlassignment
-    $queryLv = "INSERT INTO student_level(student_id, gradelevel_id, schoolyear_id) VALUES('{$student_id}', '{$gradelevel_id}', '{$schoolyear_id}')";
+    //query to sectionassignment
+    $queryLv = "INSERT INTO student_section(student_id, section_id, schoolyear_id) VALUES('{$student_id}', '{$section_id}', '{$schoolyear_id}')";
     mysqli_query($connection, $queryLv) or die(mysqli_error($connection));
 
     //alert

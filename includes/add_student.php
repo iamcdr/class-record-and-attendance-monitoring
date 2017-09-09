@@ -40,20 +40,20 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-12">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                         <h5>Contact No</h5>
                         <input type="text" name="contact_no" class="form-control">
                     </div>
                     <div class="col-lg-3">
-                        <h5>Assign Grade Level</h5>
-                        <select name="assg_gradelevel" class="form-control">
+                        <h5>Assign Section</h5>
+                        <select name="assg_section" class="form-control">
                             <?php
-                            $queryGl = "SELECT * FROM gradelevel WHERE archive_status = 0 ORDER BY gradelevel_description ASC";
+                            $queryGl = "SELECT * FROM sections WHERE archive_status = 0 ORDER BY section_description ASC";
                             $resultGl = mysqli_query($connection, $queryGl) or die(mysqli_error($connection));
 
                             while($rowGl = mysqli_fetch_array($resultGl)){
                                 ?>
-                                <option value="<?= $rowGl[0] ?>"><?= $rowGl['gradelevel_description'] ?></option>
+                                <option value="<?= $rowGl[0] ?>"><?= $rowGl['section_description'] ?></option>
                                 <?php } ?>
                         </select>
                     </div>
@@ -68,7 +68,7 @@
                                 ?>
                                 <option value="<?= $sydata['id']; ?>" <?php if($currentSy['id']==$sydata['id']){ echo "selected"; } ?>>
                                         <?= $sydata['year1'] . " - " . $sydata['year2']; ?>
-                                    </option>
+                                </option>
                                 <?php } ?>
                         </select>
                     </div>
