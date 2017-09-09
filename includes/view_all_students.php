@@ -78,7 +78,7 @@ if(isset($_SESSION['ALERT']['ADD_STUDENT_SUCCESS'])){
                                         <button type="button" data-toggle="dropdown" class="btn btn-success dropdown-toggle">Action &nbsp;
                                                 <i class="fa fa-angle-down"></i></button>
                                         <ul role="menu" class="dropdown-menu">
-                                            <li><a href="students.php?s=view&uid=<?= $rowStud[0] ?>">View Information</a></li>
+                                            <li><a href="students.php?s=view&sid=<?= $rowStud[0] ?>">View Information</a></li>
                                             <li><a href="students.php?s=assg_sc&sid=<?= $rowStud[0] ?>">Assign Section</a></li>
                                             <li class="divider"></li>
                                             <li><a href="#" id="archive_student<?= $rowStud[0] ?>">Move to Archive</a></li>

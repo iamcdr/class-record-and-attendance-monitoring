@@ -35,6 +35,10 @@ $activePage = "Manage Students";
                            include "includes/students_assignsection.php";
                            break;
 
+                       case 'view':
+                           include "includes/view_student_info.php";
+                           break;
+
                        case 'exec':
                            include "includes/students_exec.php";
                            break;
