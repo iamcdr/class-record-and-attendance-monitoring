@@ -14,10 +14,10 @@ $activePage = "Manage Teacher";
                     <?php
             if(isset($_GET['s'])&&$_GET['s']=="assg_cls")
                 echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> Assign Classes to '. displayTeacherName($_GET['tid']) .'</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="assg_adv_cls")
+                echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> Assign Advisory Classes to '. displayTeacherName($_GET['tid']) .'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="view")
                 echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> View Details '. displayTeacherName($_GET['tid']) .'</h4>';
-            elseif(isset($_GET['s'])&&$_GET['s']=="view_cls")
-                echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> View Classes of '. displayTeacherName($_GET['tid']) .'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="view_cls_rec")
                 echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> <a href="teachers.php?s=view_cls&tid='.getTeacherIdFromTeacherClasses($_GET['tcid']).'">View Classes</a> of '. displayTeacherName(getTeacherIdFromTeacherClasses($_GET['tcid'])) .'-> '.displaySectionDesc(getSectionIdFromTeacherClasses($_GET['tcid'])) . ' (' . displaySubjectDesc(getSubjectIdFromTeacherClasses($_GET['tcid'])) .') </h4>';
             else
@@ -33,6 +33,10 @@ $activePage = "Manage Teacher";
 
                        case 'assg_cls':
                            include "includes/teacher_assignclasses.php";
+                           break;
+
+                       case 'assg_adv_cls':
+                           include "includes/teacher_assign_adv_classes.php";
                            break;
 
                        case 'view':

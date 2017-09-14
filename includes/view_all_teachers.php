@@ -42,6 +42,7 @@ if(isset($_SESSION['ALERT']['ADD_STUDENT_SUCCESS'])){
                                                 <li><a href="teachers.php?s=view_cls&tid=<?= $rowTeach[0] ?>">View Classes</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="teachers.php?s=assg_cls&tid=<?= $rowTeach[0] ?>">Assign Class</a></li>
+                                                <li><a href="teachers.php?s=assg_adv_cls&tid=<?= $rowTeach[0] ?>">Assign Advisory Class</a></li>
                                             </ul>
                                         </div>
                                     </td>
