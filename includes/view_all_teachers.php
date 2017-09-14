@@ -39,6 +39,8 @@ if(isset($_SESSION['ALERT']['ADD_STUDENT_SUCCESS'])){
                                                 <i class="fa fa-angle-down"></i></button>
                                             <ul role="menu" class="dropdown-menu">
                                                 <li><a href="teachers.php?s=view&tid=<?= $rowTeach[0] ?>">View Information</a></li>
+                                                <li><a href="teachers.php?s=view_cls&tid=<?= $rowTeach[0] ?>">View Classes</a></li>
+                                                <li class="divider"></li>
                                                 <li><a href="teachers.php?s=assg_cls&tid=<?= $rowTeach[0] ?>">Assign Class</a></li>
                                             </ul>
                                         </div>
