@@ -74,22 +74,25 @@
         }
         focusInput(20);
 
-        $('input[name="barcode"]').on('keyup paste', function(e) {
-            e.stopImmediatePropagation();
-            $.ajax({
-                url: "attendance.php",
-                type: "POST",
-                data: {
-                    barcode: $('input[name="barcode"]').val(),
-                    barcode_shoot: true
-                },
-                success: function(result) {
-                    var getStatus = $('#showStatusHere', $(result));
-                    $('#showStatusHere').html(getStatus);
+        $('input[name="barcode"]').on('keypress', function(e) {
+            if (e.which == 13) {
+                e.stopImmediatePropagation();
+                $.ajax({
+                    url: "attendance.php",
+                    type: "POST",
+                    data: {
+                        barcode: $('input[name="barcode"]').val(),
+                        barcode_shoot: true
+                    },
+                    success: function(result) {
+                        var getStatus = $('#showStatusHere', $(result));
+                        $('#showStatusHere').html(getStatus);
 
-                    focusInput(1000);
-                }
-            })
+                        focusInput(1000);
+                    }
+                })
+            }
         })
+
     })
 </script>
