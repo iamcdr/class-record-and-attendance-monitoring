@@ -10,7 +10,6 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                 <thead>
                     <tr>
                         <th>Section</th>
-                        <th>Subject</th>
                         <th>Year</th>
                         <th>Options</th>
                     </tr>
@@ -26,23 +25,11 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                                     $resultSection = mysqli_query($connection, $querySection);
 
                                     while($rowSection = mysqli_fetch_array($resultSection)){
+                                        $countSection = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']} AND advisory = 1 AND section_id = {$rowSection[0]}"));
+                                        if($countSection==0):
                                     ?>
                                     <option value="<?= $rowSection[0] ?>"><?= $rowSection['section_description'] ?></option>
-                                    <?php } ?>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="subject_id" class="form-control">
-                                    <?php
-                                    $querySubj = "SELECT * FROM subjects WHERE archive_status = 0";
-                                    $resultSubj = mysqli_query($connection, $querySubj);
-
-                                    while($rowSubj = mysqli_fetch_array($resultSubj)){
-
-                                        ?>
-                                        <option value="<?= $rowSubj[0] ?>"><?= $rowSubj['subject_description'] ?></option>
-                                        <?php
-
+                                    <?php endif;
                                     } ?>
                                 </select>
                             </td>
@@ -72,7 +59,6 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                     ?>
                     <tr>
                         <td><?= displaySectionDesc($rowClass['section_id']) ?></td>
-                        <td><?= displaySubjectDesc($rowClass['subject_id']) ?></td>
                         <td><?= displayAcadYear($rowClass['year_id']) ?></td>
                     </tr>
                     <?php } ?>

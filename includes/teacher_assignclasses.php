@@ -65,7 +65,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                         </tr>
                     </form>
                     <?php
-                    $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']}";
+                    $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']} AND advisory = 0";
                     $resultClass = mysqli_query($connection, $queryClass);
 
                     while($rowClass = mysqli_fetch_array($resultClass)){

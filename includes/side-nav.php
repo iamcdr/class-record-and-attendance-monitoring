@@ -93,8 +93,12 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
 
                     <?php if($_SESSION['hts_user_userprivilege']==2){ ?>
 
-                    <li <?php if(isset($activePage)&&strpos($activePage, "Classes")!==false) echo "class='active'" ?>>
+                    <li <?php if(isset($activePage)&&strpos($activePage, "View Classes")!==false) echo "class='active'" ?>>
                         <a href="./classes.php"><i class="fa fa-address-book fa-fw"></i> Classes</a>
+                    </li>
+
+                    <li <?php if(isset($activePage)&&strpos($activePage, "Advisory")!==false) echo "class='active'" ?>>
+                        <a href="./advisory.php"><i class="fa fa-users fa-fw"></i> Advisory Classes</a>
                     </li>
                     <?php } ?>
                 </ul>
