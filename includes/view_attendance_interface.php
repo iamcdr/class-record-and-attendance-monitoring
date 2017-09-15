@@ -26,30 +26,32 @@
                         mysqli_query($connection, "INSERT INTO attendance_log(student_id, date_attended, time_in, sent) VALUES ({$row[0]}, '{$date_attended}', '{$time_in}', 1 )");
 
                         $message = "Date: $date_attended \n Time In: $time_in ";
-                        itexmo($contactno, $message);
+                        //itexmo($contactno, $message);
                         $i=1;
                     }
 
                 ?>
 
                 <div class="row">
-                    <div class="col-lg-4">
-                        <label>Full Name</label>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Full Name</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <?= $row['last_name'] . " " . $row['first_name']  ?>
+                        </div>
                     </div>
-                    <div class="col-lg-8">
-                        <?= $row['last_name'] . " " . $row['first_name']  ?>
+                    <div class="row">
+                        <div class="col-lg-4"><label>Birthdate</label></div>
+                        <div class="col-lg-8">
+                            <?= $row['birthdate'] ?>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4"><label>Birthdate</label></div>
-                    <div class="col-lg-8">
-                        <?= $row['birthdate'] ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4"><label>Section</label></div>
-                    <div class="col-lg-8">
-                        <?= displaySectionDesc($row['section_id']) ?>
+                    <div class="row">
+                        <div class="col-lg-4"><label>Section</label></div>
+                        <div class="col-lg-8">
+                            <?= displaySectionDesc($row['section_id']) ?>
+                        </div>
                     </div>
                 </div>
 
@@ -74,22 +76,25 @@
         }
         focusInput(20);
 
-        $('input[name="barcode"]').on('keyup paste', function(e) {
-            e.stopImmediatePropagation();
-            $.ajax({
-                url: "attendance.php",
-                type: "POST",
-                data: {
-                    barcode: $('input[name="barcode"]').val(),
-                    barcode_shoot: true
-                },
-                success: function(result) {
-                    var getStatus = $('#showStatusHere', $(result));
-                    $('#showStatusHere').html(getStatus);
+        $('input[name="barcode"]').on('keypress', function(e) {
+            if (e.which == 13) {
+                e.stopImmediatePropagation();
+                $.ajax({
+                    url: "attendance.php",
+                    type: "POST",
+                    data: {
+                        barcode: $('input[name="barcode"]').val(),
+                        barcode_shoot: true
+                    },
+                    success: function(result) {
+                        var getStatus = $('#showStatusHere', $(result));
+                        $('#showStatusHere').html(getStatus);
 
-                    focusInput(1000);
-                }
-            })
+                        focusInput(100);
+                    }
+                })
+            }
         })
+
     })
 </script>
