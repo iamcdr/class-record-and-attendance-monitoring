@@ -314,13 +314,40 @@ function displayGradingPeriodGrade($student_id, $subid, $secid, $gradingperiod_i
     global $connection;
 
     $teacher_id = (isset($teacher_id)) ? $teacher_id : $_SESSION['hts_user_id'];
-    
+
     $query = "SELECT * FROM outputs_final WHERE student_id = {$student_id} AND section_id = {$secid} AND subject_id = {$subid} AND gradingperiod_id = {$gradingperiod_id} AND teacher_id = {$teacher_id}";
     $result = mysqli_query($connection, $query);
 
     $row = mysqli_fetch_array($result);
     return $row['total_score'];
 }
+
+function displayFinalGrade($student_id, $subid, $secid){
+    global $connection;
+
+    $teacher_id = (isset($teacher_id)) ? $teacher_id : $_SESSION['hts_user_id'];
+
+    $first = displayGradingPeriodGrade($student_id, $subid, $secid, 1);
+    $second = displayGradingPeriodGrade($student_id, $subid, $secid, 2);
+    $third = displayGradingPeriodGrade($student_id, $subid, $secid, 3);
+    $fourth = displayGradingPeriodGrade($student_id, $subid, $secid, 4);
+
+    $query = "SELECT * FROM outputs_final WHERE student_id = {$student_id} AND section_id = {$secid} AND subject_id = {$subid} AND teacher_id = {$teacher_id} ORDER BY gradingperiod_id DESC";
+    $result = mysqli_query($connection, $query);
+
+    $row = mysqli_fetch_array($result);
+
+    if($row['gradingperiod_id']==1)
+        return ($first + $second + $third + $fourth);
+    elseif($row['gradingperiod_id']==2)
+        return ($first + $second + $third + $fourth)/2;
+    elseif($row['gradingperiod_id']==3)
+        return ($first + $second + $third + $fourth)/3;
+    elseif($row['gradingperiod_id']==4)
+        return ($first + $second + $third + $fourth)/4;
+
+}
+
 
 
 //##########################################################################
@@ -344,37 +371,37 @@ function itexmo($number,$message,$apicode = "TR-CHRIS443202_CBIDA"){
 
 function getTeacherIdFromTeacherClasses($tcid){
     global $connection;
-    
+
     $query = "SELECT * FROM teacher_classes WHERE teach_class_id = {$tcid}";
     $result = mysqli_query($connection, $query);
-    
+
     $row = mysqli_fetch_array($result);
     return $row['teacher_id'];
 }
 function getSectionIdFromTeacherClasses($tcid){
     global $connection;
-    
+
     $query = "SELECT * FROM teacher_classes WHERE teach_class_id = {$tcid}";
     $result = mysqli_query($connection, $query);
-    
+
     $row = mysqli_fetch_array($result);
     return $row['section_id'];
 }
 function getSubjectIdFromTeacherClasses($tcid){
     global $connection;
-    
+
     $query = "SELECT * FROM teacher_classes WHERE teach_class_id = {$tcid}";
     $result = mysqli_query($connection, $query);
-    
+
     $row = mysqli_fetch_array($result);
     return $row['subject_id'];
 }
 function getSchoolyearIdFromTeacherClasses($tcid){
     global $connection;
-    
+
     $query = "SELECT * FROM teacher_classes WHERE teach_class_id = {$tcid}";
     $result = mysqli_query($connection, $query);
-    
+
     $row = mysqli_fetch_array($result);
     return $row['year_id'];
 }

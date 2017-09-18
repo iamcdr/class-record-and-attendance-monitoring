@@ -15,6 +15,8 @@ $activePage = "View Classes";
                 echo '<h4 class="page-header"><a href="classes.php">Classes</a> ->'.displaySectionDesc($_GET['sid']).'('.displaySubjectDesc($_GET['subid']).')</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="add_grades")
                 echo '<h4 class="page-header"><a href="classes.php">Classes</a>-><a href="classes.php?s=cls_rec&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'('.displaySubjectDesc($_GET['subid']).')</a> ->Add Grades</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="cls_stndng")
+                echo '<h4 class="page-header"><a href="classes.php">Classes</a>-><a href="classes.php?s=cls_rec&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'('.displaySubjectDesc($_GET['subid']).')</a> ->Class Standing Reports</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="add_ww")
                 echo '<h4 class="page-header"><a href="classes.php">Classes</a>-><a href="classes.php?s=cls_rec&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'('.displaySubjectDesc($_GET['subid']).')</a> -><a href="classes.php?s=add_grades&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">Add Grades</a>-> <a href="classes.php?s=ww&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">Written Work</a>-> Add Written Work</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="ww")
@@ -80,6 +82,10 @@ $activePage = "View Classes";
 
                        case 'edit_qa':
                            include "includes/classes_add_quartasse.php";
+                           break;
+
+                       case 'cls_stndng':
+                           include "includes/classes_report_standing.php";
                            break;
 
                        case 'exec':
