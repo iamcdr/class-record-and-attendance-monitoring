@@ -77,7 +77,7 @@
         focusInput(20);
 
         $('input[name="barcode"]').on('keypress', function(e) {
-            if (e.which == 13) {
+            if (e.which == 13) { //13 is for enter key
                 e.stopImmediatePropagation();
                 $.ajax({
                     url: "attendance.php",
