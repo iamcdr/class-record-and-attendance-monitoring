@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-body">
+           <a href="advisory.php?s=cls_stndng&sid=<?= $_GET['sid']?>&yid=<?= $_GET['yid'] ?>" class="btn btn-info btn-lg">Class Standing Report</a>
             <table class="table table-bordered" id="content">
                 <thead>
                     <tr>

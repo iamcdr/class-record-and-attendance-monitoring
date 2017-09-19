@@ -21,10 +21,21 @@
                     $queryClass = "SELECT * FROM students AS a INNER JOIN student_section AS b ON a.student_id=b.student_id WHERE a.archive_status = 0 AND b.section_id = {$_GET['sid']} AND b.schoolyear_id = {$_GET['yid']} ORDER BY a.last_name ASC";
                     $resultClass = mysqli_query($connection, $queryClass) or die(mysqli_error($connection)  . $queryClass);
 
-                    $i=1;
+                    $i=1; $sumgrade=0;
                     while($rowClass = mysqli_fetch_array($resultClass)){
-                        $final_grade = displayFinalGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid']) ?: 60;
-                        $queryTempIns = "INSERT INTO class_final_ranking VALUES({$rowClass['student_id']}, $final_grade)";
+
+                        //get active grading period
+                        $rowGp = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM gradingperiod WHERE status = 1"));
+
+                        //subject loop
+                        $querySub = "SELECT * FROM outputs_final WHERE student_id = {$rowClass['student_id']} AND gradingperiod_id = {$rowGp[0]}";
+                        $resultSub = mysqli_query($connection, $querySub);
+                        $countSub = mysqli_num_rows(mysqli_query($connection, "SELECT DISTINCT gradingperiod_id FROM outputs_final WHERE student_id = {$rowClass['student_id']}"));
+                        while($rowSub = mysqli_fetch_array($resultSub)){
+                            $sumgrade += displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $_GET['sid']) ?: 60;
+                        }
+                        $finalgrade = $sumgrade / $countSub;
+                        $queryTempIns = "INSERT INTO class_final_ranking VALUES({$rowClass['student_id']}, $finalgrade)";
                         mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection) . $queryTempIns);
 
 
@@ -59,13 +70,13 @@
                 </thead>
                 <tbody>
                     <?php
-                    $queryClass = "SELECT * FROM students AS a INNER JOIN student_section AS b ON a.student_id=b.student_id WHERE a.archive_status = 0 AND b.section_id = {$_GET['sid']} AND b.schoolyear_id = {$_GET['yid']} ORDER BY a.last_name ASC";
+                    $queryClass = "SELECT * FROM class_final_ranking ORDER BY final_grade DESC";
                     $resultClass = mysqli_query($connection, $queryClass) or die(mysqli_error($connection));
 
                     $i=1;
                     while($rowClass = mysqli_fetch_array($resultClass)):
-                        $final_grade = displayFinalGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid']);
-                               
+                        $final_grade = $rowClass['final_grade'];
+
                         if($final_grade<80):
                     ?>
                         <tr>
