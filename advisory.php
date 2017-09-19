@@ -15,6 +15,8 @@ $activePage = "View Advisory Classes";
                 echo '<h4 class="page-header"><a href="advisory.php">Advisory</a> ->'.displaySectionDesc($_GET['sid']).'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="gr_list")
                 echo '<h4 class="page-header"><a href="advisory.php">Advisory</a> -> <a href="advisory.php?s=subj_list&sid='. $_GET['sid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'</a> -> '.displaySubjectDesc($_GET['subid']).'</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="cls_stndng")
+                echo '<h4 class="page-header"><a href="advisory.php">Advisory</a>-><a href="advisory.php?s=gr_list&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'('.displaySubjectDesc($_GET['subid']).')</a> ->Class Standing Reports</h4>';
             else
                 echo '<h4 class="page-header">View Advisory Classes</h4>';
                         ?>
@@ -32,6 +34,10 @@ $activePage = "View Advisory Classes";
 
                        case 'gr_list':
                            include "includes/advisory_classes_grlist.php";
+                           break;
+
+                       case 'cls_stndng':
+                           include "includes/advisory_classes_report_standing.php";
                            break;
 
                        default:

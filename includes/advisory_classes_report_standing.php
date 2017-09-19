@@ -13,31 +13,35 @@
                 <tbody>
                     <?php
                     //create temporary table
-                    $queryTemp = "CREATE TEMPORARY TABLE class_final(
+                    $queryTemp = "CREATE TEMPORARY TABLE class_final_ranking(
                     `student_id` int NOT NULL,
                     `final_grade` dec (10,2) NOT NULL)";
                     mysqli_query($connection, $queryTemp) or die(mysqli_error($connection));
 
                     //truncate
-                    $queryTemp = "TRUNCATE class_final";
+                    $queryTemp = "TRUNCATE class_final_ranking";
                     mysqli_query($connection, $queryTemp) or die(mysqli_error($connection));
                     
-                    $queryClass = "SELECT * FROM students AS a LEFT JOIN outputs_final AS b ON a.student_id=b.student_id WHERE a.archive_status = 0 AND b.section_id = {$_GET['sid']} AND b.subject_id = {$_GET['subid']}";
+                    $queryClass = "SELECT * FROM students AS a INNER JOIN student_section AS b ON a.student_id=b.student_id WHERE a.archive_status = 0 AND b.section_id = {$_GET['sid']} AND b.schoolyear_id = {$_GET['yid']} ORDER BY a.last_name ASC";
                     $resultClass = mysqli_query($connection, $queryClass) or die(mysqli_error($connection));
 
                     $i=1;
                     while($rowClass = mysqli_fetch_array($resultClass)){
                         $final_grade = displayFinalGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid']);
-                        $queryTempIns = "INSERT INTO class_final VALUES({$rowClass['student_id']}, $final_grade)";
+                        $queryTempIns = "INSERT INTO class_final_ranking VALUES({$rowClass['student_id']}, $final_grade)";
                         mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection));
 
 
-                        $queryTempSel = "SELECT * FROM class_final ORDER BY final_grade DESC";
+                        $queryTempSel = "SELECT * FROM class_final_ranking ORDER BY final_grade DESC";
                         $resultTempSel = mysqli_query($connection, $queryTempSel) or die(mysqli_error($connection));
                     }
+                        $i=1;
                         while($rowTempSel = mysqli_fetch_array($resultTempSel)):
                     ?>
                         <tr>
+                           <td>
+                               <?= $i++ ?>
+                           </td>
                             <td>
                                 <?= displayLastNameFirst($rowTempSel['student_id']) ?>
                             </td>
@@ -59,39 +63,25 @@
                 </thead>
                 <tbody>
                     <?php
-                    //create temporary table
-                    $queryTemp = "CREATE TEMPORARY TABLE class_final(
-                    `student_id` int NOT NULL,
-                    `final_grade` dec (10,2) NOT NULL
-                    )";
-                    mysqli_query($connection, $queryTemp) or die(mysqli_error($connection));
-                    
-
                     $queryClass = "SELECT * FROM students AS a INNER JOIN student_section AS b ON a.student_id=b.student_id WHERE a.archive_status = 0 AND b.section_id = {$_GET['sid']} AND b.schoolyear_id = {$_GET['yid']} ORDER BY a.last_name ASC";
                     $resultClass = mysqli_query($connection, $queryClass) or die(mysqli_error($connection));
 
                     $i=1;
-                    while($rowClass = mysqli_fetch_array($resultClass)){
+                    while($rowClass = mysqli_fetch_array($resultClass)):
                         $final_grade = displayFinalGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid']);
-                        $queryTempIns = "INSERT INTO class_final VALUES({$rowClass['student_id']}, $final_grade)";
-                        mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection));
-
-
-                        $queryTempSel = "SELECT * FROM class_final ORDER BY final_grade DESC";
-                        $resultTempSel = mysqli_query($connection, $queryTempSel) or die(mysqli_error($connection));
-                    }
-                                
-                    while($rowTempSel = mysqli_fetch_array($resultTempSel)):
+                               
+                        if($final_grade<80):
                     ?>
                         <tr>
                             <td>
-                                <?= displayLastNameFirst($rowTempSel['student_id']) ?>
+                                <?= displayLastNameFirst($rowClass['student_id']) ?>
                             </td>
                             <td>
-                                <?= $rowTempSel['final_grade'] ?>
+                                <?= $final_grade ?>
                             </td>
                         </tr>
                         <?php
+                        endif; //final grade > 80
                     endwhile ?>
                 </tbody>
             </table>
