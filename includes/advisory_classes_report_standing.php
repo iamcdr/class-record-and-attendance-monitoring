@@ -16,20 +16,16 @@
                     $queryTemp = "CREATE TEMPORARY TABLE class_final_ranking(
                     `student_id` int NOT NULL,
                     `final_grade` dec (10,2) NOT NULL)";
-                    mysqli_query($connection, $queryTemp) or die(mysqli_error($connection));
+                    mysqli_query($connection, $queryTemp) or die(mysqli_error($connection) . $queryTemp);
 
-                    //truncate
-                    $queryTemp = "TRUNCATE class_final_ranking";
-                    mysqli_query($connection, $queryTemp) or die(mysqli_error($connection));
-                    
                     $queryClass = "SELECT * FROM students AS a INNER JOIN student_section AS b ON a.student_id=b.student_id WHERE a.archive_status = 0 AND b.section_id = {$_GET['sid']} AND b.schoolyear_id = {$_GET['yid']} ORDER BY a.last_name ASC";
-                    $resultClass = mysqli_query($connection, $queryClass) or die(mysqli_error($connection));
+                    $resultClass = mysqli_query($connection, $queryClass) or die(mysqli_error($connection)  . $queryClass);
 
                     $i=1;
                     while($rowClass = mysqli_fetch_array($resultClass)){
-                        $final_grade = displayFinalGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid']);
+                        $final_grade = displayFinalGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid']) ?: 60;
                         $queryTempIns = "INSERT INTO class_final_ranking VALUES({$rowClass['student_id']}, $final_grade)";
-                        mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection));
+                        mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection) . $queryTempIns);
 
 
                         $queryTempSel = "SELECT * FROM class_final_ranking ORDER BY final_grade DESC";
@@ -40,7 +36,7 @@
                     ?>
                         <tr>
                            <td>
-                               <?= $i++ ?>
+                               <?= $i ?>
                            </td>
                             <td>
                                 <?= displayLastNameFirst($rowTempSel['student_id']) ?>
@@ -50,7 +46,7 @@
                             </td>
                         </tr>
                         <?php
-                    endwhile ?>
+                    $i++; endwhile ?>
                 </tbody>
             </table>
             <h2>Failing Students</h2>
