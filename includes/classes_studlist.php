@@ -2,7 +2,6 @@
     <div class="col-lg-12">
         <div class="panel panel-body">
            <a href="classes.php?s=add_grades&sid=<?= $_GET['sid']?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>" class="btn btn-success btn-lg"><i class="fa fa-plus fa-fw"></i> Add Grades</a>
-           <a href="classes.php?s=cls_stndng&sid=<?= $_GET['sid']?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>" class="btn btn-info btn-lg">Class Standing Report</a>
             <table class="table table-striped" id="content">
                 <thead>
                     <tr>

@@ -10,20 +10,28 @@
 </style>
 
 <?php
-$rowGP = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM gradingperiod WHERE status = 1"));
-$queryCounts = "SELECT * FROM outputs_final WHERE teacher_id = {$_SESSION['hts_user_id']} AND section_id = {$_GET['sid']} AND subject_id = {$_GET['subid']} AND gradingperiod_id = {$rowGP[0]}";
-$resultCounts = mysqli_query($connection, $queryCounts);
-
-if(mysqli_num_rows($resultCounts)==0):
+$queryGP = "SELECT * FROM gradingperiod";
+$resultGP = mysqli_query($connection, $queryGP);
 ?>
-<a href="#" id="submitGrade" class="btn btn-primary btn-lg">Submit Grade as Final</a>
-<?php endif ?>
-<form action="#">
+
+    <?php
+    while($rowGP = mysqli_fetch_array($resultGP)):
+?>
+<form action="#" class="form<?= $rowGP[0] ?>">
    <input type="hidden" name="section_id" value="<?= $_GET['sid'] ?>">
    <input type="hidden" name="subject_id" value="<?= $_GET['subid'] ?>">
    <input type="hidden" name="year_id" value="<?= $_GET['yid'] ?>">
-    <div class="row">
+       <div class="row">
+       <?php
+       $queryCounts = "SELECT * FROM outputs_final WHERE teacher_id = {$_SESSION['hts_user_id']} AND section_id = {$_GET['sid']} AND subject_id = {$_GET['subid']} AND gradingperiod_id = {$rowGP[0]}";
+        $resultCounts = mysqli_query($connection, $queryCounts);
+        ?>
         <div class="col-lg-12">
+        <?php
+        if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1):
+        ?>
+        <a href="#" id="submitGrade<?= $rowGP[0] ?>" class="btn btn-primary btn-lg">Submit Grade as Final</a>
+        <?php endif ?>
             <div class="panel panel-body">
                 <h4>
                     <?php
@@ -34,8 +42,8 @@ if(mysqli_num_rows($resultCounts)==0):
                     <tr>
                         <th>Learners' Name</th>
                         <th>Written Works (30%)
-                        <a href="classes.php?s=ww&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>">
-                        <?php if(mysqli_num_rows($resultCounts)==0): ?>
+                        <a href="classes.php?s=ww&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>">
+                        <?php if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1): ?>
                         <i class="fa fa-plus"></i>
                         <?php else: ?>
                         <i class="fa fa-eye"></i>
@@ -43,8 +51,8 @@ if(mysqli_num_rows($resultCounts)==0):
                         </a>
                         </th>
                         <th>Performance Tasks (50%)
-                        <a href="classes.php?s=pt&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>">
-                        <?php if(mysqli_num_rows($resultCounts)==0): ?>
+                        <a href="classes.php?s=pt&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>">
+                        <?php if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1): ?>
                         <i class="fa fa-plus"></i>
                         <?php else: ?>
                         <i class="fa fa-eye"></i>
@@ -52,8 +60,8 @@ if(mysqli_num_rows($resultCounts)==0):
                         </a>
                         </th>
                         <th>Quarterly Assessments (20%)
-                        <a href="classes.php?s=qa&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>">
-                        <?php if(mysqli_num_rows($resultCounts)==0): ?>
+                        <a href="classes.php?s=qa&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>">
+                        <?php if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1): ?>
                         <i class="fa fa-plus"></i>
                         <?php else: ?>
                         <i class="fa fa-eye"></i>
@@ -242,9 +250,11 @@ if(mysqli_num_rows($resultCounts)==0):
         </div>
     </div>
 </form>
+
+
 <script>
     $(document).ready(function() {
-        $('#submitGrade').click(function() {
+        $('#submitGrade<?= $rowGP[0] ?>').click(function() {
                 swal({
                     title: "Submit this as final grade?",
                     text: "Please input your password to confirm submitting this final grade.",
@@ -260,7 +270,7 @@ if(mysqli_num_rows($resultCounts)==0):
                             $.ajax({
                                 url: "includes/classes_exec.php",
                                 type: "POST",
-                                data: $('form').serialize()+'&submit_final_grade=1'+'&password_auth='+$('input[name="password_auth"]').val(),
+                                data: $('.form<?= $rowGP[0] ?>').serialize()+'&submit_final_grade=1'+'&password_auth='+$('input[name="password_auth"]').val(),
                                 success: function(data) {
                                     console.log(data);
                                     if (data == "error") {
@@ -287,3 +297,4 @@ if(mysqli_num_rows($resultCounts)==0):
             })
     })
 </script>
+    <?php endwhile ?>

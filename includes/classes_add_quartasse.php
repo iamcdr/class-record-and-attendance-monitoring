@@ -1,7 +1,6 @@
 <form action="classes.php?s=exec" method="post">
     <?php
-    $rowGP = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM gradingperiod WHERE status = 1"));
-    $gradingperiod_id = $rowGP[0];
+    $gradingperiod_id = $_GET['gpid'];
     ?>
         <input type="hidden" name="output_session" value="<?= $_GET['outses'] ?>">
         <input type="hidden" name="teacher_id" value="<?= $_SESSION['hts_user_id'] ?>">
@@ -30,7 +29,7 @@
                     </div>
                 </div>-->
                     <h4>
-                        <?= $rowGP['description'];?>
+                        <?= displayGradingPeriod($gradingperiod_id) ?>
                     </h4>
                     <input type="hidden" name="gradingperiod_id" value="<?= $gradingperiod_id ?>">
                     <table class="table">

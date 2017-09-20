@@ -32,7 +32,9 @@
                         $resultSub = mysqli_query($connection, $querySub);
                         $countSub = mysqli_num_rows(mysqli_query($connection, "SELECT DISTINCT gradingperiod_id FROM outputs_final WHERE student_id = {$rowClass['student_id']}"));
                         while($rowSub = mysqli_fetch_array($resultSub)){
-                            $sumgrade += displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $_GET['sid']) ?: 60;
+//                            $studGrade = (displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $_GET['sid'])!=60) ? displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $_GET['sid']) : 60;
+                            $studGrade = (displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $_GET['sid']));
+                            $sumgrade += $studGrade;
                         }
                         $finalgrade = $sumgrade / $countSub;
                         $queryTempIns = "INSERT INTO class_final_ranking VALUES({$rowClass['student_id']}, $finalgrade)";
