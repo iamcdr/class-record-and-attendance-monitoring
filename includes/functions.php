@@ -354,7 +354,7 @@ function displayFinalGrade($student_id, $subid, $secid){
 // ITEXMO SEND SMS API - PHP - CURL-LESS METHOD
 // Visit www.itexmo.com/developers.php for more info about this API
 //##########################################################################
-function itexmo($number,$message,$apicode = "TR-CHRIS443202_CBIDA"){
+function itexmo($number,$message,$apicode = "TR-HOLYT940364_354K4"){
     $url = 'https://www.itexmo.com/php_api/api.php';
     $itexmo = array('1' => $number, '2' => $message, '3' => $apicode);
     $param = array(

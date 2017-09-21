@@ -26,7 +26,7 @@
                         mysqli_query($connection, "INSERT INTO attendance_log(student_id, date_attended, time_in, sent) VALUES ({$row[0]}, '{$date_attended}', '{$time_in}', 1 )");
 
                         $message = "Date: $date_attended \n Time In: $time_in ";
-                        //itexmo($contactno, $message);
+                        itexmo($contactno, $message);
                         $i=1;
                     }
 
