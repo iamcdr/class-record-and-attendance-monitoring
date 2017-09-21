@@ -54,8 +54,11 @@
                                 <?php if(isset($_GET['error'])&&$_GET['error']==2){ ?>
                                     <div class="alert alert-danger"> Error! Username is not registered.</div>
                                     <?php
-                                } elseif(isset($_GET['error'])&&$_GET['error']==1){ ?>
+                                } elseif(isset($_GET['error'])&&$_GET['error']=='1'){ ?>
                                         <div class="alert alert-danger"> Error! Username and password did not match.</div>
+                                    <?php
+                                } elseif(isset($_GET['error'])&&$_GET['error']=='1s'){ ?>
+                                        <div class="alert alert-danger"> Error! Account is disabled. Contact your administrator</div>
                                         <?php } ?>
 
                                             <div class="panel-heading">

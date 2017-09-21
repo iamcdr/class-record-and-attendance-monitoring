@@ -7,6 +7,7 @@ include("includes/functions.php");
 
     if(!isset($_SESSION['hts_user_userprivilege']))
         header("Location: login.php");
+
  ?>
 
 <!DOCTYPE html>

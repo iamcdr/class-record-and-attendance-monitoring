@@ -24,16 +24,17 @@ if(isset($_POST['login'])){
             $db_user_middlename = $rowVerify['middle_name'];
             $db_user_lastname = $rowVerify['last_name'];
             $db_user_userprivilege = $rowVerify['user_privilege'];
+            $db_user_rand_salt = $rowVerify['randSalt'];
             $db_user_account_status = $rowVerify['archive_status'];
-            $db_user_account_status = $rowVerify['randSalt'];
+            $db_user_first_login = $rowVerify['first_login'];
 
             $password = crypt($password, $db_user_password);
         }
 
-        if(($username !== $db_user_username && $username !== $db_user_emp_num) || $password !== $db_user_password || $db_user_account_status == 1){
-
+        if(($username !== $db_user_username && $username !== $db_user_emp_num) || $password !== $db_user_password){
             header("Location:login.php?error=1");
-
+        } else if($db_user_account_status == 1){
+            header("Location:login.php?error=1s");
         } else if(($username == $db_user_username|| $username == $db_user_emp_num) && $password == $db_user_password){
 
             $_SESSION['hts_user_id'] = $db_user_id;
@@ -44,6 +45,7 @@ if(isset($_POST['login'])){
             $_SESSION['hts_user_lastname'] = $db_user_lastname;
             $_SESSION['hts_user_userprivilege'] = $db_user_userprivilege;
             $_SESSION['hts_user_account_status'] = $db_user_account_status;
+            $_SESSION['hts_user_first_login'] = $db_user_first_login;
 
             //$_SESSION['loggedin_time'] = time();
 
@@ -54,7 +56,10 @@ if(isset($_POST['login'])){
                 $remarks = "User Name: $user_name";
                 insertAuditLogData($type, $remarks);*/
 
-                header("Location: ./");
+                if($_SESSION['hts_user_first_login']==1)
+                    header("Location: ./accounts.php?s=chpas");
+                else
+                    header("Location: ./");
 
         }
 

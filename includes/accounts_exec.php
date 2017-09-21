@@ -45,7 +45,7 @@ if(isset($_POST['add_account'])){
         $_SESSION['ALERT']['ADD_ACCOUNT_FAILED'] = "$fullname already exists";
     } else {
         //query useraccounts
-        $queryUc = "INSERT INTO useraccount(password, last_name, middle_name, first_name, emp_num, user_privilege) VALUES('{$defaultPass}', '{$last_name}', '{$middle_name}', '{$first_name}', '{$emp_num}', '{$user_privilege}')";
+        $queryUc = "INSERT INTO useraccount(password, last_name, middle_name, first_name, emp_num, user_privilege, first_login) VALUES('{$defaultPass}', '{$last_name}', '{$middle_name}', '{$first_name}', '{$emp_num}', '{$user_privilege}', 1)";
         mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
         $user_id = mysqli_insert_id($connection);
 
@@ -133,8 +133,8 @@ if(isset($_POST['submit_cpass'])){
 
         $newpassword = crypt($newpassword, $randSalt);
 
-        $queryUpdatePassword = "UPDATE useraccount SET password = '{$newpassword}' WHERE user_id = {$user_id}";
-
+        $queryUpdatePassword = "UPDATE useraccount SET password = '{$newpassword}', first_login = 0 WHERE user_id = {$user_id}";
+        $_SESSION['hts_user_first_login'] = 0;
         $resultUpdatePassword = mysqli_query($connection, $queryUpdatePassword);
 
         $_SESSION['ALERT']['CHANGEPASS_SUCCESS'] = "Password was successfully changed.";
