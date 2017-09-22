@@ -36,7 +36,7 @@
                             $studGrade = (displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $_GET['sid']));
                             $sumgrade += $studGrade;
                         }
-                        $finalgrade = $sumgrade / $countSub;
+                        $finalgrade = getOutputsFinalGrade($sumgrade / $countSub);
                         $queryTempIns = "INSERT INTO class_final_ranking VALUES({$rowClass['student_id']}, $finalgrade)";
                         mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection) . $queryTempIns);
 
