@@ -27,6 +27,8 @@
                               </a>
                               <ul class="dropdown-menu">
                                <li><a href="accounts.php?s=chpas">Change Password</a></li>
+                               <li><a href="accounts.php?s=edit&uid=<?= $_SESSION['hts_user_id'] ?>">Edit Information</a></li>
+
                                 <li><a href="login.php?s=exec&logout">Log Out</a></li>
                               </ul>
                         </li>

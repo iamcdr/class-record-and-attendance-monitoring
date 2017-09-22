@@ -15,6 +15,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
             <div class="header">
                 <h4 class="title">Class Record and Attendance Monitoring System</h4>
                 <p class="category">Handcrafted for Holy Trinity School</p>
+                <?= (isset($_SESSION['ALERT']['EDIT_ACCOUNT_SUCCESS'])&&$_SESSION['hts_user_userprivilege']==2) ? "<div class='alert alert-success'> {$_SESSION['ALERT']['EDIT_ACCOUNT_SUCCESS']} </div>" : '' ?>
             </div>
 
             <div class="row">
@@ -43,41 +44,60 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                                 <?php
                             $cDateYear = date("Y");
                             $currentSy = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM year WHERE year1 = '{$cDateYear}'"));
-                                
+
                             echo "S.Y. " . $currentSy['year1'] . " - " . $currentSy['year2'];
                             ?>
                             </h4>
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="panel task db mbm">
+                        <div class="panel-body">
+                            <p class="icon">
+                                Current Number of Students
+                            </p>
+                            <h4>
+                                <?php
+                            $countStud = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM students WHERE archive_status = 0"));
+
+                            echo $countStud;
+                            ?>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+            <!--TEACHERS -->
             <?php
             $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_SESSION['hts_user_id']} AND year_id = {$currentSy[0]} AND archive_status = 0 AND advisory = 1";
             $resultClass = mysqli_query($connection, $queryClass);
 
             while($rowClass = mysqli_fetch_array($resultClass)){
             ?>
-            <div class="row">
-                <div class="col-sm-12 col-md-4">
-                    <div class="panel task db mbm">
-                        <div class="panel-body">
-                            <p class="icon">
-                               <?= displaySectionDesc($rowClass['section_id']) ?>
-                            </p>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="panel panel-body">
-                                        <p><strong>Ranking</strong></p>
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <td>Rank #</td>
-                                                    <td>Student Name</td>
-                                                    <td>Grade</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="panel task db mbm">
+                            <div class="panel-body">
+                                <p class="icon">
+                                    <?= displaySectionDesc($rowClass['section_id']) ?>
+                                </p>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-body">
+                                            <p><strong>Ranking</strong></p>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Rank #</td>
+                                                        <td>Student Name</td>
+                                                        <td>Grade</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
                                                 //create temporary table
                                                 $queryTemp = "CREATE TEMPORARY TABLE class_final_ranking(
                                                 `student_id` int NOT NULL,
@@ -113,31 +133,31 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                                                     $i=1;
                                                     while($rowTempSel = mysqli_fetch_array($resultTempSel)):
                                                 ?>
-                                                    <tr>
-                                                       <td>
-                                                           <?= $i ?>
-                                                       </td>
-                                                        <td>
-                                                            <?= displayLastNameFirst($rowTempSel['student_id']) ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $rowTempSel['final_grade'] ?>
-                                                        </td>
-                                                    </tr>
-                                                    <?php
+                                                        <tr>
+                                                            <td>
+                                                                <?= $i ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= displayLastNameFirst($rowTempSel['student_id']) ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $rowTempSel['final_grade'] ?>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
                                                 $i++; endwhile ?>
-                                            </tbody>
-                                        </table>
-                                        <p><strong>Failing Students</strong></p>
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <td>Student Name</td>
-                                                    <td>Grade</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
+                                                </tbody>
+                                            </table>
+                                            <p><strong>Failing Students</strong></p>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Student Name</td>
+                                                        <td>Grade</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
                                                 $queryClass = "SELECT * FROM class_final_ranking ORDER BY final_grade DESC";
                                                 $resultClass = mysqli_query($connection, $queryClass) or die(mysqli_error($connection));
 
@@ -147,27 +167,87 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
 
                                                     if($final_grade<80):
                                                 ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?= displayLastNameFirst($rowClass['student_id']) ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $final_grade ?>
-                                                        </td>
-                                                    </tr>
-                                                    <?php
+                                                        <tr>
+                                                            <td>
+                                                                <?= displayLastNameFirst($rowClass['student_id']) ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $final_grade ?>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
                                                     endif; //final grade > 80
                                                 endwhile ?>
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                    <?php } ?>
+                <?php } ?>
+
+            <!--AUDIT TRAIL-->
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="panel task db mbm">
+                            <div class="panel-body">
+                                <p class="icon">
+                                Audit Logs
+                                </p>
+                                 <div class="row">
+                                    <div class="col-lg-12" id="auditLog">
+                                        <div class="panel panel-body">
+                                        <table class="table">
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Remarks</th>
+                                                <th>Date Updated</th>
+                                            </tr>
+                                            <?php
+                                            $queryAud = "SELECT * FROM audit_trail WHERE user_id != {$_SESSION['hts_user_id']} ORDER BY audit_datetime DESC LIMIT 5";
+                                            $resultAud = mysqli_query($connection, $queryAud);
+
+                                            while($rowAud = mysqli_fetch_array($resultAud)):
+                                            ?>
+                                                <tr>
+                                                    <td><?= displayName($rowAud['user_id']) ?></td>
+                                                    <td><?= $rowAud['audit_type'] ?> </td>
+                                                    <td><?= $rowAud['audit_datetime'] ?> </td>
+                                                </tr>
+
+                                            <?php endwhile ?>
+                                        </table>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<script>
+$(document).ready(auditLog);
+setInterval(auditLog, 3000);
+
+    function auditLog(e){
+         $.ajax({
+            method: "POST",
+            url: "index.php",
+            success: function(result) {
+                var div = $('#auditLog', $(result));
+                $('#auditLog').html(div);
+            }
+
+        })
+    }
+</script>
+
+
+
+
         </div>
     </div>
     <!-- /#page-wrapper -->

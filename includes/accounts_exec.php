@@ -99,9 +99,15 @@ if(isset($_POST['edit_account'])){
         $remarks = "Name: $full_name ";
         insertAuditLogData($type, $remarks);
 
-        $_SESSION['ALERT']['EDIT_ACCOUNT_SUCCESS'] = "The information details of $full_name is successfully updated.";
+        $_SESSION['ALERT']['EDIT_ACCOUNT_SUCCESS'] = "The information details of $full_name are successfully updated.";
 
-    header("Location: accounts.php");
+    if($_SESSION['hts_user_userprivilege']==1)
+        header("Location: accounts.php");
+    elseif($_SESSION['hts_user_userprivilege']==2){
+        $_SESSION['ALERT']['EDIT_ACCOUNT_SUCCESS'] = "Your information details are successfully updated.";
+        header("Location: ./");
+    }
+
     exit();
 }
 

@@ -20,7 +20,7 @@ $teacher_id = getTeacherIdFromTeacherClasses($_GET['tcid']);
                 </thead>
                 <tbody>
                     <?php
-                    $queryClass = "SELECT * FROM students AS a INNER JOIN student_section AS b ON a.student_id=b.student_id WHERE a.archive_status = 0 AND b.section_id = {$section_id} AND b.schoolyear_id = {$year_id} ORDER BY a.last_name ASC";
+                    $queryClass = "SELECT * FROM students AS a INNER JOIN student_section AS b ON a.student_id=b.student_id WHERE a.archive_status = 0 AND b.section_id = {$section_id} AND b.schoolyear_id = {$year_id}  ORDER BY a.last_name ASC";
                     $resultClass = mysqli_query($connection, $queryClass);
 
                     while($rowClass = mysqli_fetch_array($resultClass)){

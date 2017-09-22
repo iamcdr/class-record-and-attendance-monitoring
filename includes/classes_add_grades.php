@@ -13,7 +13,9 @@
 $queryGP = "SELECT * FROM gradingperiod";
 $resultGP = mysqli_query($connection, $queryGP);
 ?>
+<?= isset($_SESSION['ALERT']['UPDATE_PERCENTAGE_SUCCESS']) ? "<div class='alert alert-success'>{$_SESSION['ALERT']['UPDATE_PERCENTAGE_SUCCESS']}</div>" : ''; ?>
 
+<a href="classes.php?s=edit_perc&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>" class="btn btn-success">Edit Percentage Distribution</a>
     <?php
     while($rowGP = mysqli_fetch_array($resultGP)):
 ?>
@@ -41,7 +43,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                 <table class="table-striped" id="addGradesTbl">
                     <tr>
                         <th>Learners' Name</th>
-                        <th>Written Works (30%)
+                        <th>Written Works (<?= getPercDistPercentage('ww',$_GET['subid'] ,$_GET['yid']) ?>%)
                         <a href="classes.php?s=ww&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>">
                         <?php if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1): ?>
                         <i class="fa fa-plus"></i>
@@ -50,7 +52,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                         <?php endif ?>
                         </a>
                         </th>
-                        <th>Performance Tasks (50%)
+                        <th>Performance Tasks (<?= getPercDistPercentage('pt',$_GET['subid'] ,$_GET['yid']) ?>%)
                         <a href="classes.php?s=pt&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>">
                         <?php if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1): ?>
                         <i class="fa fa-plus"></i>
@@ -59,7 +61,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                         <?php endif ?>
                         </a>
                         </th>
-                        <th>Quarterly Assessments (20%)
+                        <th>Quarterly Assessments (<?= getPercDistPercentage('qa',$_GET['subid'] ,$_GET['yid']) ?>%)
                         <a href="classes.php?s=qa&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>">
                         <?php if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1): ?>
                         <i class="fa fa-plus"></i>
@@ -94,7 +96,7 @@ $resultGP = mysqli_query($connection, $queryGP);
 
 
                                         <td class="inputGrades" style="width:80px"><b>100.00</b></td>
-                                        <td class="inputGrades" style="width:80px"><b>30%</b></td>
+                                        <td class="inputGrades" style="width:80px"><b><?= getPercDistPercentage('ww',$_GET['subid'] ,$_GET['yid']) ?>%</b></td>
                                 </tr>
                             </table>
                         </td>
@@ -119,7 +121,7 @@ $resultGP = mysqli_query($connection, $queryGP);
 
 
                                         <td class="inputGrades" style="width:80px"><b>100.00</b></td>
-                                        <td class="inputGrades" style="width:80px"><b>50%</b></td>
+                                        <td class="inputGrades" style="width:80px"><b><?= getPercDistPercentage('pt',$_GET['subid'] ,$_GET['yid']) ?>%</b></td>
                                 </tr>
                             </table>
                         </td>
@@ -141,7 +143,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                                ?>
 
                                         <td class="inputGrades" style="width:80px"><b>100.00</b></td>
-                                        <td class="inputGrades" style="width:80px"><b>20%</b></td>
+                                        <td class="inputGrades" style="width:80px"><b><?= getPercDistPercentage('qa',$_GET['subid'] ,$_GET['yid']) ?>%</b></td>
                                 </tr>
                             </table>
                         </td>
@@ -188,7 +190,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                                             <?= getOutputsPercentage($totalOverallWw, $totalRawWw) ?>
                                         </td>
                                         <td class="inputGrades" style="width:80px">
-                                            <?= $totalWw = getOutputsWwWeighted(getOutputsPercentage($totalOverallWw, $totalRawWw)) ?>
+                                            <?= $totalWw = getOutputsWwWeighted(getOutputsPercentage($totalOverallWw, $totalRawWw), getPercDistMultiplier('ww',$_GET['subid'] ,$_GET['yid']) ) ?>
                                         </td>
                                     </tr>
                                 </table>
@@ -211,7 +213,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                                             <?= getOutputsPercentage($totalOverallPt, $totalRawPt) ?>
                                         </td>
                                         <td class="inputGrades" style="width:80px">
-                                            <?= $totalPt = getOutputsPtWeighted(getOutputsPercentage($totalOverallPt, $totalRawPt)) ?>
+                                            <?= $totalPt = getOutputsPtWeighted(getOutputsPercentage($totalOverallPt, $totalRawPt), getPercDistMultiplier('pt',$_GET['subid'] ,$_GET['yid'])) ?>
                                         </td>
                                     </tr>
                                 </table>
@@ -231,7 +233,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                                             <?= getOutputsPercentage($totalOverallQa, $totalRawQa) ?>
                                         </td>
                                         <td class="inputGrades" style="width:80px">
-                                            <?= $totalQa = getOutputsQaWeighted(getOutputsPercentage($totalOverallQa, $totalRawQa)) ?>
+                                            <?= $totalQa = getOutputsQaWeighted(getOutputsPercentage($totalOverallQa, $totalRawQa), getPercDistMultiplier('qa',$_GET['subid'] ,$_GET['yid'])) ?>
                                         </td>
                                     </tr>
                                 </table>

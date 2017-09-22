@@ -76,4 +76,38 @@ if(isset($_POST['submit_final_grade'])){
         }
 
 }
-?>
+
+if(isset($_POST['percentage_dist'])){
+    $section_id = $_POST['section_id'];
+    $subject_id = $_POST['subject_id'];
+    $year_id = $_POST['year_id'];
+    $ww = mysqli_real_escape_string($connection, $_POST['ww']);
+    $pt = mysqli_real_escape_string($connection, $_POST['pt']);
+    $qa = mysqli_real_escape_string($connection, $_POST['qa']);
+    $pt_eq = $pt/100;
+    $ww_eq = $ww/100;
+    $qa_eq = $qa/100;
+    //check table if subj&year avail
+    $countAvail = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM percentage_distribution WHERE subject_id = {$subject_id} AND schoolyear_id = {$year_id} AND status = 0"));
+
+    if($countAvail>0){
+        echo $queryWw = "UPDATE percentage_distribution SET percent = '{$ww}', equivalent = '{$ww_eq}' WHERE subject_id = {$subject_id} AND schoolyear_id = {$year_id} AND score_category = 'ww' AND status = 0";
+        mysqli_query($connection, $queryWw);
+        echo $queryPt = "UPDATE percentage_distribution SET percent = '{$pt}', equivalent = '{$pt_eq}' WHERE subject_id = {$subject_id} AND schoolyear_id = {$year_id} AND score_category = 'pt' AND status = 0";
+        mysqli_query($connection, $queryPt);
+        echo $queryQa = "UPDATE percentage_distribution SET percent = '{$qa}', equivalent = '{$qa_eq}' WHERE subject_id = {$subject_id} AND schoolyear_id = {$year_id} AND score_category = 'qa' AND status = 0";
+        mysqli_query($connection, $queryQa);
+    } else {
+        $queryWw = "INSERT INTO percentage_distribution(subject_id, schoolyear_id, score_category, percent, equivalent, status) VALUES({$subject_id}, {$year_id}, 'ww', {$ww}, {$ww_eq}, 0) ";
+        mysqli_query($connection, $queryWw);
+        $queryPt = "INSERT INTO percentage_distribution(subject_id, schoolyear_id, score_category, percent, equivalent, status) VALUES({$subject_id}, {$year_id}, 'pt', {$pt}, {$pt_eq}, 0) ";
+        mysqli_query($connection, $queryPt);
+        $queryQa = "INSERT INTO percentage_distribution(subject_id, schoolyear_id, score_category, percent, equivalent, status) VALUES({$subject_id}, {$year_id}, 'qa', {$qa}, {$qa_eq}, 0) ";
+        mysqli_query($connection, $queryQa);
+    }
+
+    $_SESSION['ALERT']['UPDATE_PERCENTAGE_SUCCESS'] = "Successfully edited percentage distribution grade";
+
+    header("Location: classes.php?s=add_grades&sid=$section_id&subid=$subject_id&yid=$year_id");
+    exit();
+}

@@ -29,6 +29,8 @@ $activePage = "View Classes";
                 echo '<h4 class="page-header"><a href="classes.php">Classes</a>-><a href="classes.php?s=cls_rec&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'('.displaySubjectDesc($_GET['subid']).')</a> -><a href="classes.php?s=add_grades&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">Add Grades</a>-> <a href="classes.php?s=qa&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'&gpid='.$_GET['gpid'].'">Quarterly Assessment</a>-> Add Quarterly Assessment</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="qa")
                 echo '<h4 class="page-header"><a href="classes.php">Classes</a>-><a href="classes.php?s=cls_rec&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'('.displaySubjectDesc($_GET['subid']).')</a> -><a href="classes.php?s=add_grades&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">Add Grades</a>-> Quarterly Assessment</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="edit_perc")
+                echo '<h4 class="page-header"><a href="classes.php">Classes</a>-><a href="classes.php?s=cls_rec&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'('.displaySubjectDesc($_GET['subid']).')</a> -><a href="classes.php?s=add_grades&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&yid='.$_GET['yid'].'">Add Grades</a>-> Edit Percentage Distribution</h4>';
             else
                 echo '<h4 class="page-header">View Classes</h4>';
                         ?>
@@ -86,6 +88,10 @@ $activePage = "View Classes";
 
                        case 'cls_stndng':
                            include "includes/classes_report_standing.php";
+                           break;
+
+                       case 'edit_perc':
+                           include "includes/classes_edit_percentage.php";
                            break;
 
                        case 'exec':

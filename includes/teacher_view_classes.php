@@ -14,7 +14,7 @@
                     </thead>
                     <tbody>
                         <?php
-                    $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']}";
+                    $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']} and advisory = 0";
                     $resultClass = mysqli_query($connection, $queryClass);
 
                     while($rowClass = mysqli_fetch_array($resultClass)){

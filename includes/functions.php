@@ -203,24 +203,45 @@ function getOutputsPercentage($overallTotal, $rawTotal){
 
 }
 
-function getOutputsWwWeighted($percentage){
+function getOutputsWwWeighted($percentage, $multiplier){
 
-    return number_format($percentage*.3, 2);
+    return number_format($percentage*$multiplier, 2);
 }
 
-function getOutputsPtWeighted($percentage){
+function getOutputsPtWeighted($percentage, $multiplier){
 
-    return number_format($percentage*.5, 2);
+    return number_format($percentage*$multiplier, 2);
 }
 
-function getOutputsQaWeighted($percentage){
+function getOutputsQaWeighted($percentage, $multiplier){
 
-    return number_format($percentage*.2, 2);
+    return number_format($percentage*$multiplier, 2);
 }
 
 function getOutputsInitialGrade($ww, $pt, $qa){
 
     return number_format($ww + $pt + $qa, 2);
+}
+
+function getPercDistPercentage($cat, $subid, $yid){
+    global $connection;
+
+    $query = "SELECT * FROM percentage_distribution WHERE score_category = '{$cat}' AND subject_id = {$subid} AND schoolyear_id = {$yid}";
+    $result = mysqli_query($connection, $query);
+
+    $row = mysqli_fetch_array($result);
+    return $row['percent'];
+}
+
+
+function getPercDistMultiplier($cat, $subid, $yid){
+    global $connection;
+
+    $query = "SELECT * FROM percentage_distribution WHERE score_category = '{$cat}' AND subject_id = {$subid} AND schoolyear_id = {$yid}";
+    $result = mysqli_query($connection, $query);
+
+    $row = mysqli_fetch_array($result);
+    return $row['equivalent'];
 }
 
 function getOutputsFinalGrade($initial){
