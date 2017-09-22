@@ -122,7 +122,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                                                         $studGrade = (displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $rowClass['section_id']));
                                                         $sumgrade += $studGrade;
                                                     }
-                                                    $finalgrade = $sumgrade / $countSub;
+                                                    $finalgrade = getOutputsFinalGrade($sumgrade / $countSub);
                                                     $queryTempIns = "INSERT INTO class_final_ranking VALUES({$rowClass['student_id']}, $finalgrade)";
                                                     mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection) . $queryTempIns);
 
@@ -190,7 +190,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                 <?php } ?>
 
             <!--AUDIT TRAIL-->
-
+<?php if($_SESSION['hts_user_privilege']==1): ?>
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <div class="panel task db mbm">
@@ -228,6 +228,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                         </div>
                     </div>
                 </div>
+<?php endif ?>
 <script>
 $(document).ready(auditLog);
 setInterval(auditLog, 3000);

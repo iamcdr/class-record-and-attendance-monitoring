@@ -14,7 +14,7 @@ $activePage = "View Advisory Classes";
             if(isset($_GET['s'])&&$_GET['s']=="subj_list")
                 echo '<h4 class="page-header"><a href="advisory.php">Advisory</a> ->'.displaySectionDesc($_GET['sid']).'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="gr_list")
-                echo '<h4 class="page-header"><a href="advisory.php">Advisory</a> -> <a href="advisory.php?s=subj_list&sid='. $_GET['sid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'</a> -> '.displaySubjectDesc($_GET['subid']).'</h4>';
+                echo '<h4 class="page-header"><a href="advisory.php">Advisory</a> -> <a href="advisory.php?s=subj_list&sid='. $_GET['sid'].'&yid='.$_GET['yid'].'&subid='.$_GET['subid'].'">'.displaySectionDesc($_GET['sid']).'</a> -> '.displaySubjectDesc($_GET['subid']).'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="cls_stndng")
                 echo '<h4 class="page-header"><a href="advisory.php">Advisory</a>-><a href="advisory.php?s=gr_list&sid='.$_GET['sid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'</a> ->Class Standing Reports</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="cls_stndng-print")
