@@ -10,6 +10,7 @@ if(isset($_SESSION['ALERT']['ADD_STUDENT_SUCCESS'])){
     <div class="row">
         <div class="col-lg-12">
             <a href="students.php?s=add" class="btn btn-primary btn-lg"><i class="fa fa-plus fa-fw"></i> Add Student</a>
+            <a href="students.php?s=add" class="btn btn-primary btn-lg">Batch Assign Section</a>
             <div class="panel panel-body">
                 <div class="col-lg-offset-4 col-lg-4 col-lg-offset-4">
                     <form action="#" method="POST">
