@@ -51,6 +51,7 @@ if(isset($_SESSION['ALERT']['EDIT_ACCOUNT_SUCCESS'])){
                                             <ul role="menu" class="dropdown-menu">
                                                 <li><a href="accounts.php?s=view&uid=<?= $rowAccounts['user_id'] ?>">View Information</a></li>
                                                 <li><a href="accounts.php?s=edit&uid=<?= $rowAccounts['user_id'] ?>">Edit Information</a></li>
+                                                <li><a href="#" id="resetPass<?= $rowAccounts['user_id'] ?>">Reset Password</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="#" id="archive_account<?= $rowAccounts['user_id'] ?>">Move to Archive</a></li>
                                             </ul>
@@ -58,6 +59,7 @@ if(isset($_SESSION['ALERT']['EDIT_ACCOUNT_SUCCESS'])){
 
                                     </td>
                                 </tr>
+                                        <?php include("includes/modal_resetpassword.php") ?>
                                         <?php include("includes/modal_archiveaccount.php") ?>
                                 <?php } ?>
                         </tbody>

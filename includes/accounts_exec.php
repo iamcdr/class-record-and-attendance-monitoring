@@ -156,3 +156,24 @@ if(isset($_POST['cpass_validation'])){
     $renewpassword = $_POST['renewpassword'];
 
 }
+
+if(isset($_POST['reset_pass'])){
+    $user_id = $_POST['user_id'];
+    $newpassword = rand_string(10);
+
+    //get details
+    $contactno = mysqli_fetch_array(mysqli_query($connection, "SELECT contact_no FROM user_profile WHERE user_id = {$user_id}"));
+
+    //for password encryp
+    $encrypt = mysqli_fetch_array(mysqli_query($connection, "SELECT randSalt FROM useraccount"));
+
+    $salt = $encrypt[0];
+    $password = crypt($newpassword, $salt);
+
+    //update
+    mysqli_query($connection, "UPDATE useraccount SET password = '$password', first_login=1 WHERE user_id = {$user_id}");
+
+    $message = "Your new pasword is: $newpassword";
+    itexmo($contactno[0], $message);
+
+}

@@ -190,7 +190,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                 <?php } ?>
 
             <!--AUDIT TRAIL-->
-<?php if($_SESSION['hts_user_privilege']==1): ?>
+<?php if($_SESSION['hts_user_userprivilege']==1): ?>
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <div class="panel task db mbm">

@@ -426,3 +426,10 @@ function getSchoolyearIdFromTeacherClasses($tcid){
     $row = mysqli_fetch_array($result);
     return $row['year_id'];
 }
+
+function rand_string( $length ) {
+
+    $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    return substr(str_shuffle($chars),0,$length);
+
+}
