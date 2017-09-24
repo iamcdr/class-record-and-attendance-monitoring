@@ -69,21 +69,24 @@ if(isset($_POST['add_account'])){
 if(isset($_POST['edit_account'])){
     $user_id = mysqli_real_escape_string($connection, $_POST['user_id']);
     $profile_id = mysqli_real_escape_string($connection, $_POST['profile_id']);
-    $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
-    $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
-    $middle_name = mysqli_real_escape_string($connection, $_POST['middle_name']);
-    $user_privilege = mysqli_real_escape_string($connection, $_POST['user_privilege']);
-    $emp_num = mysqli_real_escape_string($connection, $_POST['emp_num']);
 
     //user_profile init
     $specialization = mysqli_real_escape_string($connection, $_POST['specialization']);
-    $full_name = "$last_name, $first_name $middle_name";
-    $gender = $_POST['gender'];
-    $birthdate = $_POST['birthdate'];
     $email = $_POST['email'];
     $contact_no = $_POST['contact_no'];
     $address = mysqli_real_escape_string($connection, $_POST['address']);
 
+    if($_SESSION['hts_user_userprivilege']==1){
+        $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
+        $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
+        $middle_name = mysqli_real_escape_string($connection, $_POST['middle_name']);
+        $user_privilege = mysqli_real_escape_string($connection, $_POST['user_privilege']);
+        $emp_num = mysqli_real_escape_string($connection, $_POST['emp_num']);
+
+
+        $full_name = "$last_name, $first_name $middle_name";
+        $gender = $_POST['gender'];
+        $birthdate = $_POST['birthdate'];
         //query useraccounts
         $queryUc = "UPDATE useraccount SET last_name = '{$last_name}', middle_name = '{$middle_name}', first_name = '{$first_name}', emp_num = '{$emp_num}', user_privilege = '{$user_privilege}' WHERE user_id = '{$user_id}'";
         mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
@@ -92,7 +95,13 @@ if(isset($_POST['edit_account'])){
 
         //query user_profile
         $queryUp = "UPDATE user_profile SET full_name = '{$full_name}', address = '{$address}', gender = '{$gender}', birthdate = '{$birthdate}', specialization = '{$specialization}', email = '{$email}', contact_no = '{$contact_no}' WHERE profile_id = {$profile_id}";
+        mysqli_query($connection, $queryUp) or die(mysqli_error($connection));//query useraccounts
+    } else {
+        //query user_profile
+        $queryUp = "UPDATE user_profile SET address = '{$address}', birthdate = '{$birthdate}', specialization = '{$specialization}', email = '{$email}', contact_no = '{$contact_no}' WHERE profile_id = {$profile_id}";
         mysqli_query($connection, $queryUp) or die(mysqli_error($connection));
+
+    }
 
         //audit log
         $type = "Updated account information";

@@ -34,10 +34,18 @@
             "order": [[1, "desc"]]
         });
         $('#content_audit').DataTable({
-            "order": [[4, "desc"]]
+            "order": [[4, "desc"]],
+
         });
         $('#content_ranking').DataTable({
             "order": [[2, "desc"]]
+        });
+
+        $('#content_archives').DataTable({
+
+            "paging": true,
+            "lengthChange": false,
+            "pageLength": 20,
         });
 
         $('#searchable').select2();

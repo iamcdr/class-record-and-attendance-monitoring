@@ -47,8 +47,8 @@ if(isset($_SESSION['ALERT']['EDIT_SUBJECT_FAILED'])){
                                                     <button type="button" data-toggle="dropdown" class="btn btn-success dropdown-toggle">Action &nbsp;
                                                         <i class="fa fa-angle-down"></i></button>
                                                     <ul role="menu" class="dropdown-menu">
-                                                        <li><a href="subjects.php?s=edit&sid=<?= $rowSubjects['subject_id'] ?>">Edit Information</a></li>
-                                                        <li class="divider"></li>
+                                                        <!--<li><a href="subjects.php?s=edit&sid=<?= $rowSubjects['subject_id'] ?>">Edit Information</a></li>
+                                                        <li class="divider"></li>-->
                                                         <li><a href="#" id="archive_subject<?= $rowSubjects['subject_id'] ?>">Move to Archive</a></li>
                                                     </ul>
                                                 </div>

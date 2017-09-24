@@ -26,7 +26,7 @@ if(isset($_SESSION['ALERT']['UNASSIGN_SUBJECT_SUCCESS'])){
 
                                 while($row = mysqli_fetch_array($query)){
 
-                                    $subjcount = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM gradelevel_subject WHERE gradelevel_id = {$_GET['lvlid']} AND subject_id = {$row['subject_id']} AND archive_status = 0"));
+                                    $subjcount = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM gradelevel_subject WHERE level_id = {$_GET['lvlid']} AND subject_id = {$row['subject_id']} AND archive_status = 0"));
                                     if($subjcount == 0){
                                 ?>
                                         <option value="<?= $row[0] ?>">

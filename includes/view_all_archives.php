@@ -1,5 +1,5 @@
 <div class="panel panel-body">
-    <table class="table table-bordered" id="content">
+    <table class="table table-bordered" id="content_archives">
         <thead>
             <tr>
                 <th>Folder Name</th>

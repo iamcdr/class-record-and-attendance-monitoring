@@ -9,6 +9,7 @@ $rowAcc = mysqli_fetch_array($resultAcc);
         <form action="accounts.php?s=exec" method="post">
            <input type="hidden" name="user_id" value="<?= $_GET['uid'] ?>">
            <input type="hidden" name="profile_id" value="<?= $rowAcc['profile_id'] ?>">
+            <?php if($_SESSION['hts_user_userprivilege']==1): ?>
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">
@@ -44,10 +45,6 @@ $rowAcc = mysqli_fetch_array($resultAcc);
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">
-                        <h5>Address</h5>
-                        <textarea name="address" class="form-control" cols="30" rows="3" style="resize: none"><?= $rowAcc['address'] ?></textarea>
-                    </div>
-                    <div class="col-lg-4">
                         <h5>Birthdate</h5>
                         <input type="date" name="birthdate" class="form-control" value="<?= $rowAcc['birthdate'] ?>">
                     </div>
@@ -60,7 +57,15 @@ $rowAcc = mysqli_fetch_array($resultAcc);
                             <label for="Female"><input type="radio" class="iCheck-control" name="gender" value="Female" <?php if($rowAcc['gender']=="Female") echo "checked" ?>>Female</label>
                         </div>
                     </div>
-
+                </div>
+            </div>
+            <?php endif ?>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <div class="col-lg-122">
+                        <h5>Address</h5>
+                        <textarea name="address" class="form-control" cols="30" rows="3" style="resize: none"><?= $rowAcc['address'] ?></textarea>
+                    </div>
                 </div>
             </div>
             <div class="row">

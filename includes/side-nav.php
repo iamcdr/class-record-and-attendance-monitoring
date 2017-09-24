@@ -90,6 +90,26 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
                             </ul>
                         </div>
                     </li>
+
+                    <li <?php if(isset($activePage)&&strpos($activePage, "Reports")!==false) echo "class='active'" ?>>
+                        <a data-toggle="collapse" href="#reports">
+                            <i class="fa fa-book fa-fw"></i>
+                            <p>Reports <b class="caret"></b></p>
+                        </a>
+                        <div class="collapse" id="reports">
+                            <ul class="nav">
+                                <li <?php if(strpos($activePageFilename, "reports.php?s=archive")!==false) echo "class='active'" ?>>
+                                    <a href="reports.php?s=archive"><i class="fa fa-align-left"></i>&nbsp; Archive Report</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "reports.php?s=attendance")!==false) echo "class='active'" ?>>
+                                    <a href="reports.php?s=attendance"><i class="fa fa-align-left"></i>&nbsp; Attendance Report</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "reports.php?s=cls_rec")!==false) echo "class='active'" ?>>
+                                    <a href="reports.php?s=cls_rec"><i class="fa fa-align-left"></i>&nbsp; Class Record Report</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <?php } ?>
 
                     <?php if($_SESSION['hts_user_userprivilege']==2){ ?>

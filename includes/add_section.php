@@ -3,7 +3,7 @@
         <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3">
            <div class="form-group">
                <label>Grade Level Assignation</label>
-               <select name="gradelevel_assg" class="form-control">
+               <select name="gradelevel_assg" class="form-control" required>
                    <option value="">=-Please Select-=</option>
                    <?php
                    $queryGl = "SELECT * FROM gradelevel WHERE archive_status = 0 ORDER BY gradelevel_id ASC";

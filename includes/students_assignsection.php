@@ -1,5 +1,5 @@
 <?= isset($_SESSION['ALERT']['ADD_STUDSEC_SUCCESS']) ? "<div class='alert alert-success'>{$_SESSION['ALERT']['ADD_STUDSEC_SUCCESS']}</div>" : '' ?>
-   
+
 
 <div class="row">
     <div class="col-lg-12">
@@ -21,13 +21,13 @@
                                    <?php
                                     $querySection = "SELECT * FROM sections WHERE archive_status = 0 ORDER BY section_description ASC";
                                     $resultSection = mysqli_query($connection, $querySection);
-                                    
+
                                     while($rowSection = mysqli_fetch_array($resultSection)){
                                         $sectioncount = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM student_section WHERE section_id = {$rowSection[0]} AND student_id = {$_GET['sid']} AND archive_status=0"));
                                         if($sectioncount==0){
                                     ?>
                                     <option value="<?= $rowSection[0] ?>"><?= $rowSection['section_description'] ?></option>
-                                    <?php } 
+                                    <?php }
                                     } ?>
                                 </select>
                             </td>
@@ -37,7 +37,7 @@
                                     $currentY = date("Y");
                                     $queryYear = "SELECT * FROM schoolyear";
                                     $resultYear = mysqli_query($connection, $queryYear);
-                                    
+
                                     while($rowYear = mysqli_fetch_array($resultYear)){
                                         $yearcount = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM student_section WHERE schoolyear_id = {$rowYear[0]} AND student_id = {$_GET['sid']} AND archive_status=0"));
                                         if($yearcount==0){
@@ -53,9 +53,9 @@
                         </tr>
                     </form>
                     <?php
-                    $queryAssign = "SELECT * FROM students AS a LEFT JOIN student_section AS b ON a.student_id=b.student_id WHERE a.student_id = {$_GET['sid']}";
+                    $queryAssign = "SELECT * FROM students AS a LEFT JOIN student_section AS b ON a.student_id=b.student_id LEFT JOIN sections AS c ON b.section_id=c.section_id WHERE a.student_id = {$_GET['sid']} AND a.archive_status = 0 AND c.archive_status = 0";
                     $resultAssign = mysqli_query($connection, $queryAssign);
-                    
+
                     while($rowAssign = mysqli_fetch_array($resultAssign)){
                     ?>
                         <tr>
