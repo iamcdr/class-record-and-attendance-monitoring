@@ -19,7 +19,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
             </div>
 
             <div class="row">
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class="panel task db mbm">
                         <div class="panel-body">
                             <p class="icon">
@@ -34,7 +34,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class="panel task db mbm">
                         <div class="panel-body">
                             <p class="icon">
@@ -51,7 +51,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class="panel task db mbm">
                         <div class="panel-body">
                             <p class="icon">
@@ -60,6 +60,22 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                             <h4>
                                 <?php
                             $countStud = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM students WHERE archive_status = 0"));
+
+                            echo $countStud;
+                            ?>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel task db mbm">
+                        <div class="panel-body">
+                            <p class="icon">
+                                Current Number of Teachers
+                            </p>
+                            <h4>
+                                <?php
+                            $countStud = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM useraccount WHERE user_privilege = 2 AND  archive_status = 0"));
 
                             echo $countStud;
                             ?>

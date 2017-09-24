@@ -10,7 +10,7 @@
                         <td>Second Grading</td>
                         <td>Third Grading</td>
                         <td>Fourth Grading</td>
-                        <td>Final Grade</td>
+                        <td>Transmuted Grade</td>
                     </tr>
                 </thead>
                 <tbody>

@@ -38,7 +38,7 @@
                             <th>Performance Task</th>
                         </tr>
                         <tr>
-                            <td><b>Highest Grade Possible</b></td>
+                            <td><b>Total Score</b></td>
                             <td>
                                 <b><input type="text" class="form-control" name="total_score" style="width: 100px" value="<?= number_format(getOutputsTotal($_GET['outses'], $_GET['subid'], $_SESSION['hts_user_id'] , $gradingperiod_id), 0) ?>"></b>
                             </td>

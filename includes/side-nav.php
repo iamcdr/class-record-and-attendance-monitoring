@@ -30,11 +30,7 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
                     </li>
 
                     <?php if($_SESSION['hts_user_userprivilege']==1){ ?>
-                    <li <?php if(isset($activePage)&&$activePage=='Archives' ) echo "class='active'" ?>>
-                        <a href="archives.php">
-                            <i class="fa fa-archive fa-fw"><div class="icon-bg bg-orange"></div></i> Archives
-                        </a>
-                    </li>
+
                     <li <?php if(isset($activePage)&&$activePage=='Attendance Monitoring' ) echo "class='active'" ?>>
                         <a href="attendance.php">
                             <i class="fa fa-calendar fa-fw"><div class="icon-bg bg-orange"></div></i> Attendance
@@ -73,7 +69,7 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
                         </div>
                     </li>
 
-                    <li <?php if(isset($activePage)&&strpos($activePage, "Settings")!==false) echo "class='active'" ?>>
+                    <li <?php if(isset($activePage)&&strpos($activePage, "Settings")!==false||strpos($activePage, "Archives")!==false) echo "class='active'" ?>>
                         <a data-toggle="collapse" href="#settings">
                             <i class="fa fa-gears fa-fw"></i>
                             <p>Settings <b class="caret"></b></p>
@@ -85,6 +81,11 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
                                 </li>
                                 <li <?php if(strpos($activePageFilename, "audittrail.php")!==false) echo "class='active'" ?>>
                                     <a href="audittrail.php"><i class="fa fa-align-left"></i>&nbsp; Audit Trail</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "archives.php")!==false) echo "class='active'" ?>>
+                                    <a href="archives.php">
+                                        <i class="fa fa-align-left"></i>&nbsp; Archives
+                                    </a>
                                 </li>
                             </ul>
                         </div>

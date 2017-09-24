@@ -48,7 +48,7 @@
 
 
                         <tr>
-                            <td><b>Highest Grade Possible</b></td>
+                            <td><b>Total Score</b></td>
                             <?php
                                     $totalOverall = 0;
                             for($i=1;$i<=10;$i++):

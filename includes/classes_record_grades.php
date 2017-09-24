@@ -24,7 +24,7 @@
                     <th><a href="#" id="#addexam"><i class="fa fa-plus fa-fw"></i></a>Exam</th>
                 </tr>
                 <tr>
-                    <td><b>Highest Grade Possible</b></td>
+                    <td><b>Total Score</b></td>
                     <td></td>
                     <td></td>
                     <td></td>

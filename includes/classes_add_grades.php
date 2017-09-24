@@ -71,7 +71,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                         </a>
                         </th>
                         <th>Initial Grade</th>
-                        <th>Final Grade</th>
+                        <th>Transmuted Grade</th>
                     </tr>
                     <tr>
 

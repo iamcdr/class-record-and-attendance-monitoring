@@ -39,7 +39,7 @@
 
 
                         <tr>
-                            <td><b>Highest Grade Possible</b></td>
+                            <td><b>Total Score</b></td>
                                 <td>
                                     <?php
                                 //check if wwsession is available on table

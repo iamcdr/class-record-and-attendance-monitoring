@@ -47,7 +47,7 @@
         $('#manage').addClass("in");
         <?php endif ?>
 
-        <?php if(isset($activePage)&&strpos($activePage, "Settings")!==false): ?>
+        <?php if(isset($activePage)&&strpos($activePage, "Settings")!==false||strpos($activePage, "Archives")!==false): ?>
         $('#settings').addClass("in");
         <?php endif ?>
 
