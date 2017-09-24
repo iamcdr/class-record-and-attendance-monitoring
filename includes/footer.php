@@ -59,6 +59,10 @@
         $('#settings').addClass("in");
         <?php endif ?>
 
+        <?php if(isset($activePage)&&strpos($activePage, "Reports")!==false):  ?>
+        $('#reports').addClass("in");
+        <?php endif ?>
+
     });
 
     $('input[type="checkbox"]').iCheck({

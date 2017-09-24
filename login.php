@@ -39,8 +39,10 @@
                 <link href="assets/css/themify-icons.css" rel="stylesheet">
 
             </head>
-
-            <body background="assets/img/school.jpg">
+<style>
+                </style>
+            <body id="bg" style="background-image: url('assets/img/school.jpg'); background-repeat: no-repeat; background-size: 100%;
+">
 
                 <div class="container">
 

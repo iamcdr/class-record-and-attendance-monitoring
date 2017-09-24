@@ -42,6 +42,10 @@ $activePage = "Reports";
                            include "includes/reports_attendance_month.php";
                            break;
 
+                       case 'pdf_attendance':
+                           include "includes/pdf.reports_attendance_month.php";
+                           break;
+
                        case 'cls_rec':
                            include "includes/reports_class_record.php";
                            break;
