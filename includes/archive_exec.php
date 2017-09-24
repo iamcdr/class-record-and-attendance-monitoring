@@ -58,7 +58,23 @@ if(isset($_POST['restore_subject'])){
     $_SESSION['ALERT']['SUCCESS_RESTORE'] = displaySubjectDesc($subject_id) . " was successfully moved to archive.";
 
     //audit log
-    $type = "Archived a subject data";
+    $type = "Restored a subject data";
+    $remarks = $_SESSION['ALERT']['SUCCESS_RESTORE'];
+    insertAuditLogData($type, $remarks);
+
+    header("Location: archives.php?s=subjects");
+
+}
+
+
+if(isset($_POST['reassign_class'])){
+    $teach_class_id = $_POST['teach_class_id'];
+
+    //query
+    mysqli_query($connection, "UPDATE teacher_classes SET archive_status = 0 WHERE teach_class_id = {$teach_class_id}");
+
+    //audit log
+    $type = "Restored a teach-assigned class data";
     $remarks = $_SESSION['ALERT']['SUCCESS_RESTORE'];
     insertAuditLogData($type, $remarks);
 

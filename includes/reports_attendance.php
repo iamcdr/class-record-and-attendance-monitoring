@@ -1,4 +1,9 @@
 <div class="container-fluid">
+   <div class="row" style="margin-bottom: 10px">
+       <div class="col-lg-offset-4 col-lg-4">
+           <input type="number" maxlength="4" class="form-control" id="year" value="<?= date("Y") ?>">
+       </div>
+   </div>
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-bordered">
@@ -14,7 +19,7 @@
                     ?>
                 <tr>
                     <td><?= $monthname ?></td>
-                    <td><a href="reports?s=attendance_month&m=<?= $monthnum ?>" class="btn btn-primary"></a></td>
+                    <td><a href="reports.php?s=attendance_month&m=<?= $monthnum ?>&y=<?php echo "<script>$('#year').val()</script>" ?>" class="btn btn-primary">View</a></td>
                 </tr>
 
                 <?php
