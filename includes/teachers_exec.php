@@ -47,3 +47,12 @@ if(isset($_POST['assign_advisory_class'])){
     header("Location: teachers.php?s=assg_adv_cls&tid=$teacher_id");
     exit();
 }
+
+if(isset($_POST['unassign_class'])){
+    $teach_class_id = $_POST['teach_class_id'];
+
+    //query
+    $query = "UPDATE teacher_classes SET archive_status = 1 WHERE teach_class_id = {$teach_class_id}";
+    mysqli_query($connection, $query);
+
+}

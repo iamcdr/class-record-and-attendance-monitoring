@@ -13,22 +13,6 @@ $rowAcc = mysqli_fetch_array($resultAcc);
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">
-                        <h5>Last Name</h5>
-                        <input type="text" class="form-control" name="last_name" value="<?= $rowAcc['last_name'] ?>">
-                    </div>
-                    <div class="col-lg-4">
-                        <h5>First Name</h5>
-                        <input type="text" class="form-control" name="first_name" value="<?= $rowAcc['first_name'] ?>">
-                    </div>
-                    <div class="col-lg-4">
-                        <h5>Middle Name</h5>
-                        <input type="text" class="form-control" name="middle_name" value="<?= $rowAcc['middle_name'] ?>">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-12">
-                    <div class="col-lg-4">
                         <h5>User Privilege</h5>
                         <select name="user_privilege" class="form-control">
                             <option value="">=-Please Select-=</option>
@@ -39,23 +23,6 @@ $rowAcc = mysqli_fetch_array($resultAcc);
                     <div class="col-lg-4">
                         <h5>Employee ID Number</h5>
                         <input type="text" class="form-control" name="emp_num" value="<?= $rowAcc['emp_num'] ?>">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-lg-12">
-                    <div class="col-lg-4">
-                        <h5>Birthdate</h5>
-                        <input type="date" name="birthdate" class="form-control" value="<?= $rowAcc['birthdate'] ?>">
-                    </div>
-                    <div class="col-lg-4">
-                        <h5>Gender</h5>
-                        <div class="radio">
-                            <label for="Male"><input type="radio" class="iCheck-control" name="gender" value="Male" <?php if($rowAcc['gender']=="Male") echo "checked" ?>>Male</label>
-                        </div>
-                        <div class="radio">
-                            <label for="Female"><input type="radio" class="iCheck-control" name="gender" value="Female" <?php if($rowAcc['gender']=="Female") echo "checked" ?>>Female</label>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -47,6 +47,10 @@ $activePage = "Archives";
                            include "includes/archived_sections.php";
                            break;
 
+                       case 'teach_class':
+                           include "includes/archived_teach_class.php";
+                           break;
+
                        case 'exec':
                            include "includes/archive_exec.php";
                            break;

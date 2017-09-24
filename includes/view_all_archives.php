@@ -23,6 +23,10 @@
                 <td>Section</td>
                 <td><a href="./archives.php?s=sections" class="btn btn-success"><i class="fa fa-folder-open"></i> Open</a></td>
             </tr>
+            <tr>
+                <td>Teacher-Assigned Class</td>
+                <td><a href="./archives.php?s=teach_class" class="btn btn-success"><i class="fa fa-folder-open"></i> Open</a></td>
+            </tr>
         </tbody>
     </table>
 </div>

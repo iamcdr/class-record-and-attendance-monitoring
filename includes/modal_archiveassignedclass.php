@@ -1,28 +1,28 @@
 <script>
     $(document).ready(function() {
-        $('#archive_assignsubject<?= $rowSubj[0] ?>').click(function() {
+        $('#archive_assignclass<?= $rowClass[0] ?>').click(function() {
             swal({
-                title: "Unassign <?= displaySubjectDesc($rowSubj['subject_id']) ?> from <?= displayGradelevelDesc($_GET['lvlid'])?>?",
+                title: "Unassign <?= displayName($_GET['tid']) ?> from <?= displaySectionDesc($rowClass['section_id'])?>?",
                 confirmButtonText: 'Yes',
                 showCancelButton: true,
                 showLoaderOnConfirm: true,
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: "gradelevel.php?s=exec",
+                                url: "teachers.php?s=exec",
                                 type: "POST",
                                 data: {
-                                    unassign_subject: true,
-                                    levelsubject_id: <?= $rowSubj[0] ?>
+                                    unassign_class: true,
+                                    teach_class_id: <?= $rowClass[0] ?>
                                 },
                                     success: function(){
                                         swal({
                                             title: 'Archived!',
-                                            text: "Unassigned <?= displaySubjectDesc($rowSubj[0]) ?> to <?= displayGradelevelDesc($_GET['lvlid'])?> successfully.",
+                                            text: "Unassigned <?= displayName($_GET['tid']) ?> from <?= displaySectionDesc($rowClass['section_id'])?> successfully.",
                                             type: 'success'
                                         })
                                             .then(function(){
-                                             window.location.href= "gradelevel.php?s=assg_sub&lvlid=<?= $_GET['lvlid'] ?>"
+                                             window.location.href= "teachers.php?s=assg_cls&tid=<?= $_GET['tid'] ?>"
                                         })
                                     }
                             })

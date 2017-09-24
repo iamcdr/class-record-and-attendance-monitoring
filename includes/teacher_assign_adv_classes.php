@@ -52,7 +52,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                         </tr>
                     </form>
                     <?php
-                    $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']} AND advisory = 1";
+                    $queryClass = "SELECT * FROM teacher_classes a LEFT JOIN sections b ON a.section_id=b.section_id WHERE teacher_id = {$_GET['tid']} AND advisory = 1 AND b.archive_status=0";
                     $resultClass = mysqli_query($connection, $queryClass);
 
                     while($rowClass = mysqli_fetch_array($resultClass)){

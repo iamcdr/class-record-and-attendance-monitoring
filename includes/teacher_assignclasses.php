@@ -65,7 +65,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                         </tr>
                     </form>
                     <?php
-                    $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']} AND advisory = 0";
+                    $queryClass = "SELECT * FROM teacher_classes a LEFT JOIN sections b ON a.section_id=b.section_id WHERE teacher_id = {$_GET['tid']} AND advisory = 0 AND b.archive_status=0 AND a.archive_status=0";
                     $resultClass = mysqli_query($connection, $queryClass);
 
                     while($rowClass = mysqli_fetch_array($resultClass)){
@@ -74,7 +74,9 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                         <td><?= displaySectionDesc($rowClass['section_id']) ?></td>
                         <td><?= displaySubjectDesc($rowClass['subject_id']) ?></td>
                         <td><?= displayAcadYear($rowClass['year_id']) ?></td>
+                        <td><a href="#" id="archive_assignclass<?= $rowClass[0] ?>" class="btn btn-danger">Archive</a></td>
                     </tr>
+                    <?php include("includes/modal_archiveassignedclass.php") ?>
                     <?php } ?>
                 </tbody>
             </table>
