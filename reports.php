@@ -15,8 +15,8 @@ $activePage = "Reports";
                 echo '<h4 class="page-header">Attendance Report</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="attendance_month")
                 echo '<h4 class="page-header"><a href="reports.php?s=attendance">Attendance Report</a>-> Monthly Report ('.date("F", strtotime("2017-{$_GET['m']}-01")).')</h4>';
-            elseif(isset($_GET['s'])&&$_GET['s']=="cls_stndng")
-                echo '<h4 class="page-header"><a href="advisory.php">Advisory</a>-><a href="advisory.php?s=gr_list&sid='.$_GET['sid'].'&yid='.$_GET['yid'].'">'.displaySectionDesc($_GET['sid']).'</a> ->Class Standing Reports</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="cls_rec")
+                echo '<h4 class="page-header">Class Record Report</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="cls_stndng-print")
                 echo '<h4 class="page-header" style="text-align: center">Class Standing Reports for '.displaySectionDesc($_GET['sid']).'</h4><h4 style="text-align: center">Subject: '.displaySubjectDesc($_GET['subid']).'</h4>';
             else

@@ -81,3 +81,20 @@ if(isset($_POST['reassign_class'])){
     header("Location: archives.php?s=subjects");
 
 }
+
+
+
+if(isset($_POST['restore_student'])){
+    $student_id = $_POST['student_id'];
+
+    //query
+    mysqli_query($connection, "UPDATE students SET archive_status = 0 WHERE student_id = {$student_id} ");
+
+    //audit log
+    $type = "Restored a student data.";
+    $remarks = $_SESSION['ALERT']['SUCCESS_RESTORE'];
+    insertAuditLogData($type, $remarks);
+
+    header("Location: archives.php?s=students");
+
+}
