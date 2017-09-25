@@ -31,7 +31,7 @@
                 <tbody>
                    <?php
                     $schoolyear_id = (isset($_POST['sy'])) ? $_POST['sy'] : $currentSy[0];
-                    $queryClass = "SELECT * FROM teacher_classes WHERE teacher_id = {$_SESSION['hts_user_id']} AND year_id = {$schoolyear_id} AND archive_status = 0 AND advisory = 0";
+                    $queryClass = "SELECT * FROM teacher_classes a LEFT JOIN sections b ON a.section_id=b.section_id WHERE teacher_id = {$_SESSION['hts_user_id']} AND advisory = 0 AND b.archive_status=0 AND a.archive_status=0";
                     $resultClass = mysqli_query($connection, $queryClass);
 
                     while($rowClass = mysqli_fetch_array($resultClass)){

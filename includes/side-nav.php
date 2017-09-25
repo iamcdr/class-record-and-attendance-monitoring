@@ -98,13 +98,13 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
                         </a>
                         <div class="collapse" id="reports">
                             <ul class="nav">
-                                <li <?php if(strpos($activePageFilename, "reports.php?s=archive")!==false) echo "class='active'" ?>>
+                                <li <?php if(strpos($activePageFilename, "reports.php")!==false&&isset($_GET['s'])&&$_GET['s']=="archive") echo "class='active'" ?>>
                                     <a href="reports.php?s=archive"><i class="fa fa-align-left"></i>&nbsp; Archive Report</a>
                                 </li>
-                                <li <?php if(strpos($activePageFilename, "reports.php?s=attendance")!==false||strpos($activePageFilename, "reports.php?s=attendance_report")!==false) echo "class='active'" ?>>
+                                <li <?php if(strpos($activePageFilename, "reports.php")!==false&&isset($_GET['s'])&&$_GET['s']=="attendance") echo "class='active'" ?>>
                                     <a href="reports.php?s=attendance"><i class="fa fa-align-left"></i>&nbsp; Attendance Report</a>
                                 </li>
-                                <li <?php if(strpos($activePageFilename, "reports.php?s=cls_rec")!==false) echo "class='active'" ?>>
+                                <li <?php if(strpos($activePageFilename, "reports.php")!==false&&isset($_GET['s'])&&$_GET['s']=="cls_rec") echo "class='active'" ?>>
                                     <a href="reports.php?s=cls_rec"><i class="fa fa-align-left"></i>&nbsp; Class Record Report</a>
                                 </li>
                             </ul>

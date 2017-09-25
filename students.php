@@ -18,6 +18,8 @@ $activePage = "Manage Students";
                 echo '<h4 class="page-header"><a href="students.php">Students</a> -> Assign Section to '.displayStudentName($_GET['sid']).'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="view")
                 echo '<h4 class="page-header"><a href="students.php">Students</a> -> View Information of '.displayStudentName($_GET['sid']).'</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="edit")
+                echo '<h4 class="page-header"><a href="students.php">Students</a> -> Update Information of '.displayStudentName($_GET['sid']).'</h4>';
             else
                 echo '<h4 class="page-header">Students</h4>';
                         ?>
@@ -39,6 +41,10 @@ $activePage = "Manage Students";
 
                        case 'view':
                            include "includes/view_student_info.php";
+                           break;
+
+                       case 'edit':
+                           include "includes/students_update.php";
                            break;
 
                        case 'exec':

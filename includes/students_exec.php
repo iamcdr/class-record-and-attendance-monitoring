@@ -54,6 +54,36 @@ if(isset($_POST['add_student'])){
     exit();
 }
 
+if(isset($_POST['update_student'])){
+
+    $student_idno = mysqli_real_escape_string($connection, $_POST['student_idno']);
+    $student_barcode = mysqli_real_escape_string($connection, $_POST['student_barcode']);
+    $contact_no = mysqli_real_escape_string($connection, $_POST['contact_no']);
+    $student_id = mysqli_real_escape_string($connection, $_POST['student_id']);
+    
+    //query to students
+    $query = "UPDATE students SET student_idno = '{$student_idno}', student_barcode = '{$student_barcode}', contact_no = '{$contact_no}' WHERE student_id = {$student_id} ";
+    mysqli_query($connection, $query) or die(mysqli_error($connection));
+
+    //init stud info
+    $rowStud = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM students WHERE student_id = {$student_id}"));
+    $first_name = $rowStud['first_name'];
+    $middle_name = $rowStud['middle_name'];
+    $last_name = $rowStud['last_name'];
+    
+    //alert
+    $_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'] = "The information of $first_name $middle_name $last_name is successfully updated.";
+
+    //audit trail
+    $type = "Update student information";
+    $remarks = "Name: $first_name $middle_name $last_name <br>";
+    $remarks .= "Student ID No: $student_idno";
+    insertAuditLogData($type, $remarks);
+
+    header("Location: students.php");
+    exit();
+}
+
 if(isset($_POST['assign_section'])){
     $student_id = $_POST['student_id'];
     $section_id = $_POST['section_id'];
