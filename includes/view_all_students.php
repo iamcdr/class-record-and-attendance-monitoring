@@ -5,6 +5,9 @@ if(isset($_SESSION['ALERT']['SUCCESS_ARCHIVE'])){
 if(isset($_SESSION['ALERT']['ADD_STUDENT_SUCCESS'])){
     echo '<div class="alert alert-success">'.$_SESSION['ALERT']['ADD_STUDENT_SUCCESS']. '</div>';
 }
+if(isset($_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'])){
+    echo '<div class="alert alert-success">'.$_SESSION['ALERT']['EDIT_STUDENT_SUCCESS']. '</div>';
+}
 ?>
 
     <div class="row">

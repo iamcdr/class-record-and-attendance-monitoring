@@ -34,7 +34,7 @@ $rowInfo = mysqli_fetch_array($resultInfo);
                         </div>
                         <div class="col-lg-6">
                             <h5>ID Barcode Number</h5>
-                            <input type="text" class="form-control" value="<?= $rowInfo['student_barcode'] ?>" name="student_idno">
+                            <input type="text" class="form-control" value="<?= $rowInfo['student_barcode'] ?>" name="student_barcode">
                         </div>
     
                     </div>
@@ -75,6 +75,7 @@ $rowInfo = mysqli_fetch_array($resultInfo);
                         </div>
                     </div>
                 </div>
+                <input type="submit" class="btn btn-primary" name="update_student">
         </div>
     </div>
 </form>

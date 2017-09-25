@@ -159,7 +159,7 @@ $resultGP = mysqli_query($connection, $queryGP);
 
 
                     <?php
-                       $queryRec = "SELECT * FROM student_section WHERE section_id = {$_GET['sid']} AND schoolyear_id = {$_GET['yid']} AND archive_status = 0";
+                       $queryRec = "SELECT * FROM student_section a LEFT JOIN students b ON a.student_id=b.student_id WHERE section_id = {$_GET['sid']} AND schoolyear_id = {$_GET['yid']} AND a.archive_status = 0 AND b.archive_status = 0";
                        $resultRec = mysqli_query($connection, $queryRec);
 
                        while($rowRec = mysqli_fetch_array($resultRec)):
@@ -299,4 +299,4 @@ $resultGP = mysqli_query($connection, $queryGP);
             })
     })
 </script>
-    <?php endwhile ?>
+<?php endwhile ?>

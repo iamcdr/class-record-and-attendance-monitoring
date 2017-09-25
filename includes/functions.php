@@ -225,23 +225,23 @@ function getOutputsInitialGrade($ww, $pt, $qa){
 
 function getPercDistPercentage($cat, $subid, $yid){
     global $connection;
-
+    error_reporting(0);
     $query = "SELECT * FROM percentage_distribution WHERE score_category = '{$cat}' AND subject_id = {$subid} AND schoolyear_id = {$yid}";
     $result = mysqli_query($connection, $query);
 
     $row = mysqli_fetch_array($result);
-    return $row['percent'];
+    return empty($row) ? 0 : $row['percent'];
 }
 
 
 function getPercDistMultiplier($cat, $subid, $yid){
     global $connection;
-
+    error_reporting(0);
     $query = "SELECT * FROM percentage_distribution WHERE score_category = '{$cat}' AND subject_id = {$subid} AND schoolyear_id = {$yid}";
     $result = mysqli_query($connection, $query);
 
     $row = mysqli_fetch_array($result);
-    return $row['equivalent'];
+    return empty($row) ? 0 : $row['equivalent'];
 }
 
 function getOutputsFinalGrade($initial){
