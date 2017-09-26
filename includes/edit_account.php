@@ -9,41 +9,23 @@ $rowAcc = mysqli_fetch_array($resultAcc);
         <form action="accounts.php?s=exec" method="post">
            <input type="hidden" name="user_id" value="<?= $_GET['uid'] ?>">
            <input type="hidden" name="profile_id" value="<?= $rowAcc['profile_id'] ?>">
-            <?php if($_SESSION['hts_user_userprivilege']==1): ?>
+            <?php if(($_SESSION['hts_user_userprivilege']==1||$_SESSION['hts_user_userprivilege']==2)&&$_SESSION['hts_user_id']==$_GET['uid']): ?>
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">
                         <h5>Last Name</h5>
-                        <input type="text" class="form-control" name="last_name" required>
+                        <input type="text" class="form-control" name="last_name" value="<?= $rowAcc['last_name'] ?>" required>
                     </div>
                     <div class="col-lg-4">
                         <h5>First Name</h5>
-                        <input type="text" class="form-control" name="first_name" required>
+                        <input type="text" class="form-control" name="first_name" value="<?= $rowAcc['first_name'] ?>" required>
                     </div>
                     <div class="col-lg-4">
                         <h5>Middle Name</h5>
-                        <input type="text" class="form-control" name="middle_name" required>
+                        <input type="text" class="form-control" name="middle_name" value="<?= $rowAcc['middle_name'] ?>" required>
                     </div>
                 </div>
             </div>
-            <?php elseif($_SESSION['hts_user_userprivilege']==2): ?>
-            <div class="row">
-                <div class="form-group col-lg-12">
-                    <div class="col-lg-4">
-                        <h5>User Privilege</h5>
-                        <select name="user_privilege" class="form-control">
-                            <option value="">=-Please Select-=</option>
-                            <option value="1" <?php if($rowAcc['user_privilege']==1) echo "selected" ?>>Administrator</option>
-                            <option value="2" <?php if($rowAcc['user_privilege']==2) echo "selected" ?>>Teacher</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-4">
-                        <h5>Employee ID Number</h5>
-                        <input type="text" class="form-control" name="emp_num" value="<?= $rowAcc['emp_num'] ?>">
-                    </div>
-                </div>
-            </div>
-            <?php endif ?>
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-122">
@@ -72,6 +54,25 @@ $rowAcc = mysqli_fetch_array($resultAcc);
                     </div>
                 </div>
             </div>
+            <?php elseif($_SESSION['hts_user_userprivilege']==1&&$_SESSION['hts_user_id']!=$_GET['uid']): ?>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <div class="col-lg-4">
+                        <h5>User Privilege</h5>
+                        <select name="user_privilege" class="form-control">
+                            <option value="">=-Please Select-=</option>
+                            <option value="1" <?php if($rowAcc['user_privilege']==1) echo "selected" ?>>Administrator</option>
+                            <option value="2" <?php if($rowAcc['user_privilege']==2) echo "selected" ?>>Teacher</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5>Employee ID Number</h5>
+                        <input type="text" class="form-control" name="emp_num" value="<?= $rowAcc['emp_num'] ?>">
+                    </div>
+                </div>
+            </div>
+            <?php endif ?>
+
 
 
             <div class="row">

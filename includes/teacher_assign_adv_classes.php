@@ -2,8 +2,10 @@
     <div class="col-lg-12">
         <div class="panel panel-body">
 <?php
-if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
-    echo '<div class="alert alert-success">'.$_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']. '</div>';
+if(isset($_SESSION['ALERT']['ASSIGN_ADV_CLASS_SUCCESS']))
+    echo '<div class="alert alert-success">'.$_SESSION['ALERT']['ASSIGN_ADV_CLASS_SUCCESS']. '</div>';
+if(isset($_SESSION['ALERT']['ASSIGN_ADV_CLASS_FAILED']))
+    echo '<div class="alert alert-danger">'.$_SESSION['ALERT']['ASSIGN_ADV_CLASS_FAILED']. '</div>';
             ?>
 
             <table class="table table-striped">
@@ -25,7 +27,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                                     $resultSection = mysqli_query($connection, $querySection);
 
                                     while($rowSection = mysqli_fetch_array($resultSection)){
-                                        $countSection = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']} AND advisory = 1 AND section_id = {$rowSection[0]}"));
+                                        $countSection = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM teacher_classes WHERE teacher_id = {$_GET['tid']} AND advisory = 1 AND section_id = {$rowSection[0]} AND archive_status = 0"));
                                         if($countSection==0):
                                     ?>
                                     <option value="<?= $rowSection[0] ?>"><?= $rowSection['section_description'] ?></option>
@@ -52,7 +54,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                         </tr>
                     </form>
                     <?php
-                    $queryClass = "SELECT * FROM teacher_classes a LEFT JOIN sections b ON a.section_id=b.section_id WHERE teacher_id = {$_GET['tid']} AND advisory = 1 AND b.archive_status=0";
+                    $queryClass = "SELECT * FROM teacher_classes a LEFT JOIN sections b ON a.section_id=b.section_id WHERE teacher_id = {$_GET['tid']} AND advisory = 1 AND b.archive_status=0 AND a.archive_status=0";
                     $resultClass = mysqli_query($connection, $queryClass);
 
                     while($rowClass = mysqli_fetch_array($resultClass)){
@@ -60,7 +62,9 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_SUCCESS']))
                     <tr>
                         <td><?= displaySectionDesc($rowClass['section_id']) ?></td>
                         <td><?= displayAcadYear($rowClass['year_id']) ?></td>
+                        <td><a href="#" id="archive_assignadvclass<?= $rowClass[0] ?>" class="btn btn-danger">Archive</a></td>
                     </tr>
+                    <?php include("includes/modal_archiveadvassignedclass.php") ?>
                     <?php } ?>
                 </tbody>
             </table>

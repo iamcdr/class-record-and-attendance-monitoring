@@ -16,6 +16,8 @@ $activePage = "Manage Accounts";
                 echo '<h4 class="page-header"><a href="accounts.php">Accounts</a> -> Add New</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="chpas")
                 echo '<h4 class="page-header">Change Password</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="edit")
+                echo '<h4 class="page-header"><a href="accounts.php">Accounts</a> -> Change Information</h4>';
             else
                 echo '<h4 class="page-header">Accounts</h4>';
                         ?>

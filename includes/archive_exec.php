@@ -74,11 +74,28 @@ if(isset($_POST['reassign_class'])){
     mysqli_query($connection, "UPDATE teacher_classes SET archive_status = 0 WHERE teach_class_id = {$teach_class_id}");
 
     //audit log
-    $type = "Restored a teach-assigned class data";
+    $type = "Restored a teacher-assigned class data";
     $remarks = $_SESSION['ALERT']['SUCCESS_RESTORE'];
     insertAuditLogData($type, $remarks);
 
-    header("Location: archives.php?s=subjects");
+    header("Location: archives.php?s=teach_class");
+
+}
+
+
+
+if(isset($_POST['reassign_adv_class'])){
+    $teach_class_id = $_POST['teach_class_id'];
+
+    //query
+    mysqli_query($connection, "UPDATE teacher_classes SET archive_status = 0 WHERE teach_class_id = {$teach_class_id}");
+
+    //audit log
+    $type = "Restored a teacher-assigned advisory class data";
+    $remarks = $_SESSION['ALERT']['SUCCESS_RESTORE'];
+    insertAuditLogData($type, $remarks);
+
+    header("Location: archives.php?s=teach_adv_class");
 
 }
 

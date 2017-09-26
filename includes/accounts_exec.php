@@ -69,34 +69,35 @@ if(isset($_POST['add_account'])){
 if(isset($_POST['edit_account'])){
     $user_id = mysqli_real_escape_string($connection, $_POST['user_id']);
     $profile_id = mysqli_real_escape_string($connection, $_POST['profile_id']);
-
+    $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
+    $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
+    $middle_name = mysqli_real_escape_string($connection, $_POST['middle_name']);
     //user_profile init
     $specialization = mysqli_real_escape_string($connection, $_POST['specialization']);
     $email = $_POST['email'];
     $contact_no = $_POST['contact_no'];
     $address = mysqli_real_escape_string($connection, $_POST['address']);
-
-    if($_SESSION['hts_user_userprivilege']==1){
-        $user_privilege = mysqli_real_escape_string($connection, $_POST['user_privilege']);
+    $user_privilege = mysqli_real_escape_string($connection, $_POST['user_privilege']);
         $emp_num = mysqli_real_escape_string($connection, $_POST['emp_num']);
+
+    if(($_SESSION['hts_user_userprivilege']==1||$_SESSION['hts_user_userprivilege']==2)&&$_SESSION['hts_user_id']==$user_id){
+
+
+        //query useraccounts
+        $queryUc = "UPDATE useraccount SET last_name = '{$last_name}', middle_name = '{$middle_name}', first_name = '{$first_name}' WHERE user_id = '{$user_id}'";
+        mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
+
+        //query user_profile
+        $queryUp = "UPDATE user_profile SET address = '{$address}', birthdate = '{$birthdate}', specialization = '{$specialization}', email = '{$email}', contact_no = '{$contact_no}' WHERE profile_id = {$profile_id}";
+        mysqli_query($connection, $queryUp) or die(mysqli_error($connection));
+
+
+
+    } elseif($_SESSION['hts_user_userprivilege']==1&&$_SESSION['hts_user_id']!=$user_id) {
 
         //query useraccounts
         $queryUc = "UPDATE useraccount SET emp_num = '{$emp_num}', user_privilege = '{$user_privilege}' WHERE user_id = '{$user_id}'";
         mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
-
-    } else {
-        
-        $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
-        $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
-        $middle_name = mysqli_real_escape_string($connection, $_POST['middle_name']);
-
-        //query useraccounts
-        $queryUc = "UPDATE useraccount SET last_name = '{$last_name}', middle_name = '{$middle_name}', first_name = '{$first_name}'  , emp_num = '{$emp_num}', user_privilege = '{$user_privilege}' WHERE user_id = '{$user_id}'";
-        mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
-        
-        //query user_profile
-        $queryUp = "UPDATE user_profile SET address = '{$address}', birthdate = '{$birthdate}', specialization = '{$specialization}', email = '{$email}', contact_no = '{$contact_no}' WHERE profile_id = {$profile_id}";
-        mysqli_query($connection, $queryUp) or die(mysqli_error($connection));
 
     }
 
