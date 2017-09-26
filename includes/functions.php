@@ -331,12 +331,10 @@ function getOutputsFinalGrade($initial){
 
 }
 
-function displayGradingPeriodGrade($student_id, $subid, $secid, $gradingperiod_id, $teacher_id=null){
+function displayGradingPeriodGrade($student_id, $subid, $secid, $gradingperiod_id ){
     global $connection;
 
-    $teacher_id = (isset($teacher_id)) ? $teacher_id : $_SESSION['hts_user_id'];
-
-    $query = "SELECT * FROM outputs_final WHERE student_id = {$student_id} AND section_id = {$secid} AND subject_id = {$subid} AND gradingperiod_id = {$gradingperiod_id} AND teacher_id = {$teacher_id}";
+    $query = "SELECT * FROM outputs_final WHERE student_id = {$student_id} AND section_id = {$secid} AND subject_id = {$subid} AND gradingperiod_id = {$gradingperiod_id} ";
     $result = mysqli_query($connection, $query);
 
     $row = mysqli_fetch_array($result);

@@ -44,7 +44,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                     <tr>
                         <th>Learners' Name</th>
                         <th>Written Works (<?= getPercDistPercentage('ww',$_GET['subid'] ,$_GET['yid']) ?>%)
-                        <a href="classes.php?s=ww&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>">
+                        <a href="classes.php?s=ww&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>" class="">
                         <?php if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1): ?>
                         <i class="fa fa-plus"></i>
                         <?php else: ?>
@@ -256,6 +256,7 @@ $resultGP = mysqli_query($connection, $queryGP);
 
 <script>
     $(document).ready(function() {
+        var 
         $('#submitGrade<?= $rowGP[0] ?>').click(function() {
                 swal({
                     title: "Submit this as final grade?",

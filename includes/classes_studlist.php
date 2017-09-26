@@ -21,9 +21,7 @@
                     while($rowClass = mysqli_fetch_array($resultClass)){
                     ?>
                         <tr>
-                            <td>
-                                <?= displayLastNameFirst($rowClass['student_id']) ?>
-                            </td>
+                            <td><?= displayLastNameFirst($rowClass['student_id']) ?></td>
                             <td><?= displayGradingPeriodGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid'], 1) ?></td>
                             <td><?= displayGradingPeriodGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid'], 2) ?></td>
                             <td><?= displayGradingPeriodGrade($rowClass['student_id'], $_GET['subid'], $_GET['sid'], 3) ?></td>
