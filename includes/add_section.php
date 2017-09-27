@@ -19,7 +19,7 @@
            </div>
             <div class="form-group">
                 <label>Section Description</label>
-                <input class="form-control" type="text" name="section_description">
+                <input class="form-control" type="text" name="section_description" required>
             </div>
             <div class="form-group">
                 <input type="submit" name="add_section" class="btn btn-success">
