@@ -1,4 +1,5 @@
 <?= isset($_SESSION['ALERT']['ADD_STUDSEC_SUCCESS']) ? "<div class='alert alert-success'>{$_SESSION['ALERT']['ADD_STUDSEC_SUCCESS']}</div>" : '' ?>
+<?= isset($_SESSION['ALERT']['ADD_STUDSEC_FAILED']) ? "<div class='alert alert-danger'>{$_SESSION['ALERT']['ADD_STUDSEC_FAILED']}</div>" : '' ?>
 
 
 <div class="row">
@@ -40,10 +41,9 @@
 
                                     while($rowYear = mysqli_fetch_array($resultYear)){
                                         $yearcount = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM student_section WHERE schoolyear_id = {$rowYear[0]} AND student_id = {$_GET['sid']} AND archive_status=0"));
-                                        if($yearcount==0){
                                         ?>
                                         <option value="<?= $rowYear[0] ?>"<?php if($currentY==$rowYear['year1']) echo "selected" ?> ><?= $rowYear['year1'] . " - " . $rowYear['year2'] ?></option>
-                                        <?php }
+                                        <?php
                                     } ?>
                                 </select>
                             </td>
@@ -53,7 +53,7 @@
                         </tr>
                     </form>
                     <?php
-                    $queryAssign = "SELECT * FROM students AS a LEFT JOIN student_section AS b ON a.student_id=b.student_id LEFT JOIN sections AS c ON b.section_id=c.section_id WHERE a.student_id = {$_GET['sid']} AND a.archive_status = 0 AND c.archive_status = 0";
+                    $queryAssign = "SELECT * FROM students AS a LEFT JOIN student_section AS b ON a.student_id=b.student_id LEFT JOIN sections AS c ON b.section_id=c.section_id WHERE a.student_id = {$_GET['sid']} AND a.archive_status = 0 AND c.archive_status = 0 AND b.archive_status = 0";
                     $resultAssign = mysqli_query($connection, $queryAssign);
 
                     while($rowAssign = mysqli_fetch_array($resultAssign)){
@@ -65,8 +65,9 @@
                             <td>
                                 <?= displayAcadYear($rowAssign['schoolyear_id']) ?>
                             </td>
-                            <td></td>
+                            <td><a href="#" id="archive_assignsection<?= $rowAssign['student_level_id'] ?>" class="btn btn-danger">Archive</a></td>
                         </tr>
+                        <?php include("includes/modal_archiveassignedsection.php") ?>
                         <?php } ?>
                 </tbody>
             </table>
