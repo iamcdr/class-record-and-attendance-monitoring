@@ -43,8 +43,10 @@ ob_start();
 
     <center>
     <img src="../assets/img/logo1.png" alt="Logo" style="width:80px; height: auto"><br>
-    <h3 style="font: arial">Holy Trinity School</h3>
-    <h3 style="font: arial">Center of Catholic Education Inc.</h3>
+        <h3 style="font: arial">Holy Trinity School</h3>
+        <h3 style="font: arial">Center of Catholic Education Inc.</h3>
+        <h3 style="font: arial; font-size: 10px">Manibaug, Paralaya</h3>
+        <h3 style="font: arial; font-size: 10px">Porac, Pampanga</h3>
     </center>
     <body style="font-size: 10px; ">
         <h2>Class Record Report</h2>

@@ -103,6 +103,7 @@ if(isset($_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'])){
                                                     <li><a href="students.php?s=view&sid=<?= $rowStud[0] ?>">View Information</a></li>
                                                     <li><a href="students.php?s=edit&sid=<?= $rowStud[0] ?>">Update Information</a></li>
                                                     <li><a href="students.php?s=assg_sc&sid=<?= $rowStud[0] ?>">Assign Section</a></li>
+                                                    <li><a href="students.php?s=shft_sc&sid=<?= $rowStud[0] ?>">Shift Section</a></li>
                                                     <li class="divider"></li>
                                                     <li><a href="#" id="archive_student<?= $rowStud[0] ?>">Move to Archive</a></li>
                                                 </ul>
