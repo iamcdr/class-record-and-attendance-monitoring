@@ -1,44 +1,49 @@
+<!--  Checkbox, Select, Radio & Switch Plugins -->
+<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+<script src="plugins/select2/dist/js/select2.min.js"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!--data tables-->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 
-    <!--  Checkbox, Select, Radio & Switch Plugins -->
-    <script src="assets/js/bootstrap-checkbox-radio.js"></script>
-    <script src="plugins/select2/dist/js/select2.min.js"></script>
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-     <!--data tables-->
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
 
-    <!--  Charts Plugin -->
-    <script src="assets/js/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
 
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
 
-    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-    <script src="assets/js/paper-dashboard.js"></script>
+<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+<script src="assets/js/paper-dashboard.js"></script>
 
-    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-    <!--<script src="assets/js/demo.js"></script>-->
+<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+<!--<script src="assets/js/demo.js"></script>-->
 
 </body>
 
 </html>
 <script>
-
     $(document).ready(function() {
         $('#content').DataTable();
         $('#content_backups').DataTable({
-            "order": [[1, "desc"]]
+            "order": [
+                [1, "desc"]
+            ]
         });
+        $('#students').DataTable();
         $('#content_audit').DataTable({
-            "order": [[4, "desc"]],
+            "order": [
+                [4, "desc"]
+            ],
 
         });
         $('#content_ranking').DataTable({
-            "order": [[2, "desc"]]
+            "order": [
+                [2, "desc"]
+            ]
         });
 
         $('#content_archives').DataTable({

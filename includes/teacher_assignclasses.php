@@ -29,9 +29,9 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_FAILED']))
 
                                     while($rowSection = mysqli_fetch_array($resultSection)){
                                     ?>
-                                    <option value="<?= $rowSection[0] ?>"><?= $rowSection['section_description'] ?></option>
+                                        <option value="<?= $rowSection[0] ?>"><?= $rowSection['section_description'] ?></option>
                                     <?php } ?>
-                                </select>
+                                    </select>
                                 </td>
                                 <td>
                                     <select name="subject_id" class="form-control">
@@ -40,13 +40,14 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_FAILED']))
                                     $resultSubj = mysqli_query($connection, $querySubj);
 
                                     while($rowSubj = mysqli_fetch_array($resultSubj)){
-
+                                            $subjectVal = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM teacher_classes a LEFT JOIN sections b ON a.section_id=b.section_id WHERE subject_id = {$rowSubj[0]} advisory = 0 AND b.archive_status=0 AND a.archive_status=0"));
+                                        if($subjectVal==0):
                                         ?>
-                                        <option value="<?= $rowSubj[0] ?>"><?= $rowSubj['subject_description'] ?></option>
+                                            <option value="<?= $rowSubj[0] ?>"><?= $rowSubj['subject_description'] ?></option>
                                         <?php
-
+                                        endif; 
                                     } ?>
-                                </select>
+                                    </select>
                                 </td>
                                 <td>
                                     <select name="year_id" class="form-control">
@@ -85,7 +86,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_FAILED']))
                                 <td><a href="#" id="archive_assignclass<?= $rowClass[0] ?>" class="btn btn-danger">Archive</a></td>
                             </tr>
                             <?php include("includes/modal_archiveassignedclass.php") ?>
-                            <?php } ?>
+                    <?php } ?>
                     </tbody>
                 </table>
         </div>
