@@ -14,12 +14,16 @@ if(isset($_SESSION['ALERT']['MISMATCH'])){
     <div class="content">
         <form action="accounts.php?s=exec" method="post">
             <div class="row">
+               <?php
+                if($_SESSION['hts_user_first_login']!=1):
+                ?>
                 <div class="form-group col-lg-12">
                     <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3">
                         <h5>Old Password</h5>
                         <input type="password" name="oldpassword" class="form-control" required>
                     </div>
                 </div>
+                <?php endif ?>
             </div>
             <div class="row">
                 <div class="form-group col-lg-12">
@@ -52,10 +56,10 @@ if(isset($_SESSION['ALERT']['MISMATCH'])){
             //no whitespace
             if (e.which === 32)
                 return false;
-            
+
         }
-        
-        
+
+
         $('input[name="newpassword"]').pwstrength({
                 ui: {
                     showVerdictsInsideProgressBar: true

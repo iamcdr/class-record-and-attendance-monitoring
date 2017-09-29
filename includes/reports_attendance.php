@@ -21,7 +21,7 @@
    <?php $year = isset($_POST['sy']) ? $_POST['sy'] : date("Y"); ?>
    <div class="row" style="margin-bottom: 10px">
        <div class="col-lg-12">
-           <a href="includes/pdf.reports_attendance_month.php?y=<?= $year ?>" class="btn btn-info btn-lg">Download PDF</a>
+           <a href="includes/pdf.s.php?y=<?= $year ?>" class="btn btn-info btn-lg">Download PDF</a>
        </div>
    </div>
     <div class="row">
@@ -40,7 +40,9 @@
                     ?>
                 <tr>
                     <td><?= $monthname ?></td>
-                    <td><a href="reports.php?s=attendance_month&m=<?= $monthnum ?>&y=<?= $year ?>" class="btn btn-primary">View</a></td>
+                    <td><a href="reports.php?s=attendance_month&m=<?= $monthnum ?>&y=<?= $year ?>" class="btn btn-primary">View</a>
+                    <a href="includes/pdf.reports_attendance_month.php?m=<?= $monthnum ?>&y=<?= $year ?>" class="btn btn-primary">Download PDF</a>
+                    </td>
                 </tr>
 
                 <?php

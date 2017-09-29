@@ -61,45 +61,38 @@
                                     <?php
                                 } elseif(isset($_GET['error'])&&$_GET['error']=='1s'){ ?>
                                         <div class="alert alert-danger"> Error! Account is disabled. Contact your administrator</div>
+                                    <?php
+                                } elseif(isset($_GET['error'])&&$_GET['error']=='fp1'){ ?>
+                                        <div class="alert alert-danger"> Failed! Employee number and contact number did not match</div>
                                         <?php } ?>
 
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Please Sign In</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <form action="login.php?s=exec" method="post">
-                                                    <fieldset>
-                                                        <div class="form-group">
-                                                            <input class="form-control" placeholder="Employee ID" name="username" type="text" autofocus>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input class="form-control" placeholder="Password" name="password" type="password">
-                                                        </div>
-                                                        <input type="submit" name="login" class="btn btn-lg btn-success btn-block" value="Login">
-                                                    </fieldset>
-                                                </form>
-                                            </div>
+                                        <?php
+                                         if(isset($_GET['s'])) $source = $_GET['s']; else $source = '';
+
+                                            switch($source){
+
+                                                case 'for_pass';
+                                                    include "includes/login_forget_password.php";
+                                                    break;
+
+                                                case 'exec';
+                                                    include "includes/login_exec.php";
+                                                    break;
+
+                                                default:
+                                                    include "includes/login_main.php";
+                                                    break;
+
+                                            }
+
+                                        ?>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
 
-                <?php
-                 if(isset($_GET['s'])) $source = $_GET['s']; else $source = '';
-
-                    switch($source){
-
-                        case 'exec';
-                            include "includes/login_exec.php";
-                            break;
-
-                        default:
-                            break;
-
-                    }
-
-                ?>
                     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
                     <script src="plugins/iCheck/icheck.min.js"></script>
 

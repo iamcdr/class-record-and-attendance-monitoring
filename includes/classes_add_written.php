@@ -4,14 +4,6 @@
     ?>
         <input type="hidden" name="output_session" value="<?= $_GET['outses'] ?>">
         <input type="hidden" name="teacher_id" value="<?= $_SESSION['hts_user_id'] ?>">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <div class="col-lg-6"><strong>Output Description: </strong></div>
-                    <div class="col-lg-6"><input type="text" name="remarks" class="form-control" value="<?= getOutputsRemarks($_GET['outses'], $_GET['subid'], $_SESSION['hts_user_id'] , $gradingperiod_id) ?>"></div>
-                </div>
-            </div>
-        </div>
         <input type="hidden" name="section_id" value="<?= $_GET['sid'] ?>">
         <input type="hidden" name="subject_id" value="<?= $_GET['subid'] ?>">
         <div class="row">
@@ -113,6 +105,7 @@
                 type: "POST",
                 data: form.serialize() + '&add_grade=1',
                 success: function(result) {
+                    console.log(result);
                     swal({
                         title: "Successful!",
                         html: "<b>Added grades successfully!</b>",

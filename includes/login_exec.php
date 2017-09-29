@@ -85,3 +85,33 @@ if(isset($_GET['logout'])&&isset($_SESSION['hts_user_userprivilege'])){
     session_destroy();
     header ("Location: ./login.php");
 }
+
+if(isset($_POST['forgot_pass'])){
+    $emp_idno = mysqli_real_escape_string($connection, $_POST['emp_idno']);
+    $contact_no = mysqli_real_escape_string($connection, $_POST['contact_no']);
+
+    //get
+    $count = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM useraccount a LEFT JOIN user_profile b ON a.user_id=b.user_id WHERE a.emp_num = '{$emp_idno}' AND b.contact_no = '{$contact_no}'"));
+
+    if($count>0){
+        $newpassword = rand_string(10);
+        //get details
+        $data = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM useraccount a LEFT JOIN user_profile b ON a.user_id=b.user_id WHERE a.emp_num = '{$emp_idno}' AND b.contact_no = '{$contact_no}'"));
+        $user_id = $data[0];
+
+        //for password encryp
+        $encrypt = mysqli_fetch_array(mysqli_query($connection, "SELECT randSalt FROM useraccount"));
+
+        $salt = $encrypt[0];
+        $password = crypt($newpassword, $salt);
+
+        //update
+        mysqli_query($connection, "UPDATE useraccount SET password = '$password', first_login=1 WHERE user_id = {$user_id}");
+
+        $message = "Your new pasword is: $newpassword";
+        itexmo($contact_no, $message);
+        header("Location: login.php");
+    } else {
+        header("Location: login.php?s=for_pass&error=fp1");
+    }
+}

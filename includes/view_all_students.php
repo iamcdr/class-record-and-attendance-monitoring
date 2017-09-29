@@ -17,12 +17,11 @@ if(isset($_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'])){
             <div class="panel panel-body">
                 <div class="row">
                     <div class="col-lg-offset-4 col-lg-4 col-lg-offset-4">
-                        <form action="#" method="POST">
                             <?php
                                 $cDateYear = date("Y");
                                 $currentSy = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM year WHERE year1 = '{$cDateYear}'"));
                                 ?>
-                            <select name="sy" onchange="this.form.submit()" class="form-control">
+                            <select name="sy" class="form-control">
                                         <?php
                                         $sy = mysqli_query($connection, "SELECT * FROM year");
                                         while($sydata = mysqli_fetch_assoc($sy)){ ?>
@@ -31,7 +30,6 @@ if(isset($_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'])){
                                             </option>
                                         <?php } ?>
                             </select>
-                        </form>
                     </div>
                 </div>
                 <div class="row" style="margin-bottom: 10px">
@@ -54,18 +52,22 @@ if(isset($_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'])){
                             </thead>
                             <tbody>
                                 <?php
-                                $schoolyear_id = (isset($_POST['sy'])) ? $_POST['sy'] : $currentSy[0];
-                                $queryStud = "SELECT * FROM students AS a INNER JOIN (SELECT * FROM student_section GROUP BY student_id) as b ON a.student_id=b.student_id LEFT JOIN sections c ON c.section_id=b.section_id LEFT JOIN gradelevel d ON d.gradelevel_id=c.gradelevel_Id WHERE a.archive_status = 0 AND b.schoolyear_id = {$schoolyear_id} AND c.archive_status = 0 ";
-                                
+                                $schoolyear_id = (isset($_POST['sy'])&&$_POST['sy']!='') ? $_POST['sy'] : $currentSy[0];
+                                $queryStud = "SELECT * FROM students AS a INNER JOIN (SELECT * FROM student_section GROUP BY student_id) as b ON a.student_id=b.student_id LEFT JOIN sections c ON c.section_id=b.section_id LEFT JOIN gradelevel d ON d.gradelevel_id=c.gradelevel_Id WHERE a.archive_status = 0 AND c.archive_status = 0 ";
+
+                                if(isset($_POST['sy'])){
+                                    $queryStud = "SELECT * FROM students AS a INNER JOIN (SELECT * FROM student_section WHERE schoolyear_Id = {$schoolyear_id} GROUP BY student_id) as b ON a.student_id=b.student_id LEFT JOIN sections c ON c.section_id=b.section_id LEFT JOIN gradelevel d ON d.gradelevel_id=c.gradelevel_Id WHERE a.archive_status = 0 AND c.archive_status = 0 AND b.schoolyear_id = {$schoolyear_id}";
+                                }
+
                                 if(isset($_POST['filter_keyword'])&&$_POST['filter_keyword']!=''){
                                     $keyword = mysqli_real_escape_string($connection, $_POST['filter_keyword']);
                                     $queryStud .= " AND CONCAT(student_idno, ' ', last_name, ' ', first_name, ' ', middle_name, ' ', gradelevel_description) LIKE '%$keyword%' ";
                                 }
-                                
+
                                 $queryStud .= " ORDER BY last_name";
                                 $resultStud = mysqli_query($connection, $queryStud) or die(mysqli_error($connection));
-                        
-                        
+
+
                                 while($rowStud = mysqli_fetch_array($resultStud)){
                                 ?>
                                     <tr>
@@ -85,14 +87,14 @@ if(isset($_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'])){
                                             <?php
                                     $querySl = "SELECT * FROM student_section AS a INNER JOIN sections AS b ON a.section_id=b.section_id INNER JOIN gradelevel AS c ON b.gradelevel_id=c.gradelevel_id WHERE student_id = {$rowStud[0]} AND a.archive_status = 0 AND b.archive_status = 0";
                                     $resultSl = mysqli_query($connection, $querySl) or die(mysqli_error($connection));
-                        
+
                                     while($rowSl = mysqli_fetch_array($resultSl)){
-                        
+
                                         echo $rowSl['gradelevel_description'] . "<br>";
                                     }
                                         ?>
                                         </td>
-                        
+
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" data-toggle="dropdown" class="btn btn-success dropdown-toggle">Action &nbsp;
@@ -121,13 +123,15 @@ if(isset($_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'])){
 <script>
 $(document).ready(studentsHandler);
 $('#keyword').on('keyup', studentsHandler);
-    
+$('select[name="sy"]').on('change', studentsHandler);
+
     function studentsHandler(e){
         $.ajax({
                 method: "POST",
                 url: "students.php",
                 data: {
                     filter_keyword: $('#keyword').val(),
+                    sy: $('select[name="sy"]').val()
                 },
                 success: function(result) {
                     var div = $('#showStudents', $(result));

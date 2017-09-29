@@ -54,7 +54,7 @@
                             while($rowGl = mysqli_fetch_array($resultGl)){
                                 ?>
                                 <option value="<?= $rowGl[0] ?>"><?= $rowGl['section_description'] ?></option>
-                                <?php } ?>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="col-lg-3">

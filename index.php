@@ -20,7 +20,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
 
             <div class="row">
                 <div class="col-sm-6 col-md-3">
-                    <div class="panel task db mbm">
+                    <div class="panel task db mbm" style="height: 150px; background-color: #0000FF; color: #000">
                         <div class="panel-body">
                             <p class="icon">
                                 Current Grading Period
@@ -35,7 +35,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <div class="panel task db mbm">
+                    <div class="panel task db mbm" style="height: 150px; background-color:	#008080; color: #000">
                         <div class="panel-body">
                             <p class="icon">
                                 Current School Year
@@ -52,7 +52,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <div class="panel task db mbm">
+                    <div class="panel task db mbm" style="height: 150px; background-color: #7CFC00; color: #000">
                         <div class="panel-body">
                             <p class="icon">
                                 Current Number of Students
@@ -68,7 +68,7 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <div class="panel task db mbm">
+                    <div class="panel task db mbm" style="height: 150px; background-color: #B22222; color: #000">
                         <div class="panel-body">
                             <p class="icon">
                                 Current Number of Teachers

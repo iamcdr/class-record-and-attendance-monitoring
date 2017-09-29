@@ -84,7 +84,7 @@ if(isset($_POST['edit_account'])){
 
 
         //query useraccounts
-        $queryUc = "UPDATE useraccount SET last_name = '{$last_name}', middle_name = '{$middle_name}', first_name = '{$first_name}' WHERE user_id = '{$user_id}'";
+        $queryUc = "UPDATE useraccount SET last_name = '{$last_name}', middle_name = '{$middle_name}', first_name = '{$first_name}', user_privilege = '{$user_privilege}' WHERE user_id = '{$user_id}'";
         mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
 
         //query user_profile
@@ -99,6 +99,10 @@ if(isset($_POST['edit_account'])){
         $queryUc = "UPDATE useraccount SET emp_num = '{$emp_num}', user_privilege = '{$user_privilege}' WHERE user_id = '{$user_id}'";
         mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
 
+        //query user_profile
+        $queryUp = "UPDATE user_profile SET contact_no = '{$contact_no}' WHERE profile_id = {$profile_id}";
+        mysqli_query($connection, $queryUp) or die(mysqli_error($connection));
+
     }
 
         //audit log
@@ -106,6 +110,8 @@ if(isset($_POST['edit_account'])){
         $remarks = "Name: $full_name ";
         insertAuditLogData($type, $remarks);
 
+
+        $full_name = displayName($user_id);
         $_SESSION['ALERT']['EDIT_ACCOUNT_SUCCESS'] = "The information details of $full_name are successfully updated.";
 
     if($_SESSION['hts_user_userprivilege']==1)
@@ -119,7 +125,10 @@ if(isset($_POST['edit_account'])){
 }
 
 if(isset($_POST['submit_cpass'])){
-    $oldpassword = $_POST['oldpassword'];
+
+    if($_SESSION['hts_user_first_login']!=1){
+        $oldpassword = $_POST['oldpassword'];
+    }
     $newpassword = $_POST['newpassword'];
     $renewpassword = $_POST['renewpassword'];
     $user_id = $_SESSION['hts_user_id'];
@@ -130,10 +139,16 @@ if(isset($_POST['submit_cpass'])){
         $randSALT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT randSalt FROM useraccount LIMIT 1"));
         $randSalt = $randSALT['randSalt'];
 
-    $oldpassword = crypt($oldpassword, $randSalt);
 
-    if($oldpassword !== $rowGetUserPass['password']){
-        $_SESSION['ALERT']['OLDMISMATCH'] = "Old password did not match.";
+
+    if($_SESSION['hts_user_first_login']!=1){
+        $oldpassword = crypt($oldpassword, $randSalt);
+        if($oldpassword !== $rowGetUserPass['password']){
+            $_SESSION['ALERT']['OLDMISMATCH'] = "Old password did not match.";
+            $old = false;
+        }
+    } else {
+        $old=true;
     }
 
     //CHECK retyped password
@@ -142,7 +157,7 @@ if(isset($_POST['submit_cpass'])){
     }
 
     //UPDATE PASSWORD
-    if($oldpassword == $rowGetUserPass['password'] && $newpassword == $renewpassword){
+    if($old==true && $newpassword == $renewpassword){
 
         $newpassword = crypt($newpassword, $randSalt);
 

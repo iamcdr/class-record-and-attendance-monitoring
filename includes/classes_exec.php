@@ -20,14 +20,14 @@ if(isset($_POST['add_grade'])){
 
         //update or insert
         //check if entry available
-        $queryCheckEntry = "SELECT * FROM outputs_actual WHERE section_id = {$section_id} AND student_id = {$student_id} AND subject_id = {$subject_id} AND gradingperiod_id = {$gradingperiod_id} AND output_session = '{$output_session}' AND teacher_id = {$teacher_id} AND archive_status = 0";
+        $queryCheckEntry = "SELECT * FROM outputs_actual WHERE section_id = {$section_id} AND student_id = {$studid} AND subject_id = {$subject_id} AND gradingperiod_id = {$gradingperiod_id} AND output_session = '{$output_session}' AND teacher_id = {$teacher_id} AND archive_status = 0";
         $resultCheckEntry = mysqli_query($connection, $queryCheckEntry) or die(mysqli_error($connection) . $queryCheckEntry);
 
         if(mysqli_num_rows($resultCheckEntry)>0){
-            $queryUpdate = "UPDATE outputs_actual SET total_score = '{$total_score}', raw_score = '{$raw_score}', section_id = '{$section_id}', remarks = '{$remarks}' WHERE student_id = {$student_id} AND section_id = {$section_id} AND subject_id = {$subject_id} AND archive_status = 0 AND output_session = '{$output_session}'";
+            $queryUpdate = "UPDATE outputs_actual SET total_score = '{$total_score}', raw_score = '{$raw_score}', section_id = '{$section_id}', remarks = '{$remarks}' WHERE student_id = {$studid} AND section_id = {$section_id} AND subject_id = {$subject_id} AND archive_status = 0 AND output_session = '{$output_session}'";
             $resultUpdate = mysqli_query($connection, $queryUpdate) or die(mysqli_error($connection) . $queryUpdate);
         } else {
-            $queryInsert = "INSERT INTO outputs_actual (student_id, section_id, subject_id, gradingperiod_id, total_score, raw_score, remarks, date_graded, teacher_id, output_session) VALUES ('{$student_id}', '{$section_id}', '{$subject_id}', '{$gradingperiod_id}', '{$total_score}', '{$raw_score}', '{$remarks}', '{$date_graded}', {$teacher_id}, '{$output_session}')";
+            $queryInsert = "INSERT INTO outputs_actual (student_id, section_id, subject_id, gradingperiod_id, total_score, raw_score, remarks, date_graded, teacher_id, output_session) VALUES ('{$studid}', '{$section_id}', '{$subject_id}', '{$gradingperiod_id}', '{$total_score}', '{$raw_score}', '{$remarks}', '{$date_graded}', {$teacher_id}, '{$output_session}')";
             $resultInsert = mysqli_query($connection, $queryInsert) or die(mysqli_error($connection) . $queryInsert);
         }
     }
