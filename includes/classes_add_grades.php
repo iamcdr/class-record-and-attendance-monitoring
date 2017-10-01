@@ -30,10 +30,10 @@ $resultGP = mysqli_query($connection, $queryGP);
         ?>
         <div class="col-lg-12">
         <?php
-        if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1):
+        //if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1):
         ?>
         <a href="#" id="submitGrade<?= $rowGP[0] ?>" class="btn btn-primary btn-lg">Submit Grade as Final</a>
-        <?php endif ?>
+        <?php //endif ?>
             <div class="panel panel-body">
                 <h4>
                     <?php
@@ -44,7 +44,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                     <tr>
                         <th>Learners' Name</th>
                         <th>Written Works (<?= getPercDistPercentage('ww',$_GET['subid'] ,$_GET['yid']) ?>%)
-                        <a href="classes.php?s=ww&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>" class="">
+                        <a href="classes.php?s=ww&sid=<?= $_GET['sid'] ?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $rowGP[0] ?>" class="addGrade">
                         <?php if(mysqli_num_rows($resultCounts)==0&&$rowGP['status']==1): ?>
                         <i class="fa fa-plus"></i>
                         <?php else: ?>
@@ -81,7 +81,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                             <table>
                                 <tr>
                                     <td class="inputGrades" style="width:80px"><b>PS</b></td>
-                                    <td class="inputGrades" style="width:80px"><b>WS</b></td>
+                                    <td class="inputGrades" style="width:50px"><b>WS</b></td>
                                 </tr>
                                 <tr>
                                     <?php
@@ -96,7 +96,7 @@ $resultGP = mysqli_query($connection, $queryGP);
 
 
                                         <td class="inputGrades" style="width:80px"><b>100.00</b></td>
-                                        <td class="inputGrades" style="width:80px"><b><?= getPercDistPercentage('ww',$_GET['subid'] ,$_GET['yid']) ?>%</b></td>
+                                        <td class="inputGrades" style="width:50px"><b><?= getPercDistPercentage('ww',$_GET['subid'] ,$_GET['yid']) ?>%</b></td>
                                 </tr>
                             </table>
                         </td>
@@ -189,7 +189,7 @@ $resultGP = mysqli_query($connection, $queryGP);
                                         <td class="inputGrades" style="width:80px">
                                             <?= getOutputsPercentage($totalOverallWw, $totalRawWw) ?>
                                         </td>
-                                        <td class="inputGrades" style="width:80px">
+                                        <td class="inputGrades" style="width:50px">
                                             <?= $totalWw = getOutputsWwWeighted(getOutputsPercentage($totalOverallWw, $totalRawWw), getPercDistMultiplier('ww',$_GET['subid'] ,$_GET['yid']) ) ?>
                                         </td>
                                     </tr>
@@ -256,7 +256,14 @@ $resultGP = mysqli_query($connection, $queryGP);
 
 <script>
     $(document).ready(function() {
-        var 
+        var perDis = <?= getPercDistPercentage('pt',$_GET['subid'] ,$_GET['yid']) ?>;
+        $('.addGrade').click(function(e){
+            if(perDis ==0)
+                e.preventDefault();
+            else
+                return true;
+        })
+
         $('#submitGrade<?= $rowGP[0] ?>').click(function() {
                 swal({
                     title: "Submit this as final grade?",

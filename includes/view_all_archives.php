@@ -35,6 +35,10 @@
                 <td>Teacher-Assigned Advisory Class</td>
                 <td><a href="./archives.php?s=teach_adv_class" class="btn btn-success"><i class="fa fa-folder-open"></i> Open</a></td>
             </tr>
+            <tr>
+                <td>Student-Assigned Section</td>
+                <td><a href="./archives.php?s=stud_sec" class="btn btn-success"><i class="fa fa-folder-open"></i> Open</a></td>
+            </tr>
         </tbody>
     </table>
 </div>

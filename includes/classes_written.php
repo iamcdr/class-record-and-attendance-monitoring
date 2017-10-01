@@ -47,7 +47,8 @@
                                     else
                                         echo '<a href="classes.php?s=add_ww&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."WW$i".'<i class="fa fa-plus"></i></a>';
                                 }else {
-                                    echo "WW$i";
+                                    echo '<a href="classes.php?s=edit_ww&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."WW$i".'<i class="fa fa-pencil"></i></a>';
+                                    //echo "WW$i";
                                 }
                             ?>
                                 </th>

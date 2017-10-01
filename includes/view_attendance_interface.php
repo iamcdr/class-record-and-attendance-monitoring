@@ -8,7 +8,7 @@
         <div class="col-lg-12" id="showStatusHere">
             <?php
             if(isset($_POST['barcode_shoot'])):
-                $query = "SELECT * FROM students AS a LEFT JOIN (SELECT * FROM student_section ORDER BY student_level_id DESC) b ON a.student_id = b.student_id WHERE a.student_barcode = '{$_POST['barcode']}'";
+                $query = "SELECT * FROM students AS a LEFT JOIN (SELECT * FROM student_section ORDER BY student_level_id DESC) b ON a.student_id = b.student_id WHERE a.student_barcode = '{$_POST['barcode']}' AND a.archive_status=0";
                 $result = mysqli_query($connection, $query);
 
                 $row = mysqli_fetch_array($result);
@@ -32,7 +32,7 @@
 
                 ?>
 
-                <div class="row">
+                <div class="row" style="margin-top: 20px">
                     <div class="row">
                         <div class="col-lg-4">
                             <label>Full Name</label>
@@ -62,8 +62,14 @@
                         </div>
                     </div>
                 </div>
-
-
+                <?php else: //else if count ==0 ?>
+                <div class="row" style="margin-top: 20px">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Either the student account has been archived or no such barcode exists.</label>
+                        </div>
+                    </div>
+                </div>
                 <?php
 
                 endif; //endif count of results more than 0

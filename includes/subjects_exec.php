@@ -14,7 +14,7 @@ if(isset($_POST['archive_subject'])){
     insertAuditLogData($type, $remarks);
 
     header("Location: subjects.php");
-    
+
 }
 
 if(isset($_POST['add_subject'])){
@@ -27,13 +27,12 @@ if(isset($_POST['add_subject'])){
     mysqli_query($connection, "INSERT INTO subjects (subject_code, subject_description) VALUES('{$subject_code}', '{$subject_description}')");
 
     //VALIDATION code
-    $queryCheck = "SELECT * FROM subjects WHERE subject_code = '{$subject_code}' OR subject_description = '{$subject_description}' AND archive_status = 0";
-    $resultCheck = mysqli_query($connection, $query);
+    echo $queryCheck = "SELECT * FROM subjects WHERE (subject_code = '{$subject_code}' OR subject_description = '{$subject_description}') AND archive_status = 0";
+    $resultCheck = mysqli_query($connection, $queryCheck);
 
     if(mysqli_num_rows($resultCheck)>0){
         //alert
         $_SESSION['ALERT']['ADD_SUBJECT_FAILED'] = "$subject_code or $subject_description already exists.";
-
 
     } else{
         //alert

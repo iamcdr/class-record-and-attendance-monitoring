@@ -16,6 +16,8 @@ $activePage = "Manage Teacher";
                 echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> Assign Classes to '. displayTeacherName($_GET['tid']) .'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="assg_adv_cls")
                 echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> Assign Advisory Classes to '. displayTeacherName($_GET['tid']) .'</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="trans_rec")
+                echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> Transfer Records of '. displayTeacherName($_GET['tid']) .'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="view")
                 echo '<h4 class="page-header"><a href="teachers.php">Teachers</a> -> View Details '. displayTeacherName($_GET['tid']) .'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="view_cls_rec")
@@ -49,6 +51,10 @@ $activePage = "Manage Teacher";
 
                        case 'view_cls_rec':
                            include "includes/teacher_view_class_rec.php";
+                           break;
+
+                       case 'trans_rec':
+                           include "includes/teacher_transfer_records.php";
                            break;
 
                        case 'exec':

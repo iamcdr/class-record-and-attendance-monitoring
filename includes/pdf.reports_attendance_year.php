@@ -89,6 +89,33 @@ ob_start();
                     ?>
 
                 </table>
+
+            <table>
+                <tr>
+                    <td style="text-align: right">
+                        Prepared By:
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">
+                        <strong><?= displayName($_SESSION['hts_user_id']) ?></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">
+                        Date:
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">
+                        <?= date("F d Y"); ?>
+                    </td>
+                </tr>
+            </table>
          </div>
     </body>
 

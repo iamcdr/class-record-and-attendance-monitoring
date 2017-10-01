@@ -10,7 +10,7 @@
             <div class="form-group">
                 <input class="form-control" placeholder="Password" name="password" type="password">
             </div>
-            <a href="login.php?s=for_pass">Forgot Password</a>
+            <a href="login.php?s=for_pass">Forgot Password?</a>
             <input type="submit" name="login" class="btn btn-lg btn-success btn-block" value="Login">
         </fieldset>
     </form>

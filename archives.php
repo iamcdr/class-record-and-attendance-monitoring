@@ -26,6 +26,8 @@ $activePage = "Archives";
                 echo '<h4 class="page-header"><a href="archives.php">Archives</a> -> Archived Teacher-Assigned Classes </h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="teach_adv_class")
                 echo '<h4 class="page-header"><a href="archives.php">Archives</a> -> Archived Teacher-Assigned Advisory Classes </h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="stud_sec")
+                echo '<h4 class="page-header"><a href="archives.php">Archives</a> -> Archived Student-Assigned Section Classes </h4>';
             else
                 echo '<h4 class="page-header">Archives</h4>';
                         ?>
@@ -63,6 +65,10 @@ $activePage = "Archives";
 
                        case 'students':
                            include "includes/archived_students.php";
+                           break;
+
+                       case 'stud_sec':
+                           include "includes/archived_student_section.php";
                            break;
 
 

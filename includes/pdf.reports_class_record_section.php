@@ -62,7 +62,7 @@ ob_start();
              <h1><?= $rowGp['description'] ?></h1>
              <table>
                 <?php
-                $querySec = "SELECT * FROM sections WHERE archive_status = 0";
+                $querySec = "SELECT * FROM sections WHERE archive_status = 0 AND section_id = {$_GET['sid']}";
                 $resultSec = mysqli_query($connection, $querySec);
                 while($rowSec = mysqli_fetch_array($resultSec)):
                     ?>

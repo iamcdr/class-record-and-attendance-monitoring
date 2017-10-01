@@ -344,14 +344,14 @@ function displayGradingPeriodGrade($student_id, $subid, $secid, $gradingperiod_i
 function displayFinalGrade($student_id, $subid, $secid){
     global $connection;
 
-    $teacher_id = (isset($teacher_id)) ? $teacher_id : $_SESSION['hts_user_id'];
+    //$teacher_id = (isset($teacher_id)) ? $teacher_id : $_SESSION['hts_user_id'];
 
     $first = displayGradingPeriodGrade($student_id, $subid, $secid, 1);
     $second = displayGradingPeriodGrade($student_id, $subid, $secid, 2);
     $third = displayGradingPeriodGrade($student_id, $subid, $secid, 3);
     $fourth = displayGradingPeriodGrade($student_id, $subid, $secid, 4);
 
-    $query = "SELECT * FROM outputs_final WHERE student_id = {$student_id} AND section_id = {$secid} AND subject_id = {$subid} AND teacher_id = {$teacher_id} ORDER BY gradingperiod_id DESC";
+    $query = "SELECT * FROM outputs_final WHERE student_id = {$student_id} AND section_id = {$secid} AND subject_id = {$subid} ORDER BY gradingperiod_id DESC";
     $result = mysqli_query($connection, $query);
 
     $row = mysqli_fetch_array($result);

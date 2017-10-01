@@ -18,7 +18,7 @@
                                     success: function(){
                                         swal({
                                             title: 'Archived!',
-                                            text: "Unassigned <?= displaySubjectDesc($rowSubj[0]) ?> to <?= displayGradelevelDesc($_GET['lvlid'])?> successfully.",
+                                            text: "Unassigned <?= displaySubjectDesc($rowSubj['subject_id']) ?> to <?= displayGradelevelDesc($_GET['lvlid'])?> successfully.",
                                             type: 'success'
                                         })
                                             .then(function(){

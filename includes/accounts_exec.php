@@ -41,6 +41,7 @@ if(isset($_POST['add_account'])){
     $queryCheck = "SELECT * FROM useraccount AS a INNER JOIN user_profile AS b ON a.user_id=b.user_id WHERE last_name = '{$last_name}' AND first_name = '{$first_name}' AND middle_name = '{$middle_name}'";
     $resultCheck = mysqli_query($connection, $queryCheck);
 
+
     if(mysqli_num_rows($resultCheck)>0){
         $_SESSION['ALERT']['ADD_ACCOUNT_FAILED'] = "$fullname already exists";
     } else {
@@ -84,7 +85,7 @@ if(isset($_POST['edit_account'])){
 
 
         //query useraccounts
-        $queryUc = "UPDATE useraccount SET last_name = '{$last_name}', middle_name = '{$middle_name}', first_name = '{$first_name}', user_privilege = '{$user_privilege}' WHERE user_id = '{$user_id}'";
+        $queryUc = "UPDATE useraccount SET emp_num = '{$emp_num}', user_privilege = '{$user_privilege}', last_name = '{$last_name}', middle_name = '{$middle_name}', first_name = '{$first_name}', user_privilege = '{$user_privilege}' WHERE user_id = '{$user_id}'";
         mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
 
         //query user_profile

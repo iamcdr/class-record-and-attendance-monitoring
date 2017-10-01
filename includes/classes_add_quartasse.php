@@ -109,6 +109,8 @@
                         title: "Successful!",
                         html: "<b>Added grades successfully!</b>",
                         type: "success"
+                    }).then(function(){
+                         window.location.href= "classes.php?s=ww&sid=<?= $_GET['sid']?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $_GET['gpid'] ?>"
                     })
                 }
             })

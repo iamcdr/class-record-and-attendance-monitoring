@@ -44,6 +44,10 @@ $rowAcc = mysqli_fetch_array($resultAcc);
                             <option value="2" <?php if($rowAcc['user_privilege']==2) echo "selected" ?>>Teacher</option>
                         </select>
                         </div>
+                        <div class="col-lg-4">
+                            <h5>Employee ID Number</h5>
+                            <input type="text" class="form-control" name="emp_num" value="<?= $rowAcc['emp_num'] ?>">
+                        </div>
                     </div>
                 </div>
                 <div class="row">

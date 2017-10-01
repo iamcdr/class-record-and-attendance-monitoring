@@ -101,6 +101,24 @@ if(isset($_POST['reassign_adv_class'])){
 
 
 
+
+
+if(isset($_POST['restore_studentsec'])){
+    $stud_sec_id = $_POST['stud_sec_id'];
+
+    //query
+    mysqli_query($connection, "UPDATE student_section SET archive_status = 0 WHERE student_level_id = {$stud_sec_id}");
+
+    //audit log
+    $type = "Restored a student-assigned section data";
+    insertAuditLogData($type, $remarks);
+
+    header("Location: archives.php?s=stud_sec");
+
+}
+
+
+
 if(isset($_POST['restore_student'])){
     $student_id = $_POST['student_id'];
 
@@ -115,3 +133,4 @@ if(isset($_POST['restore_student'])){
     header("Location: archives.php?s=students");
 
 }
+

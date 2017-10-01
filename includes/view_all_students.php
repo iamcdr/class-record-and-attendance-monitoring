@@ -8,12 +8,24 @@ if(isset($_SESSION['ALERT']['ADD_STUDENT_SUCCESS'])){
 if(isset($_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'])){
     echo '<div class="alert alert-success">'.$_SESSION['ALERT']['EDIT_STUDENT_SUCCESS']. '</div>';
 }
+if(isset($_SESSION['ALERT']['ADD_STUDENT_FAILED'])){
+    echo '<div class="alert alert-danger">'.$_SESSION['ALERT']['ADD_STUDENT_FAILED']. '</div>';
+}
 ?>
 
     <div class="row">
         <div class="col-lg-12">
+        <div class="btn-group">
             <a href="students.php?s=add" class="btn btn-primary btn-lg"><i class="fa fa-plus fa-fw"></i> Add Student</a>
-            <a href="students.php?s=add" class="btn btn-primary btn-lg">Batch Assign Section</a>
+            <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+            <ul class="dropdown-menu">
+                <li><a href="students.php?s=batch_assign">Batch Assign Section</a></li>
+            </ul>
+        </div>
+
             <div class="panel panel-body">
                 <div class="row">
                     <div class="col-lg-offset-4 col-lg-4 col-lg-offset-4">

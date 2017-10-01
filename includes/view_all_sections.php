@@ -41,6 +41,7 @@ if(isset($_SESSION['ALERT']['ADD_SECTION_FAILED'] )){
                                                         <i class="fa fa-angle-down"></i></button>
                                                     <ul role="menu" class="dropdown-menu">
                                                         <li><a href="#" id="archive_section<?= $rowSection[0] ?>">Move to Archive</a></li>
+                                                        <li><a href="sections.php?s=students&sid=<?= $rowSection[0] ?>">View Students</a></li>
                                                     </ul>
                                                 </div>
                                                 <?php include("includes/modal_archivesection.php") ?>

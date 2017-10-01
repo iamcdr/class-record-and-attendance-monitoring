@@ -12,20 +12,22 @@
                 </thead>
                 <tbody>
                     <?php
-                        $querySubjects = "SELECT * FROM subjects WHERE archive_status = 0";
+                        $dataGL = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM sections WHERE section_id = {$_GET['sid']}"));
+                        $level_id = $dataGL['gradelevel_id'];
+                        $querySubjects = "SELECT * FROM gradelevel_subject a WHERE archive_status = 0 AND level_id = {$level_id}";
                         $resultSubjects = mysqli_query($connection, $querySubjects) or die(mysqli_error($connection));
 
                         while($rowSubjects = mysqli_fetch_array($resultSubjects)){
                         ?>
                         <tr>
                             <td>
-                                <?= $rowSubjects['subject_code'] ?>
+                                <?= displaySubjectCode($rowSubjects['subject_id']) ?>
                             </td>
                             <td>
-                                <?= $rowSubjects['subject_description'] ?>
+                                <?= displaySubjectDesc($rowSubjects['subject_id']) ?>
                             </td>
                             <td>
-                                <a href="advisory.php?s=gr_list&sid=<?= $_GET['sid']?>&yid=<?= $_GET['yid']?>&subid=<?= $rowSubjects[0] ?>" class="btn btn-primary">Open</a>
+                                <a href="advisory.php?s=gr_list&sid=<?= $_GET['sid']?>&yid=<?= $_GET['yid']?>&subid=<?= $rowSubjects['subject_id'] ?>" class="btn btn-primary">Open</a>
                             </td>
                         </tr>
                         <?php } ?>

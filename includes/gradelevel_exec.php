@@ -21,16 +21,18 @@ if(isset($_POST['add_gradelevel'])){
     $gradelevel_code = mysqli_real_escape_string($connection, $_POST['gradelevel_code']);
     $gradelevel_description = mysqli_real_escape_string($connection, $_POST['gradelevel_description']);
 
-    //query
-    mysqli_query($connection, "INSERT INTO gradelevel (gradelevel_code, gradelevel_description) VALUES('{$gradelevel_code}', '{$gradelevel_description}')");
 
     //VALIDATION
-    $queryCheck = "SELECT * FROM gradelevel WHERE gradelevel_code = OR gradelevel_description = AND archive_status=0";
+    $queryCheck = "SELECT * FROM gradelevel WHERE (gradelevel_code = '{$gradelevel_code}' OR gradelevel_description = '{$gradelevel_description}') AND archive_status=0";
     $resultCheck = mysqli_query($connection, $queryCheck);
 
     if(mysqli_num_rows($resultCheck)>0){
-        $_SESSION['ALERT']['ADD_GRADELEVEL_FAILED'] = "$gradel0evel_code or $gradelevel_description already exists.";
+        $_SESSION['ALERT']['ADD_GRADELEVEL_FAILED'] = "$gradelevel_code or $gradelevel_description already exists.";
     } else {
+
+        //query
+        mysqli_query($connection, "INSERT INTO gradelevel (gradelevel_code, gradelevel_description) VALUES('{$gradelevel_code}', '{$gradelevel_description}')");
+
         //alert
         $_SESSION['ALERT']['ADD_GRADELEVEL_SUCCESS'] = "$gradelevel_description was successfully added.";
 

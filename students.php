@@ -22,6 +22,8 @@ $activePage = "Manage Students";
                 echo '<h4 class="page-header"><a href="students.php">Students</a> -> Update Information of '.displayStudentName($_GET['sid']).'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="shft_sc")
                 echo '<h4 class="page-header"><a href="students.php">Students</a> -> Shift Section of '.displayStudentName($_GET['sid']).'</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="batch_assign")
+                echo '<h4 class="page-header"><a href="students.php">Students</a> -> Batch Assigning of Sections</h4>';
             else
                 echo '<h4 class="page-header">Students</h4>';
                         ?>
@@ -51,6 +53,10 @@ $activePage = "Manage Students";
 
                        case 'shft_sc':
                            include "includes/students_shift_section.php";
+                           break;
+
+                       case 'batch_assign':
+                           include "includes/students_batch_assign.php";
                            break;
 
                        case 'exec':

@@ -16,6 +16,8 @@ $activePage = "Manage Accounts";
                 echo '<h4 class="page-header"><a href="accounts.php">Accounts</a> -> Add New</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="chpas")
                 echo '<h4 class="page-header">Change Password</h4>';
+            elseif(isset($_GET['s'])&&$_GET['s']=="view")
+                echo '<h4 class="page-header"><a href="accounts.php">Accounts</a> -> View Details '. displayName($_GET['uid']) .'</h4>';
             elseif(isset($_GET['s'])&&$_GET['s']=="edit")
                 echo '<h4 class="page-header"><a href="accounts.php">Accounts</a> -> Change Information</h4>';
             else
@@ -39,6 +41,10 @@ $activePage = "Manage Accounts";
 
                        case 'chpas':
                            include "includes/account_changepass.php";
+                           break;
+
+                       case 'view':
+                           include "includes/account_view_information.php";
                            break;
 
                        case 'exec':

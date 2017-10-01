@@ -45,7 +45,7 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_FAILED']))
                                         ?>
                                             <option value="<?= $rowSubj[0] ?>"><?= $rowSubj['subject_description'] ?></option>
                                         <?php
-                                        endif; 
+                                        endif;
                                     } ?>
                                     </select>
                                 </td>
@@ -92,3 +92,5 @@ if(isset($_SESSION['ALERT']['ASSIGN_CLASS_FAILED']))
         </div>
     </div>
 </div>
+
+

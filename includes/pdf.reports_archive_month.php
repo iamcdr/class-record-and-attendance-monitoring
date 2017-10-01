@@ -1,10 +1,9 @@
 <?php
 require('./db.php');
 require('./functions.php');
-session_start();
 require_once('../plugins/dompdf/autoload.inc.php');
 //echo  $_SERVER['PHP_SELF'];
-
+session_start();
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 $dompdf->set_option('defaultFont', 'Helvetica');
@@ -38,26 +37,24 @@ ob_start();
                 padding: 7px
             }
 
-            tr:nth-child(even) {
-                background-color: #f2f2f2
-            }
+            tr:nth-child(even) {background-color: #f2f2f2}
+
         </style>
     </head>
 
     <center>
-        <img src="../assets/img/logo1.png" alt="Logo" style="width:80px; height: auto"><br>
+    <img src="../assets/img/logo1.png" alt="Logo" style="width:80px; height: auto"><br>
         <h3 style="font: arial">Holy Trinity School</h3>
         <h3 style="font: arial">Center of Catholic Education Inc.</h3>
         <h3 style="font: arial; font-size: 10px">Manibaug, Paralaya</h3>
         <h3 style="font: arial; font-size: 10px">Porac, Pampanga</h3>
     </center>
-
     <body style="font-size: 10px; ">
-        <h2>Attendance Report</h2>
-        <div style="margin: 10px 96px 96px 96px">
-            <table border=1>
+        <h2>Archive Report</h2>
+         <div style="margin: 10px 96px 96px 96px">
+             <table border=1>
 
-                <?php
+                    <?php
                         $year = $_GET['y'];
                         $month = $_GET['m'];
                         $samdate = "$year-$month-01";
@@ -65,39 +62,31 @@ ob_start();
                         $monthnum = date("m", strtotime($samdate));
                         ?>
                     <tr>
-                        <th colspan=3>
-                            <h3>
-                                <?= $monthname . " " . $year ?>
-                            </h3>
-                        </th>
+                        <th colspan=3><h3><?= $monthname . " " . $year ?></h3></th>
                     </tr>
                     <tr>
-                        <th>Date</th>
-                        <th>Student Name</th>
-                        <th>Time In</th>
+                        <th>Audit Type</th>
+                        <th>Remarks</th>
+                        <th>Date Time</th>
                     </tr>
                     <?php
 
-                    $queryAtt = "SELECT * FROM attendance_log WHERE YEAR(date_attended) = {$year} AND MONTH(date_attended) = {$monthnum} ORDER BY time_in";
+                    $queryAtt = "SELECT * FROM audit_trail WHERE YEAR(audit_datetime) = {$year} AND MONTH(audit_datetime) = {$monthnum} ORDER BY audit_datetime";
                     $resultAtt = mysqli_query($connection, $queryAtt) or die(mysqli_error($connection));
                     while($rowAtt = mysqli_fetch_array($resultAtt)):
                         ?>
-                        <tr>
-                            <td>
-                                <?= $rowAtt['date_attended'] ?>
-                            </td>
-                            <td>
-                                <?= displayStudentName($rowAtt['student_id']) ?>
-                            </td>
-                            <td>
-                                <?= $rowAtt['time_in'] ?>
-                            </td>
-                        </tr>
-                        <?php
+                    <tr>
+                        <td><?= $rowAtt['audit_type'] ?></td>
+                        <td><?= $rowAtt['audit_remarks'] ?></td>
+                        <td><?= $rowAtt['audit_datetime'] ?></td>
+                    </tr>
+                    <?php
                     endwhile;
                     ?>
 
-            </table>
+
+                </table>
+
             <table>
                 <tr>
                     <td style="text-align: right">
@@ -124,9 +113,7 @@ ob_start();
                     </td>
                 </tr>
             </table>
-
-        </div>
-
+         </div>
     </body>
 
     </html>

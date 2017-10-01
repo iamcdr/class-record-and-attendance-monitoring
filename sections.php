@@ -16,7 +16,9 @@ $activePage = "Manage Sections";
     if(isset($_GET['s'])&&$_GET['s']=="add")
         echo '<h4 class="page-header"><a href="sections.php">Sections</a> -> Add New</h4>';
     elseif(isset($_GET['s'])&&$_GET['s']=="edit")
-        echo '<h4 class="page-header"><a href="sections.php">Sections</a> -> Edit '. displaySubjectDesc($_GET['sid']) .'</h4>';
+        echo '<h4 class="page-header"><a href="sections.php">Sections</a> -> Edit '. displaySectionDesc($_GET['sid']) .'</h4>';
+    elseif(isset($_GET['s'])&&$_GET['s']=="students")
+        echo '<h4 class="page-header"><a href="sections.php">Sections</a> -> View Students in '. displaySectionDesc($_GET['sid']) .'</h4>';
     else
         echo '<h4 class="page-header">Sections</h4>';
                 ?>
@@ -31,6 +33,10 @@ $activePage = "Manage Sections";
 
                        case 'add':
                            include "includes/add_section.php";
+                           break;
+
+                       case 'students':
+                           include "includes/section_view_students.php";
                            break;
 
                        case 'exec':

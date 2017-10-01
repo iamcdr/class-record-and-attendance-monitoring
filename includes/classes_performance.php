@@ -36,7 +36,8 @@
                                     else
                                         echo '<a href="classes.php?s=add_pt&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."PT$i".'<i class="fa fa-plus"></i></a>';
                                 } else{
-                                    echo "PT$i";
+                                    //echo "PT$i";
+                                    echo '<a href="classes.php?s=edit_pt&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."PT$i".'<i class="fa fa-pencil"></i></a>';
                                 }
                             ?>
                                 </th>

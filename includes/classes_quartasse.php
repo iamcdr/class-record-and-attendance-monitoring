@@ -31,7 +31,8 @@
                                 else
                                     echo '<a href="classes.php?s=add_qa&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."QA".'<i class="fa fa-plus"></i></a>';
                            } else {
-                               echo "QA";
+                                //echo "QA";
+                                echo '<a href="classes.php?s=edit_qa&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."QA".'<i class="fa fa-pencil"></i></a>';
                            }
                             ?>
                                 </th>
