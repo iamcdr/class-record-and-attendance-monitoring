@@ -3,6 +3,7 @@ require('./db.php');
 require('./functions.php');
 require_once('../plugins/dompdf/autoload.inc.php');
 //echo  $_SERVER['PHP_SELF'];
+ini_set('max_execution_time', 9000);
 session_start();
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();

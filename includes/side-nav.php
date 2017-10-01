@@ -90,7 +90,6 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
                             </ul>
                         </div>
                     </li>
-                    <?php } ?>
 
 
 
@@ -115,6 +114,10 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
                             </ul>
                         </div>
                     </li>
+
+
+
+                    <?php } ?>
 
 
                     <?php if($_SESSION['hts_user_userprivilege']==2){ ?>

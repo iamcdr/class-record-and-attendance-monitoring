@@ -3,7 +3,7 @@ require('./db.php');
 require('./functions.php');
 require_once('../plugins/dompdf/autoload.inc.php');
 //echo  $_SERVER['PHP_SELF'];
-
+ini_set('max_execution_time', 9000);
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 $dompdf->set_option('defaultFont', 'Helvetica');

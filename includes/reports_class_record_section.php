@@ -10,11 +10,11 @@
              <h1><?= $rowGp['description'] ?></h1>
              <table class="table table-bordered">
                 <?php
-                $querySec = "SELECT * FROM sections WHERE archive_status = 0";
+                $querySec = "SELECT * FROM sections WHERE archive_status = 0 AND section_id = {$_GET['sid']}";
                 $resultSec = mysqli_query($connection, $querySec);
                 while($rowSec = mysqli_fetch_array($resultSec)):
                     ?>
-                    <tr class="border">
+                    <tr>
                         <th colspan=2>
                             <?= displaySectionDesc($rowSec[0]) ?>
                         </th>
@@ -38,7 +38,7 @@
 
                         while($rowSub = mysqli_fetch_array($resultSub)):
                         ?>
-                        <tr style="border: 1px solid black; font-weight: bold">
+                        <tr style="font-weight: bold">
                             <td><?= displaySubjectDesc($rowSub['subject_id']) ?></td>
                             <td><?= displayGradingPeriodGrade($rowStuds['student_id'], $rowSub['subject_id'], $rowSec[0], $rowGp[0]) ?></td>
                         </tr>

@@ -40,8 +40,7 @@
                         <td>
                             <?= displaySectionDesc($rowSec[0]) ?>
                         </td>
-                        <td><a href="reports.php?s=cls_rec_section&sid=<?= $rowSec[0] ?>&ay=<?= $year ?>" class="btn btn-primary">View</a></td>
-                        <td><a href="includes/pdf.reports_class_record.php?ay=<?= $year ?>&sid=<?= $rowSec[0] ?>" class="btn btn-primary">Download PDF</a></td>
+                        <td><a href="reports.php?s=cls_rec_section&sid=<?= $rowSec[0] ?>&ay=<?= $year ?>" class="btn btn-primary">View</a><a href="includes/pdf.reports_class_record_section.php?ay=<?= $year ?>&sid=<?= $rowSec[0] ?>" class="btn btn-primary">Download PDF</a></td>
                     </tr>
 
                     <?php
