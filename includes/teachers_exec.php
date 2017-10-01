@@ -120,7 +120,7 @@ if(isset($_POST['transfer_records'])){
     $new_teacher_id = $_POST['new_teacher_id'];
 
     //query
-    $query = "UPDATE teacher_classes SET teacher_id = {$new_teacher_id} WHERE teacher_id = {$teacher_id}";
+    $query = "UPDATE teacher_classes SET teacher_id = {$new_teacher_id} WHERE teacher_id = {$teacher_id} AND archive_status =0";
     mysqli_query($connection, $query);
 
     $queryAct = "UPDATE outputs_actual SET teacher_id = {$new_teacher_id} WHERE teacher_id = {$teacher_id}";

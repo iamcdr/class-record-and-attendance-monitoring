@@ -140,13 +140,14 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                                                     if($countSub==1)
                                                         $countSub = mysqli_num_rows(mysqli_query($connection, "SELECT DISTINCT subject_id FROM outputs_final WHERE student_id = {$rowClass['student_id']}"));
 
+
                                                     while($rowSub = mysqli_fetch_array($resultSub)){
                                                         $studGrade = (displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $rowClass['section_id']));
                                                         $sumgrade += $studGrade;
                                                     }
                                                     $countSub = ($countSub==0) ? 1 : $countSub;
-                                                    $finalgrade = getOutputsFinalGrade($sumgrade / $countSub);
-                                                    $queryTempIns = "INSERT INTO class_final_ranking_$rowClasses[0] VALUES({$rowClass['student_id']}, '{$finalgrade}')";
+                                                    $finalgrade = $sumgrade / $countSub;
+                                                    $queryTempIns = "INSERT INTO class_final_ranking_$rowClasses[0] VALUES({$rowClass['student_id']}, '{$finalgrade}')" ;
                                                     mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection) . $queryTempIns);
                                                     $sumgrade=0;
 
@@ -300,12 +301,14 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                                                     $querySub = "SELECT * FROM outputs_final WHERE student_id = {$rowClass['student_id']} AND gradingperiod_id = {$rowGp[0]}";
                                                     $resultSub = mysqli_query($connection, $querySub) or die (mysqli_error($connection)) ;
                                                     $countSub = mysqli_num_rows(mysqli_query($connection, "SELECT DISTINCT gradingperiod_id FROM outputs_final WHERE student_id = {$rowClass['student_id']}"));
+                                                    if($countSub==1)
+                                                        $countSub = mysqli_num_rows(mysqli_query($connection, "SELECT DISTINCT subject_id FROM outputs_final WHERE student_id = {$rowClass['student_id']}"));
                                                     while($rowSub = mysqli_fetch_array($resultSub)){
                                                         $studGrade = (displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $rowClass['section_id']));
                                                         $sumgrade += $studGrade;
                                                     }
                                                     $countSub = ($countSub==0) ? 1 : $countSub ;
-                                                    $finalgrade = getOutputsFinalGrade($sumgrade/$countSub);
+                                                    $finalgrade = $sumgrade/$countSub;
                                                     $sumgrade=0;
                                                     $queryTempIns = "INSERT INTO class_final_ranking_$rowGLvl[0] VALUES({$rowClass['student_id']}, '{$finalgrade}')";
                                                     mysqli_query($connection, $queryTempIns) or die(mysqli_error($connection) . $queryTempIns);
