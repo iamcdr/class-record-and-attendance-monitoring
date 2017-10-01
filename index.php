@@ -137,6 +137,9 @@ if(isset($_SESSION['hts_user_first_login'])&&$_SESSION['hts_user_first_login']!=
                                                     $querySub = "SELECT * FROM outputs_final WHERE student_id = '{$rowClass['student_id']}' AND gradingperiod_id = '{$rowGp[0]}'";
                                                     $resultSub = mysqli_query($connection, $querySub) or die (mysqli_error($connection)) ;
                                                     $countSub = mysqli_num_rows(mysqli_query($connection, "SELECT DISTINCT gradingperiod_id FROM outputs_final WHERE student_id = {$rowClass['student_id']}"));
+                                                    if($countSub==1)
+                                                        $countSub = mysqli_num_rows(mysqli_query($connection, "SELECT DISTINCT subject_id FROM outputs_final WHERE student_id = {$rowClass['student_id']}"));
+
                                                     while($rowSub = mysqli_fetch_array($resultSub)){
                                                         $studGrade = (displayFinalGrade($rowClass['student_id'], $rowSub['subject_id'], $rowClass['section_id']));
                                                         $sumgrade += $studGrade;
