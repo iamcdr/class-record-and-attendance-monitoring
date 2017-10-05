@@ -1,6 +1,21 @@
 <div class="content">
     <div class="row">
+       <div style="color: red">
+            <p>* - Required fields</p>
+       </div>
         <form action="accounts.php?s=exec" method="post">
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <div class="col-lg-4">
+                        <h5>Honorific</h5>
+                        <input type="text" class="form-control" name="honor" placeholder="e.g. Mr, Mrs" required>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <h5>Suffix</h5>
+                        <input type="text" class="form-control" name="suffix" placeholder="e.g. Jr, Sr, III" required>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">
@@ -25,6 +40,8 @@
                             <option value="">=-Please Select-=</option>
                             <option value="1">Administrator</option>
                             <option value="2">Teacher</option>
+                            <option value="3">Coordinator</option>
+                            <option value="4">Attendance Monitor</option>
                         </select>
                     </div>
                     <div class="col-lg-4">

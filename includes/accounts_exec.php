@@ -37,6 +37,9 @@ if(isset($_POST['add_account'])){
         $address3 = mysqli_real_escape_string($connection, $_POST['address3']);
     $address = "$address1, $address2, $address3";
 
+    //
+    $honor = mysqli_real_escape_string($connection, $_POST['honor']);
+    $suffix = mysqli_real_escape_string($connection, $_POST['suffix']);
     //VALIDATION
     $queryCheck = "SELECT * FROM useraccount AS a INNER JOIN user_profile AS b ON a.user_id=b.user_id WHERE last_name = '{$last_name}' AND first_name = '{$first_name}' AND middle_name = '{$middle_name}'";
     $resultCheck = mysqli_query($connection, $queryCheck);
@@ -46,7 +49,7 @@ if(isset($_POST['add_account'])){
         $_SESSION['ALERT']['ADD_ACCOUNT_FAILED'] = "$fullname already exists";
     } else {
         //query useraccounts
-        $queryUc = "INSERT INTO useraccount(password, last_name, middle_name, first_name, emp_num, user_privilege, first_login) VALUES('{$defaultPass}', '{$last_name}', '{$middle_name}', '{$first_name}', '{$emp_num}', '{$user_privilege}', 1)";
+        $queryUc = "INSERT INTO useraccount(password, last_name, middle_name, first_name, emp_num, user_privilege, first_login, honorific, suffix) VALUES('{$defaultPass}', '{$last_name}', '{$middle_name}', '{$first_name}', '{$emp_num}', '{$user_privilege}', 1, '{$honor}', '{$suffix}')";
         mysqli_query($connection, $queryUc) or die(mysqli_error($connection));
         $user_id = mysqli_insert_id($connection);
 

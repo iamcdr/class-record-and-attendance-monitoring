@@ -15,7 +15,7 @@ if(isset($_SESSION['ALERT']['ADD_STUDENT_FAILED'])){
 
     <div class="row">
         <div class="col-lg-12">
-        <div class="btn-group">
+        <!--<div class="btn-group">
             <a href="students.php?s=add" class="btn btn-primary btn-lg"><i class="fa fa-plus fa-fw"></i> Add Student</a>
             <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="caret"></span>
@@ -24,7 +24,8 @@ if(isset($_SESSION['ALERT']['ADD_STUDENT_FAILED'])){
             <ul class="dropdown-menu">
                 <li><a href="students.php?s=batch_assign">Batch Assign Section</a></li>
             </ul>
-        </div>
+        </div>-->
+            <a href="students.php?s=add" class="btn btn-primary btn-lg"><i class="fa fa-plus fa-fw"></i> Add Student</a>
 
             <div class="panel panel-body">
                 <div class="row">

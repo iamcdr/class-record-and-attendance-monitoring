@@ -39,7 +39,7 @@ if(isset($_POST['add_student'])){
     } else {
 
         //query to students
-        $query = "INSERT INTO students (last_name, first_name, middle_name, student_idno, birthdate, contact_no, student_barcode) VALUES('{$last_name}', '{$first_name}', '{$middle_name}', '{$student_idno}', '{$birthdate}', '{$contact_no}', '{$student_barcode}')";
+        $query = "INSERT INTO students (last_name, first_name, middle_name, student_idno, birthdate, contact_no, student_barcode, image) VALUES('{$last_name}', '{$first_name}', '{$middle_name}', '{$student_idno}', '{$birthdate}', '{$contact_no}', '{$student_barcode}')";
         mysqli_query($connection, $query) or die(mysqli_error($connection));
 
             //init students id
@@ -70,24 +70,54 @@ if(isset($_POST['update_student'])){
     $contact_no = mysqli_real_escape_string($connection, $_POST['contact_no']);
     $student_id = mysqli_real_escape_string($connection, $_POST['student_id']);
 
-    //query to students
-    $query = "UPDATE students SET student_idno = '{$student_idno}', student_barcode = '{$student_barcode}', contact_no = '{$contact_no}' WHERE student_id = {$student_id} ";
-    mysqli_query($connection, $query) or die(mysqli_error($connection));
 
-    //init stud info
-    $rowStud = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM students WHERE student_id = {$student_id}"));
-    $first_name = $rowStud['first_name'];
-    $middle_name = $rowStud['middle_name'];
-    $last_name = $rowStud['last_name'];
+    $target_dir = "images/";
+    $renamedFile = time() . " - " . mysqli_real_escape_string($connection, basename($_FILES["stud_img"]["name"]));
+    $target_file = $target_dir . $renamedFile;
 
-    //alert
-    $_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'] = "The information of $first_name $middle_name $last_name is successfully updated.";
+    $uploadOk = 1;
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
-    //audit trail
-    $type = "Update student information";
-    $remarks = "Name: $first_name $middle_name $last_name <br>";
-    $remarks .= "Student ID No: $student_idno";
-    insertAuditLogData($type, $remarks);
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["stud_img"]["tmp_name"]);
+
+    // Check if directory already exists
+    if(!file_exists($target_dir)){
+        mkdir($target_dir);
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["stud_img"]["tmp_name"], $target_file)) {
+            //query to students
+            $query = "UPDATE students SET student_idno = '{$student_idno}', student_barcode = '{$student_barcode}', contact_no = '{$contact_no}', image_1 = '{$renamedFile}' WHERE student_id = {$student_id} ";
+            mysqli_query($connection, $query) or die(mysqli_error($connection));
+
+            //init stud info
+            $rowStud = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM students WHERE student_id = {$student_id}"));
+            $first_name = $rowStud['first_name'];
+            $middle_name = $rowStud['middle_name'];
+            $last_name = $rowStud['last_name'];
+
+            //alert
+            $_SESSION['ALERT']['EDIT_STUDENT_SUCCESS'] = "The information of $first_name $middle_name $last_name is successfully updated.";
+
+            //audit trail
+            $type = "Update student information";
+            $remarks = "Name: $first_name $middle_name $last_name <br>";
+            $remarks .= "Student ID No: $student_idno";
+            insertAuditLogData($type, $remarks);
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    }
+
+
+
+
 
     header("Location: students.php");
     exit();

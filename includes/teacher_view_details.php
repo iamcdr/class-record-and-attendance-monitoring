@@ -7,6 +7,18 @@ $row = mysqli_fetch_array($result);
 <div class="content">
     <div class="row">
         <form action="accounts.php?s=exec" method="post">
+           <div class="row">
+                <div class="form-group col-lg-12">
+                    <div class="col-lg-4">
+                        <h5>Honorific</h5>
+                        <?= $row['honorific'] ?>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <h5>Suffix</h5>
+                        <?= $row['suffix'] ?>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">

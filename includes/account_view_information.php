@@ -10,6 +10,18 @@ $row = mysqli_fetch_array($result);
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">
+                        <h5>Honorific</h5>
+                        <?= $row['honorific'] ?>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <h5>Suffix</h5>
+                        <?= $row['suffix'] ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <div class="col-lg-4">
                         <h5>Last Name</h5>
                         <h5><b><?= $row['last_name'] ?></b></h5>
                     </div>

@@ -1,6 +1,6 @@
 <div class="content">
     <div class="row">
-        <form action="students.php?s=exec" method="post">
+        <form action="students.php?s=exec" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">
@@ -32,9 +32,13 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-12">
-                    <div class="col-lg-offset-4 col-lg-4 col-lg-offset-4">
+                    <div class="col-lg-4 ">
                         <h5>Birthdate</h5>
                         <input type="date" name="birthdate" class="form-control">
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <h5>Image of Student</h5>
+                        <input type="file" name="stud_img" class="form-control" accept="image/*">
                     </div>
                 </div>
             </div>

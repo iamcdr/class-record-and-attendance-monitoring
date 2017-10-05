@@ -19,8 +19,12 @@ function displayAccountType($userprivilege){
 
     if($userprivilege==1)
         return "Administrator";
-    else
+    elseif($userprivilege==2)
         return "Teacher";
+    elseif($userprivilege==3)
+        return "Coordinator";
+    else
+        return "Attendance Monitor";
 }
 
 function displayArchiveStatus($status){

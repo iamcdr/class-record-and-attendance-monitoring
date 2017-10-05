@@ -6,10 +6,10 @@ $rowInfo = mysqli_fetch_array($resultInfo);
 ?>
 
 
-<form action="students.php?s=exec" method="post">
-   <input type="hidden" name="student_id" value="<?= $_GET['sid'] ?>">
-    <div class="content">
-        <div class="row">
+    <form action="students.php?s=exec" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="student_id" value="<?= $_GET['sid'] ?>">
+        <div class="content">
+            <div class="row">
                 <div class="row">
                     <div class="form-group col-lg-12">
                         <div class="col-lg-4">
@@ -36,14 +36,18 @@ $rowInfo = mysqli_fetch_array($resultInfo);
                             <h5>ID Barcode Number</h5>
                             <input type="text" class="form-control" value="<?= $rowInfo['student_barcode'] ?>" name="student_barcode">
                         </div>
-    
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-12">
-                        <div class="col-lg-offset-4 col-lg-4 col-lg-offset-4">
+                        <div class="col-lg-4">
                             <h5>Birthdate</h5>
                             <?= $rowInfo['birthdate'] ?>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-4">
+                            <h5>Image of Student</h5>
+                            <input type="file" name="stud_img" class="form-control" accept="image/*">
                         </div>
                     </div>
                 </div>
@@ -60,22 +64,26 @@ $rowInfo = mysqli_fetch_array($resultInfo);
                                     <th>School Year</th>
                                     <th>Section</th>
                                 </tr>
-                            <?php
+                                <?php
                             $queryGl = "SELECT * FROM student_section a LEFT JOIN sections b ON a.section_id=b.section_id WHERE a.archive_status = 0 AND a.student_id={$_GET['sid']} ORDER BY section_description ASC";
                             $resultGl = mysqli_query($connection, $queryGl) or die(mysqli_error($connection));
-    
+
                             while($rowGl = mysqli_fetch_array($resultGl)){
                                 ?>
-                                <tr>
-                                    <td><?= displayAcadYear($rowGl['schoolyear_id']) ?></td>
-                                    <td><?= displaySectionDesc($rowGl['section_id']) ?></td>
-                                </tr>
-                                <?php } ?>
+                                    <tr>
+                                        <td>
+                                            <?= displayAcadYear($rowGl['schoolyear_id']) ?>
+                                        </td>
+                                        <td>
+                                            <?= displaySectionDesc($rowGl['section_id']) ?>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
                             </table>
                         </div>
                     </div>
                 </div>
                 <input type="submit" class="btn btn-primary" name="update_student">
+            </div>
         </div>
-    </div>
-</form>
+    </form>
