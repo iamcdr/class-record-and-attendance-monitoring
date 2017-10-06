@@ -84,7 +84,7 @@ if(isset($_POST['edit_account'])){
     $user_privilege = mysqli_real_escape_string($connection, $_POST['user_privilege']);
     $emp_num = mysqli_real_escape_string($connection, $_POST['emp_num']);
 
-    if(($_SESSION['hts_user_userprivilege']==1||$_SESSION['hts_user_userprivilege']==2)&&$_SESSION['hts_user_id']==$user_id){
+    if($_SESSION['hts_user_id']==$user_id){
 
 
         //query useraccounts

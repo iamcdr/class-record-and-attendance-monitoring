@@ -9,7 +9,7 @@ $rowAcc = mysqli_fetch_array($resultAcc);
             <form action="accounts.php?s=exec" method="post">
                 <input type="hidden" name="user_id" value="<?= $_GET['uid'] ?>">
                 <input type="hidden" name="profile_id" value="<?= $rowAcc['profile_id'] ?>">
-                <?php if(($_SESSION['hts_user_userprivilege']==1||$_SESSION['hts_user_userprivilege']==2)&&$_SESSION['hts_user_id']==$_GET['uid']): ?>
+                <?php if($_SESSION['hts_user_id']==$_GET['uid']): ?>
                 <div class="row">
                     <div class="form-group col-lg-12">
                         <div class="col-lg-4">
