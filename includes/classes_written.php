@@ -7,6 +7,11 @@
     $queryCounts = "SELECT * FROM outputs_final WHERE teacher_id = {$_SESSION['hts_user_id']} AND section_id = {$_GET['sid']} AND subject_id = {$_GET['subid']} AND gradingperiod_id = {$gradingperiod_id}";
     $resultCounts = mysqli_query($connection, $queryCounts);
     ?>
+       <div class="row">
+           <div class="col-lg-offset-4 col-lg-4">
+               <a href="classes.php?s=ww_e&sid=<?= $_GET['sid']?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $gradingperiod_id?>" class="btn btn-primary btn-lg"><i class="fa fa-pencil"></i>Edit Grades</a>
+           </div>
+       </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-body">
@@ -43,7 +48,8 @@
                                 $totalOverall += $totalFromOutAct;
                                 if($rowGP[0]==$gradingperiod_id){
                                     if($totalFromOutAct!="")
-                                        echo '<a href="classes.php?s=edit_ww&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."WW$i".'<i class="fa fa-pencil"></i></a>';
+                                        echo "WW$i";
+                                        //echo '<a href="classes.php?s=edit_ww&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."WW$i".'<i class="fa fa-pencil"></i></a>';
                                     else
                                         echo '<a href="classes.php?s=add_ww&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."WW$i".'<i class="fa fa-plus"></i></a>';
                                 }else {

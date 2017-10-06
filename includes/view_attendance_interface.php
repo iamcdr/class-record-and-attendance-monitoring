@@ -33,6 +33,11 @@
                 ?>
 
                 <div class="row" style="margin-top: 20px">
+                   <div class="row" style="margin-bottom: 20px">
+                       <div class="col-lg-offset-4 col-lg-4">
+                            <img src="./images/<?= $row['image_1'] ?>" alt="<?= $row['image_1'] ?>" class="img-responsive" style="width: 200px; ">
+                       </div>
+                   </div>
                     <div class="row">
                         <div class="col-lg-4">
                             <label>Full Name</label>

@@ -31,12 +31,6 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
 
                     <?php if($_SESSION['hts_user_userprivilege']==1){ ?>
 
-                    <li <?php if(isset($activePage)&&$activePage=='Attendance Monitoring' ) echo "class='active'" ?>>
-                        <a href="attendance.php">
-                            <i class="fa fa-calendar fa-fw"><div class="icon-bg bg-orange"></div></i> Attendance
-                        </a>
-                    </li>
-
                     <li <?php if(isset($activePage)&&strpos($activePage, "Manage")!==false) echo "class='active'" ?>>
                         <a data-toggle="collapse" href="#manage">
                             <i class="fa fa-gear fa-fw"></i>
@@ -128,6 +122,76 @@ $activePageFilename = basename($_SERVER['PHP_SELF']);
 
                     <li <?php if(isset($activePage)&&strpos($activePage, "Advisory")!==false) echo "class='active'" ?>>
                         <a href="./advisory.php"><i class="fa fa-users fa-fw"></i> Advisory Classes</a>
+                    </li>
+                    <?php } ?>
+
+
+                    <?php if($_SESSION['hts_user_userprivilege']==3){ ?>
+
+                    <li <?php if(isset($activePage)&&strpos($activePage, "Manage")!==false) echo "class='active'" ?>>
+                        <a data-toggle="collapse" href="#manage">
+                            <i class="fa fa-gear fa-fw"></i>
+                            <p>Manage <b class="caret"></b></p>
+                        </a>
+                        <div class="collapse" id="manage">
+                            <ul class="nav">
+                                <li <?php if(strpos($activePageFilename, "subjects.php")!==false) echo "class='active'" ?>>
+                                    <a href="subjects.php"><i class="fa fa-align-left"></i>&nbsp; Subjects</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "gradelevel.php")!==false) echo "class='active'" ?>>
+                                    <a href="gradelevel.php"><i class="fa fa-align-left"></i>&nbsp; Grade Level</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "gradingperiod.php")!==false) echo "class='active'" ?>>
+                                    <a href="gradingperiod.php"><i class="fa fa-align-left"></i>&nbsp; Grading Period</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "sections.php")!==false) echo "class='active'" ?>>
+                                    <a href="sections.php"><i class="fa fa-align-left"></i>&nbsp; Sections</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "students.php")!==false) echo "class='active'" ?>>
+                                    <a href="students.php"><i class="fa fa-align-left"></i>&nbsp; Students</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "teachers.php")!==false) echo "class='active'" ?>>
+                                    <a href="teachers.php"><i class="fa fa-align-left"></i>&nbsp; Teachers</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li <?php if(isset($activePage)&&strpos($activePage, "Settings")!==false||strpos($activePage, "Archives")!==false) echo "class='active'" ?>>
+                        <a data-toggle="collapse" href="#settings">
+                            <i class="fa fa-gears fa-fw"></i>
+                            <p>Settings <b class="caret"></b></p>
+                        </a>
+                        <div class="collapse" id="settings">
+                            <ul class="nav">
+                                <li <?php if(strpos($activePageFilename, "backupandrestore.php")!==false) echo "class='active'" ?>>
+                                    <a href="backupandrestore.php"><i class="fa fa-align-left"></i>&nbsp; Backup and Restore</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "audittrail.php")!==false) echo "class='active'" ?>>
+                                    <a href="audittrail.php"><i class="fa fa-align-left"></i>&nbsp; Audit Trail</a>
+                                </li>
+                                <li <?php if(strpos($activePageFilename, "archives.php")!==false) echo "class='active'" ?>>
+                                    <a href="archives.php">
+                                        <i class="fa fa-align-left"></i>&nbsp; Archives
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+
+                    <?php } ?>
+
+
+
+                    <?php if($_SESSION['hts_user_userprivilege']==4){ ?>
+
+                    <li <?php if(isset($activePage)&&$activePage=='Attendance Monitoring' ) echo "class='active'" ?>>
+                        <a href="attendance.php">
+                            <i class="fa fa-calendar fa-fw"><div class="icon-bg bg-orange"></div></i> Attendance
+                        </a>
                     </li>
                     <?php } ?>
                 </ul>

@@ -63,7 +63,7 @@ if(isset($_POST['add_account'])){
         $remarks = "Name: $full_name ";
         insertAuditLogData($type, $remarks);
 
-        $_SESSION['ALERT']['ADD_ACCOUNT_SUCCESS'] = "$fullname account is successfully added.";
+        $_SESSION['ALERT']['ADD_ACCOUNT_SUCCESS'] = "$full_name account is successfully added.";
     }
 
     header("Location: accounts.php");

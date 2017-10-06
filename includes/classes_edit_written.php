@@ -7,16 +7,22 @@
     $queryCounts = "SELECT * FROM outputs_final WHERE teacher_id = {$_SESSION['hts_user_id']} AND section_id = {$_GET['sid']} AND subject_id = {$_GET['subid']} AND gradingperiod_id = {$gradingperiod_id}";
     $resultCounts = mysqli_query($connection, $queryCounts);
     ?>
-
        <div class="row">
-           <div class="col-lg-offset-4 col-lg-4">
-               <a href="classes.php?s=pt_e&sid=<?= $_GET['sid']?>&subid=<?= $_GET['subid'] ?>&yid=<?= $_GET['yid'] ?>&gpid=<?= $gradingperiod_id?>" class="btn btn-primary btn-lg"><i class="fa fa-pencil"></i>Edit Grades</a>
-           </div>
        </div>
-
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-body">
+                    <!--<div class="row">
+                    <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3">
+                        <select name="gradingperiod" id="" class="form-control">
+                            <option value="1">First Grading</option>
+                            <option value="2">Second Grading</option>
+                            <option value="3">Third Grading</option>
+                            <option value="4">Fourth Grading</option>
+                            <option value="90">VIEW ALL</option>
+                        </select>
+                    </div>
+                </div>-->
                     <h4>
                         <?= displayGradingPeriod($gradingperiod_id) ?>
                     </h4>
@@ -34,18 +40,17 @@
                                 <th>
                                     <?php
                             //check if wwsession is available on table
-                                $output_session = "PT".$i;
+                                $output_session = "WW".$i;
                                 $totalFromOutAct = getOutputsTotal($output_session,$_GET['subid'],$_SESSION['hts_user_id'],$gradingperiod_id);
                                 $totalOverall += $totalFromOutAct;
                                 if($rowGP[0]==$gradingperiod_id){
                                     if($totalFromOutAct!="")
-                                        echo "PT$i";
-                                        //echo '<a href="classes.php?s=edit_pt&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."PT$i".'<i class="fa fa-pencil"></i></a>';
+                                        echo '<a href="classes.php?s=edit_ww&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."WW$i".'<i class="fa fa-pencil"></i></a>';
                                     else
-                                        echo '<a href="classes.php?s=add_pt&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."PT$i".'<i class="fa fa-plus"></i></a>';
-                                } else{
-                                    echo "PT$i";
-                                    //echo '<a href="classes.php?s=edit_pt&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."PT$i".'<i class="fa fa-pencil"></i></a>';
+                                        echo "WW$i";
+                                }else {
+                                    //echo '<a href="classes.php?s=edit_ww&sid='.$_GET['sid'].'&subid='.$_GET['subid'].'&outses='.$output_session.'&yid='.$_GET['yid'].'&gpid='.$gradingperiod_id.'">'."WW$i".'<i class="fa fa-pencil"></i></a>';
+                                    echo "WW$i";
                                 }
                             ?>
                                 </th>
@@ -65,13 +70,14 @@
                                 <td>
                                     <?php
                                 //check if wwsession is available on table
-                                $output_session = "PT".$i;
+                                $output_session = "WW".$i;
                                 $totalFromOutAct = getOutputsTotal($output_session,$_GET['subid'],$_SESSION['hts_user_id'],$gradingperiod_id);
                                 $totalOverall += $totalFromOutAct;
                                 if($totalFromOutAct!="")
                                     echo number_format($totalFromOutAct, 0);
                                 else
                                     echo 0;
+
                             ?>
                                 </td>
                                 <?php
@@ -97,8 +103,8 @@
                                 <?php
                                 $totalRaw = 0;
                                 for($i=1;$i<=10;$i++):
-                                    $output_session = "PT".$i;
-                                    $queryWW = "SELECT * FROM outputs_actual WHERE archive_status = 0 AND student_id = {$rowRec['student_id']} AND output_session = '{$output_session}' AND subject_id = {$_GET['subid']} AND section_id = {$_GET['sid']} AND teacher_id = {$_SESSION['hts_user_id']} AND gradingperiod_id = {$gradingperiod_id}";
+                                    $output_session = "WW".$i;
+                                    $queryWW = "SELECT * FROM outputs_actual WHERE archive_status = 0 AND student_id = {$rowRec['student_id']} AND output_session = '{$output_session}' AND subject_id = {$_GET['subid']} AND section_id = {$_GET['sid']} AND gradingperiod_id = {$gradingperiod_id}";
                                     $resultWW = mysqli_query($connection, $queryWW);
                                     $countWW = mysqli_num_rows($resultWW);
                                     if($countWW>0){

@@ -12,7 +12,6 @@ $rowInfo = mysqli_fetch_array($resultInfo);
                <div class="col-lg-offset-4 col-lg-4">
                    <img src="./images/<?= $rowInfo['image_1'] ?>" alt="<?= $rowInfo['image_1'] ?>" class="img-responsive" style="width: 200px; ">
                </div>
-
            </div>
             <div class="row">
                 <div class="form-group col-lg-12">

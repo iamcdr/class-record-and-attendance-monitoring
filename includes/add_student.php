@@ -5,15 +5,15 @@
                 <div class="form-group col-lg-12">
                     <div class="col-lg-4">
                         <h5>Last Name</h5>
-                        <input type="text" class="form-control" name="last_name">
+                        <input type="text" class="form-control" name="last_name" required onkeypress="return lettersOnly(event)">
                     </div>
                     <div class="col-lg-4">
                         <h5>First Name</h5>
-                        <input type="text" class="form-control" name="first_name">
+                        <input type="text" class="form-control" name="first_name" required onkeypress="return lettersOnly(event)">
                     </div>
                     <div class="col-lg-4">
                         <h5>Middle Name</h5>
-                        <input type="text" class="form-control" name="middle_name">
+                        <input type="text" class="form-control" name="middle_name" onkeypress="return lettersOnly(event)">
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="form-group col-lg-12">
                     <div class="col-lg-3">
                         <h5>Contact No</h5>
-                        <input type="text" name="contact_no" class="form-control">
+                        <input type="text" name="contact_no" class="form-control" required onkeypress="return isNumberKey(event)">
                     </div>
                     <div class="col-lg-3">
                         <h5>Assign Section</h5>
@@ -88,3 +88,27 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function lettersOnly(evt) {
+       evt = (evt) ? evt : event;
+       var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
+          ((evt.which) ? evt.which : 0));
+       if (charCode > 32 && (charCode < 65 || charCode > 90) &&
+          (charCode < 97 || charCode > 122)) {
+          swal("Enter letters only.");
+          return false;
+       }
+       return true;
+     }
+
+
+</script>
